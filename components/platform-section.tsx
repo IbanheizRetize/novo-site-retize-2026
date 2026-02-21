@@ -101,19 +101,20 @@ export function PlatformSection() {
                 </p>
               </div>
 
-              {/* Dots indicator */}
-              <div className="absolute bottom-12 left-1/2 flex -translate-x-1/2 gap-2">
-                {slides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrent(idx)}
-                    className={`h-2 rounded-full border border-[#cccccc] transition-all duration-300 ${
-                      idx === current ? "w-6 bg-[#4700d1]" : "w-2 bg-[#ffffff]/50"
-                    }`}
-                    aria-label={`Slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
+            </div>
+
+            {/* Dots indicator */}
+            <div className="mt-4 flex items-center justify-center gap-2">
+              {slides.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrent(idx)}
+                  className={`h-2 rounded-full border border-[#cccccc] transition-all duration-300 ${
+                    idx === current ? "w-6 bg-[#4700d1]" : "w-2 bg-[#d4d4d4]"
+                  }`}
+                  aria-label={`Slide ${idx + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>

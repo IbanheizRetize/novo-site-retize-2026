@@ -1,0 +1,161 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { Menu } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
+import { LanguageSelector } from "@/components/language-selector"
+import { useI18n } from "@/lib/i18n/context"
+
+export function OrgHeader() {
+  const { t } = useI18n()
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const navItems = [
+    { label: "Retize", href: "/" },
+    { label: t("org.header.brands"), href: "/marcas-anunciantes" },
+    { label: t("org.header.useCases"), href: "#alavancas" },
+    { label: t("org.header.platform"), href: "#plataforma" },
+    { label: t("org.header.cases"), href: "#cases" },
+  ]
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const handleNavClick = (href: string) => {
+    setMobileOpen(false)
+    if (href.startsWith("#")) {
+      const el = document.querySelector(href)
+      if (el) {
+        const offset = 80
+        const top = el.getBoundingClientRect().top + window.scrollY - offset
+        window.scrollTo({ top, behavior: "smooth" })
+      }
+    }
+  }
+
+  return (
+    <header
+      style={{
+        backgroundColor: scrolled ? "rgba(255,255,255,0.97)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        boxShadow: scrolled ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+        transition: "background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease",
+      }}
+      className="fixed top-0 left-0 right-0 z-50"
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
+        <Link href="/" className="flex-shrink-0" aria-label="Retize Home">
+          <Image
+            src="/brand/retize-logo.png"
+            alt="Retize"
+            width={113}
+            height={25}
+            style={{
+              filter: scrolled ? "none" : "brightness(0) invert(1)",
+              transition: "filter 0.3s ease",
+            }}
+            priority
+          />
+        </Link>
+
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Menu principal">
+          {navItems.map((item) =>
+            item.href.startsWith("#") ? (
+              <button
+                key={item.label}
+                onClick={() => handleNavClick(item.href)}
+                style={{
+                  color: scrolled ? "#0f0f0f" : "#ffffff",
+                  transition: "color 0.3s ease",
+                }}
+                className="text-sm font-medium hover:opacity-80"
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                key={item.label}
+                href={item.href}
+                style={{
+                  color: scrolled ? "#0f0f0f" : "#ffffff",
+                  transition: "color 0.3s ease",
+                }}
+                className="text-sm font-medium hover:opacity-80"
+              >
+                {item.label}
+              </Link>
+            )
+          )}
+          <Button
+            className="rounded-full bg-[#00CCFF] px-5 text-sm font-semibold text-[#0f0f0f] hover:bg-[#00b8e6]"
+            onClick={() => handleNavClick("#alavancas")}
+          >
+            {t("org.header.cta")}
+          </Button>
+          <LanguageSelector variant={scrolled ? "dark" : "light"} />
+        </nav>
+
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSelector variant={scrolled ? "dark" : "light"} />
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                aria-label={t("header.menu.open")}
+                className="flex h-10 w-10 items-center justify-center rounded-md"
+                style={{
+                  color: scrolled ? "#0f0f0f" : "#ffffff",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                <Menu className="h-6 w-6" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72 bg-[#ffffff] p-6">
+              <SheetTitle className="sr-only">{t("header.menu.title")}</SheetTitle>
+              <div className="mb-8">
+                <Image src="/brand/retize-logo.png" alt="Retize" width={90} height={20} />
+              </div>
+              <nav className="flex flex-col gap-5" aria-label="Menu mobile">
+                {navItems.map((item) =>
+                  item.href.startsWith("#") ? (
+                    <button
+                      key={item.label}
+                      onClick={() => handleNavClick(item.href)}
+                      className="text-left text-base font-medium text-[#0f0f0f] transition-colors hover:text-[#00CCFF]"
+                    >
+                      {item.label}
+                    </button>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="text-base font-medium text-[#0f0f0f] transition-colors hover:text-[#00CCFF]"
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
+                <Button
+                  className="mt-2 w-full rounded-full bg-[#00CCFF] text-[#0f0f0f] hover:bg-[#00b8e6]"
+                  onClick={() => handleNavClick("#alavancas")}
+                >
+                  {t("org.header.cta")}
+                </Button>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
+  )
+}
