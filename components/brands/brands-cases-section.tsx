@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, forwardRef } from "react"
 import { ChevronLeft, ChevronRight, Play, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
@@ -112,7 +112,9 @@ export function BrandsCasesSection() {
   const { t } = useI18n()
   const [mobileIdx, setMobileIdx] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
+  const testimonialsRef = useRef<HTMLDivElement>(null)
   const [isInView, setIsInView] = useState(false)
+  const [testimonialsInView, setTestimonialsInView] = useState(false)
 
   useEffect(() => {
     const el = sectionRef.current
@@ -120,6 +122,17 @@ export function BrandsCasesSection() {
     const observer = new IntersectionObserver(
       ([entry]) => setIsInView(entry.isIntersecting),
       { threshold: 0.15 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const el = testimonialsRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setTestimonialsInView(entry.isIntersecting),
+      { threshold: 0.1 }
     )
     observer.observe(el)
     return () => observer.disconnect()
@@ -168,11 +181,11 @@ export function BrandsCasesSection() {
         </div>
 
         {/* Testimonials (home-style with video) */}
-        <TestimonialsBlock t={t} />
+        <TestimonialsBlock ref={testimonialsRef} t={t} />
       </div>
 
-      {/* Floating side arrows -- mobile only */}
-      {isInView && (
+      {/* Floating side arrows -- mobile only, hidden when testimonials are in view */}
+      {isInView && !testimonialsInView && (
         <>
           <button
             onClick={() => setMobileIdx(Math.max(0, mobileIdx - 1))}
@@ -198,12 +211,12 @@ export function BrandsCasesSection() {
 
 /* ─── Testimonials Block (home-style with video) ─── */
 
-function TestimonialsBlock({ t }: { t: (k: string) => string }) {
+const TestimonialsBlock = forwardRef<HTMLDivElement, { t: (k: string) => string }>(function TestimonialsBlock({ t }, ref) {
   const [videoOpen, setVideoOpen] = useState<string | null>(null)
   const [mobileIdx, setMobileIdx] = useState(0)
 
   return (
-    <div className="mt-16">
+    <div ref={ref} className="mt-16">
       <h3 className="text-balance text-center text-2xl font-bold tracking-tight text-[#0f0f0f] md:text-3xl">
         {t("brands.testimonials.title")}
       </h3>
@@ -293,7 +306,7 @@ function TestimonialsBlock({ t }: { t: (k: string) => string }) {
       </Dialog>
     </div>
   )
-}
+})
 
 function TestimonialCard({
   item,
