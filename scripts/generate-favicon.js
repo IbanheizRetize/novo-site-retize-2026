@@ -24,18 +24,25 @@ async function main() {
     .toBuffer();
   console.log(`Cropped to ${size}x${size} square`);
 
-  // Base64 encode for use in Write tool
+  // Write cropped square as PNG to project directory
+  const projectDir = "/vercel/share/v0-project";
+
+  // 32x32 icon
   const fav32 = await sharp(squareBuffer).resize(32, 32, { fit: "cover" }).png().toBuffer();
-  console.log("FAVICON_32_BASE64_START");
-  console.log(fav32.toString("base64"));
-  console.log("FAVICON_32_BASE64_END");
+  fs.writeFileSync(path.join(projectDir, "app/icon.png"), fav32);
+  console.log("Written app/icon.png (32x32)");
 
+  // 180x180 apple icon
   const apple180 = await sharp(squareBuffer).resize(180, 180, { fit: "cover" }).png().toBuffer();
-  console.log("APPLE_180_BASE64_START");
-  console.log(apple180.toString("base64"));
-  console.log("APPLE_180_BASE64_END");
+  fs.writeFileSync(path.join(projectDir, "app/apple-icon.png"), apple180);
+  console.log("Written app/apple-icon.png (180x180)");
 
-  console.log("Done generating base64 favicon data");
+  // Also write 512 for OG
+  const icon512 = await sharp(squareBuffer).resize(512, 512, { fit: "cover" }).png().toBuffer();
+  fs.writeFileSync(path.join(projectDir, "public/icon-512.png"), icon512);
+  console.log("Written public/icon-512.png (512x512)");
+
+  console.log("Done! All favicons generated from original image.");
 }
 
 main().catch(console.error);
