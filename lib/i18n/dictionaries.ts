@@ -3,7 +3,7 @@ export type Locale = "pt-BR" | "en" | "es"
 export const dictionaries: Record<Locale, Record<string, string>> = {
   "pt-BR": {
     // Header
-    "header.nav.organizations": "Organizações",
+    "header.nav.organizations": "Organizações Esportivas",
     "header.nav.advertisers": "Anunciantes",
     "header.nav.platform": "Plataforma",
     "header.nav.clients": "Clientes",
@@ -375,7 +375,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
 
   en: {
     // Header
-    "header.nav.organizations": "Organizations",
+    "header.nav.organizations": "Sports Organizations",
     "header.nav.advertisers": "Advertisers",
     "header.nav.platform": "Platform",
     "header.nav.clients": "Clients",
@@ -747,7 +747,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
 
   es: {
     // Header
-    "header.nav.organizations": "Organizaciones",
+    "header.nav.organizations": "Organizaciones Deportivas",
     "header.nav.advertisers": "Anunciantes",
     "header.nav.platform": "Plataforma",
     "header.nav.clients": "Clientes",

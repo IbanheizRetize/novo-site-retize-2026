@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import { X } from "lucide-react"
+
 import { useI18n } from "@/lib/i18n/context"
 
 const PDF_PACOTES_URL =
@@ -93,15 +93,7 @@ function LeadFormModal({
       <DialogContent className="max-w-md border-[#e5e5e5] bg-[#ffffff] p-0">
         <DialogTitle className="sr-only">{title}</DialogTitle>
         <div className="relative p-6">
-          <button
-            onClick={() => onOpenChange(false)}
-            className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f7f7f8] text-[#6b6b6b] hover:bg-[#e5e5e5]"
-            aria-label="Fechar"
-          >
-            <X className="h-4 w-4" />
-          </button>
-
-          <h3 className="text-xl font-bold text-[#0f0f0f]">{title}</h3>
+          <h3 className="pr-8 text-xl font-bold text-[#0f0f0f]">{title}</h3>
 
           {success ? (
             <div className="mt-6 rounded-lg bg-[#00cc88]/10 p-4 text-center">
