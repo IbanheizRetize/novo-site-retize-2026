@@ -7,18 +7,20 @@ import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { LanguageSelector } from "@/components/language-selector"
-
-const navItems = [
-  { label: "Retize", href: "/" },
-  { label: "Marcas Anunciantes", href: "/marcas-anunciantes" },
-  { label: "Casos de uso", href: "#alavancas" },
-  { label: "Plataforma", href: "#plataforma" },
-  { label: "Cases", href: "#cases" },
-]
+import { useI18n } from "@/lib/i18n/context"
 
 export function OrgHeader() {
+  const { t } = useI18n()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const navItems = [
+    { label: "Retize", href: "/" },
+    { label: t("org.header.brands"), href: "/marcas-anunciantes" },
+    { label: t("org.header.useCases"), href: "#alavancas" },
+    { label: t("org.header.platform"), href: "#plataforma" },
+    { label: t("org.header.cases"), href: "#cases" },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -96,7 +98,7 @@ export function OrgHeader() {
             className="rounded-full bg-[#00CCFF] px-5 text-sm font-semibold text-[#0f0f0f] hover:bg-[#00b8e6]"
             onClick={() => handleNavClick("#alavancas")}
           >
-            Saiba mais
+            {t("org.header.cta")}
           </Button>
           <LanguageSelector variant={scrolled ? "dark" : "light"} />
         </nav>
@@ -107,7 +109,7 @@ export function OrgHeader() {
             <SheetTrigger asChild>
               <button
                 type="button"
-                aria-label="Abrir menu"
+                aria-label={t("header.menu.open")}
                 className="flex h-10 w-10 items-center justify-center rounded-md"
                 style={{
                   color: scrolled ? "#0f0f0f" : "#ffffff",
@@ -118,7 +120,7 @@ export function OrgHeader() {
               </button>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 bg-[#ffffff] p-6">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
+              <SheetTitle className="sr-only">{t("header.menu.title")}</SheetTitle>
               <div className="mb-8">
                 <Image src="/brand/retize-logo.png" alt="Retize" width={90} height={20} />
               </div>
@@ -147,7 +149,7 @@ export function OrgHeader() {
                   className="mt-2 w-full rounded-full bg-[#00CCFF] text-[#0f0f0f] hover:bg-[#00b8e6]"
                   onClick={() => handleNavClick("#alavancas")}
                 >
-                  Saiba mais
+                  {t("org.header.cta")}
                 </Button>
               </nav>
             </SheetContent>

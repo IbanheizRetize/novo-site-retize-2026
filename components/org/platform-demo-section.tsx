@@ -3,89 +3,76 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useI18n } from "@/lib/i18n/context"
 
-const modules = [
+interface Module {
+  id: string
+  name: string
+  tagKeys: string[]
+  bulletKeys: string[]
+  video: string
+  poster: string
+}
+
+const modules: Module[] = [
   {
     id: "track",
     name: "Retize Track",
-    tags: ["Mensure", "Descubra"],
-    bullets: [
-      "Mensure e valorize a exposição de mídia com visão computacional",
-      "Relatórios transparentes para patrocinadores e insights por canal",
-      "Conexão com redes sociais, YouTube e transmissões",
-    ],
+    tagKeys: ["org.platform.tag.measure", "org.platform.tag.discover"],
+    bulletKeys: ["org.platform.track.1", "org.platform.track.2", "org.platform.track.3"],
     video: "/videos/retize-track.mp4",
     poster: "",
   },
   {
     id: "survey",
     name: "Retize Survey",
-    tags: ["Descubra", "Ative"],
-    bullets: [
-      "Pesquisas gamificadas para aumentar e enriquecer base",
-      "Questionários rápidos e personalizados por objetivo de negócio",
-      "Respostas viram audiência automaticamente",
-    ],
+    tagKeys: ["org.platform.tag.discover", "org.platform.tag.activate"],
+    bulletKeys: ["org.platform.survey.1", "org.platform.survey.2", "org.platform.survey.3"],
     video: "/videos/retize-survey.mp4",
     poster: "",
   },
   {
     id: "analytics",
     name: "Retize Analytics",
-    tags: ["Mensure", "Descubra"],
-    bullets: [
-      "Dashboards e análises com visão única do fã",
-      "Filtros avançados e métricas por jornada",
-      "Painéis personalizados no onboarding",
-    ],
+    tagKeys: ["org.platform.tag.measure", "org.platform.tag.discover"],
+    bulletKeys: ["org.platform.analytics.1", "org.platform.analytics.2", "org.platform.analytics.3"],
     video: "/videos/retize-analytics.mp4",
     poster: "",
   },
   {
     id: "cdp",
     name: "Retize CDP",
-    tags: ["Descubra", "Ative"],
-    bullets: [
-      "Crie clusters de audiência direto na interface",
-      "Use audiências em CRM e mídia display",
-      "Performance alimenta a base central do fã",
-    ],
+    tagKeys: ["org.platform.tag.discover", "org.platform.tag.activate"],
+    bulletKeys: ["org.platform.cdp.1", "org.platform.cdp.2", "org.platform.cdp.3"],
     video: "/videos/retize-cdp.mp4",
     poster: "",
   },
   {
     id: "crm",
     name: "Retize CRM",
-    tags: ["Ative", "Mensure"],
-    bullets: [
-      "Réguas de automação para objetivos de negócio",
-      "Testes de comunicação por audiência (e-mail como chave)",
-      "Templates criados rápido na plataforma",
-    ],
+    tagKeys: ["org.platform.tag.activate", "org.platform.tag.measure"],
+    bulletKeys: ["org.platform.crm.1", "org.platform.crm.2", "org.platform.crm.3"],
     video: "/videos/retize-crm.mp4",
     poster: "",
   },
   {
     id: "ads",
     name: "Retize Ads",
-    tags: ["Ative", "Mensure"],
-    bullets: [
-      "Gerenciador de campanhas em sites e apps",
-      "Audiências 1st party prontas para ativação",
-      "Parametrização para análise completa da jornada",
-    ],
+    tagKeys: ["org.platform.tag.activate", "org.platform.tag.measure"],
+    bulletKeys: ["org.platform.ads.1", "org.platform.ads.2", "org.platform.ads.3"],
     video: "/videos/retize-ads.mp4",
     poster: "",
   },
 ]
 
 const TAG_COLORS: Record<string, string> = {
-  Mensure: "#00CCFF",
-  Descubra: "#FF0066",
-  Ative: "#00cc88",
+  "org.platform.tag.measure": "#00CCFF",
+  "org.platform.tag.discover": "#FF0066",
+  "org.platform.tag.activate": "#00cc88",
 }
 
 export function PlatformDemoSection() {
+  const { t } = useI18n()
   const [current, setCurrent] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
@@ -107,7 +94,6 @@ export function PlatformDemoSection() {
     v.currentTime = 0
     v.src = modules[current].video
     v.load()
-    // On mobile don't autoplay
     const isMobile = window.innerWidth < 768
     if (!isMobile) {
       v.play()
@@ -146,10 +132,10 @@ export function PlatformDemoSection() {
         {/* Section header */}
         <div className="text-center">
           <h2 className="text-balance text-3xl font-bold tracking-tight text-[#ffffff] md:text-4xl">
-            {"Como a tecnologia Retize suporta a jornada de monetização"}
+            {t("org.platform.title")}
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-[#ffffff]/60">
-            {"Tecnologia modular adaptada para a necessidade de múltiplos segmentos esportivos"}
+            {t("org.platform.subtitle")}
           </p>
         </div>
 
@@ -183,7 +169,6 @@ export function PlatformDemoSection() {
                 playsInline
                 preload="metadata"
               />
-              {/* Overlay with play button when paused */}
               {!isPlaying && (
                 <button
                   onClick={togglePlay}
@@ -195,7 +180,6 @@ export function PlatformDemoSection() {
                   </div>
                 </button>
               )}
-              {/* Controls */}
               {isPlaying && (
                 <div className="absolute bottom-3 left-3 flex gap-2">
                   <button
@@ -230,7 +214,7 @@ export function PlatformDemoSection() {
               <button
                 onClick={() => goTo(current + 1)}
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-[#000000]/50 text-[#ffffff] transition-colors hover:bg-[#000000]/70"
-                aria-label="Próximo slide"
+                aria-label="Proximo slide"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -240,29 +224,29 @@ export function PlatformDemoSection() {
           {/* Module info */}
           <div className="flex w-full flex-col lg:w-2/5">
             <div className="flex flex-wrap gap-2">
-              {mod.tags.map((tag) => (
+              {mod.tagKeys.map((tagKey) => (
                 <span
-                  key={tag}
+                  key={tagKey}
                   className="rounded-full px-3 py-1 text-xs font-bold"
                   style={{
-                    backgroundColor: `${TAG_COLORS[tag]}20`,
-                    color: TAG_COLORS[tag],
+                    backgroundColor: `${TAG_COLORS[tagKey]}20`,
+                    color: TAG_COLORS[tagKey],
                   }}
                 >
-                  {tag}
+                  {t(tagKey)}
                 </span>
               ))}
             </div>
             <h3 className="mt-4 text-2xl font-bold text-[#ffffff]">{mod.name}</h3>
             <ul className="mt-5 flex flex-col gap-4">
-              {mod.bullets.map((b, i) => (
-                <li key={i} className="flex items-start gap-3">
+              {mod.bulletKeys.map((key) => (
+                <li key={key} className="flex items-start gap-3">
                   <span
                     className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full"
-                    style={{ backgroundColor: TAG_COLORS[mod.tags[0]] }}
+                    style={{ backgroundColor: TAG_COLORS[mod.tagKeys[0]] }}
                     aria-hidden="true"
                   />
-                  <span className="text-sm leading-relaxed text-[#ffffff]/80">{b}</span>
+                  <span className="text-sm leading-relaxed text-[#ffffff]/80">{t(key)}</span>
                 </li>
               ))}
             </ul>
@@ -290,7 +274,7 @@ export function PlatformDemoSection() {
             className="rounded-md bg-[#00CCFF] px-8 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/20 transition-all hover:shadow-xl hover:brightness-110"
           >
             <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
-              Solicite uma demo
+              {t("org.platform.cta")}
             </a>
           </Button>
         </div>

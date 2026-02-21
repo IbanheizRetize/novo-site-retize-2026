@@ -1,31 +1,32 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { useI18n } from "@/lib/i18n/context"
 
-const entities = [
-  "CBV",
-  "Grêmio",
-  "São Paulo",
-  "Atlético MG",
-  "Vasco da Gama",
-  "Imperial",
-  "Sport Club do Recife",
-  "Coritiba FC",
-  "Vitória",
-  "Portuguesa",
-  "LPF",
-  "FPF",
-  "Vila Nova",
-  "Grande Prêmio",
-  "Nosso Palestra",
-  "Máquina do Esporte",
-  "Olimpíada Todo Dia",
-  "Filma Eu",
-  "Agendei",
-  "Paysandu",
-  "Azuriz FC",
-  "Magnus Futsal",
+const entities: { name: string; logo?: string }[] = [
+  { name: "CBV", logo: "/logos/cbv.png" },
+  { name: "Gremio", logo: "/logos/gremio.png" },
+  { name: "Sao Paulo", logo: "/logos/sao-paulo.png" },
+  { name: "Atletico MG", logo: "/logos/atletico-mg.png" },
+  { name: "Vasco da Gama", logo: "/logos/vasco.png" },
+  { name: "Imperial", logo: "/logos/imperial.png" },
+  { name: "Sport Club do Recife" },
+  { name: "Coritiba FC" },
+  { name: "Vitoria" },
+  { name: "Portuguesa" },
+  { name: "LPF" },
+  { name: "FPF" },
+  { name: "Vila Nova" },
+  { name: "Grande Premio" },
+  { name: "Nosso Palestra" },
+  { name: "Maquina do Esporte" },
+  { name: "Olimpiada Todo Dia" },
+  { name: "Filma Eu" },
+  { name: "Agendei" },
+  { name: "Paysandu" },
+  { name: "Azuriz FC" },
+  { name: "Magnus Futsal" },
 ]
 
 function getInitials(name: string): string {
@@ -35,31 +36,42 @@ function getInitials(name: string): string {
 }
 
 export function PartnersSection() {
+  const { t } = useI18n()
+
   return (
     <section className="bg-[#ffffff] py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-4 lg:px-8">
-        <h2 className="text-balance text-center text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
-          {"Quem joga com a Retize"}
-        </h2>
+      <div className="mx-auto max-w-5xl px-4 lg:px-8">
+        <div className="text-center">
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
+            {t("org.partners.title")}
+          </h2>
+        </div>
 
-        <TooltipProvider delayDuration={200}>
-          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
-            {entities.map((name) => (
-              <Tooltip key={name}>
-                <TooltipTrigger asChild>
-                  <div className="group flex aspect-square cursor-default items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#f7f7f8] p-4 transition-all hover:scale-105 hover:shadow-md">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#00CCFF]/15 text-base font-bold text-[#0f0f0f] transition-colors group-hover:bg-[#00CCFF]/25">
-                      {getInitials(name)}
-                    </div>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{name}</p>
-                </TooltipContent>
-              </Tooltip>
-            ))}
-          </div>
-        </TooltipProvider>
+        <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+          {entities.map((item) => (
+            <div
+              key={item.name}
+              className="group relative flex aspect-square items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#f7f7f8] p-5 transition-shadow hover:shadow-md"
+            >
+              {item.logo ? (
+                <Image
+                  src={item.logo}
+                  alt={item.name}
+                  width={120}
+                  height={120}
+                  className="h-12 w-12 object-contain lg:h-16 lg:w-16"
+                />
+              ) : (
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#00CCFF]/15 text-base font-bold text-[#0f0f0f]">
+                  {getInitials(item.name)}
+                </div>
+              )}
+              <span className="pointer-events-none absolute inset-x-0 bottom-2 text-center text-[10px] font-semibold text-[#6b6b6b] opacity-0 transition-opacity group-hover:opacity-100">
+                {item.name}
+              </span>
+            </div>
+          ))}
+        </div>
 
         <div className="mt-12 flex justify-center">
           <Button
@@ -68,7 +80,7 @@ export function PartnersSection() {
             className="rounded-md bg-[#00CCFF] px-8 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/20 transition-all hover:shadow-xl hover:brightness-110"
           >
             <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
-              Quero jogar junto
+              {t("org.partners.cta")}
             </a>
           </Button>
         </div>

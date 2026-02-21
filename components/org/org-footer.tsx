@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useI18n } from "@/lib/i18n/context"
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -37,13 +38,15 @@ const socialLinks = [
   { label: "Linktree", href: "https://linktr.ee/retize", Icon: LinktreeIcon },
 ]
 
-const solutionLinks = [
-  { label: "Plataforma", href: "#plataforma" },
-  { label: "Para Clubes", href: "/organizacoes-esportivas" },
-  { label: "Para Marcas", href: "/marcas-anunciantes" },
-]
-
 export function OrgFooter() {
+  const { t } = useI18n()
+
+  const solutionLinks = [
+    { label: t("org.footer.platform"), href: "#plataforma" },
+    { label: t("org.footer.clubs"), href: "/organizacoes-esportivas" },
+    { label: t("org.footer.brands"), href: "/marcas-anunciantes" },
+  ]
+
   return (
     <footer className="bg-[#1a1a1a] py-12 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
@@ -64,8 +67,8 @@ export function OrgFooter() {
 
           {/* Solutions */}
           <div>
-            <h4 className="text-sm font-bold text-[#ffffff]">Soluções</h4>
-            <nav className="mt-4 flex flex-col gap-3" aria-label="Soluções">
+            <h4 className="text-sm font-bold text-[#ffffff]">{t("org.footer.solutions")}</h4>
+            <nav className="mt-4 flex flex-col gap-3" aria-label={t("org.footer.solutions")}>
               {solutionLinks.map((link) => (
                 <Link
                   key={link.label}
@@ -80,7 +83,7 @@ export function OrgFooter() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-bold text-[#ffffff]">Contato</h4>
+            <h4 className="text-sm font-bold text-[#ffffff]">{t("org.footer.contact")}</h4>
             <div className="mt-4 flex flex-col gap-3">
               <a
                 href="mailto:contato@retize.com.br"
@@ -97,7 +100,7 @@ export function OrgFooter() {
                 WhatsApp
               </a>
               <address className="mt-1 text-sm not-italic leading-snug text-[#ffffff]/50">
-                {"Av. Francisco Matarazzo, 1705 - Água Branca, São Paulo - SP, 05001-200"}
+                {"Av. Francisco Matarazzo, 1705 - Agua Branca, Sao Paulo - SP, 05001-200"}
               </address>
             </div>
 
@@ -121,17 +124,17 @@ export function OrgFooter() {
         <div className="mt-12 border-t border-[#ffffff]/10 pt-6">
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
             <p className="text-xs text-[#ffffff]/40">
-              {"© 2026 Retize Sports Media Network. Todos os direitos reservados."}
+              {t("org.footer.copyright")}
             </p>
             <nav className="flex gap-6 text-xs" aria-label="Links legais">
               <Link href="/politica-de-privacidade" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
-                Política de Privacidade
+                {t("org.footer.privacy")}
               </Link>
               <Link href="/portal-de-privacidade" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
-                Portal de Privacidade
+                {t("org.footer.privacyPortal")}
               </Link>
               <Link href="/termos-de-uso" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
-                Termos de Uso
+                {t("org.footer.terms")}
               </Link>
             </nav>
           </div>

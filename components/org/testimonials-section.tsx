@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Play, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import { useI18n } from "@/lib/i18n/context"
 
 const testimonials = [
   {
@@ -10,7 +11,7 @@ const testimonials = [
     name: "Ricardo Bonetti",
     role: "COO Imperial eSports",
     quote:
-      "Uma empresa extremamente dedicada, o atendimento sempre foi muito próximo, nos ajudando entender nossos problemas, expertise nesse mercado de análise de dados, com certeza vai nos trazer negócios.",
+      "Uma empresa extremamente dedicada, o atendimento sempre foi muito proximo, nos ajudando entender nossos problemas, expertise nesse mercado de analise de dados, com certeza vai nos trazer negocios.",
     video: "/videos/testimonial-1.mp4",
     initials: "RB",
     color: "#00CCFF",
@@ -18,19 +19,19 @@ const testimonials = [
   {
     id: "erich",
     name: "Erich Beting",
-    role: "CEO Máquina do Esporte",
+    role: "CEO Maquina do Esporte",
     quote:
-      "A gente conseguiu finalmente fazer com que a publicidade tivesse lógica dentro de aparição para público, tivesse uma boa entrega e além disso, a gente conta com profissionais que têm ajudado a gente no dia a dia.",
+      "A gente conseguiu finalmente fazer com que a publicidade tivesse logica dentro de aparicao para publico, tivesse uma boa entrega e alem disso, a gente conta com profissionais que tem ajudado a gente no dia a dia.",
     video: "/videos/testimonial-2.mp4",
     initials: "EB",
     color: "#FF0066",
   },
   {
     id: "debora",
-    name: "Débora Saldanha",
-    role: "Head de Inovação, Clube Atlético Mineiro",
+    name: "Debora Saldanha",
+    role: "Head de Inovacao, Clube Atletico Mineiro",
     quote:
-      "Com a Retize, estruturamos um modelo de dados e engajamento no SuperApp do Galo que possibilita uma verdadeira hiper personalização, permitindo que marcas e parceiros conversem diretamente com os torcedores.",
+      "Com a Retize, estruturamos um modelo de dados e engajamento no SuperApp do Galo que possibilita uma verdadeira hiper personalizacao, permitindo que marcas e parceiros conversem diretamente com os torcedores.",
     video: "/videos/testimonial-3.mp4",
     initials: "DS",
     color: "#00cc88",
@@ -38,6 +39,7 @@ const testimonials = [
 ]
 
 export function TestimonialsSection() {
+  const { t } = useI18n()
   const [videoOpen, setVideoOpen] = useState<string | null>(null)
   const [mobileIdx, setMobileIdx] = useState(0)
 
@@ -45,13 +47,13 @@ export function TestimonialsSection() {
     <section className="bg-[#ffffff] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <h2 className="text-balance text-center text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
-          Depoimentos
+          {t("org.testimonials.title")}
         </h2>
 
         {/* Desktop */}
         <div className="mt-12 hidden grid-cols-3 gap-6 md:grid">
-          {testimonials.map((t) => (
-            <TestimonialCard key={t.id} t={t} onPlay={() => setVideoOpen(t.video)} />
+          {testimonials.map((item) => (
+            <TestimonialCard key={item.id} item={item} onPlay={() => setVideoOpen(item.video)} watchLabel={t("org.testimonials.watch")} />
           ))}
         </div>
 
@@ -62,9 +64,9 @@ export function TestimonialsSection() {
               className="flex transition-transform duration-300"
               style={{ transform: `translateX(-${mobileIdx * 100}%)` }}
             >
-              {testimonials.map((t) => (
-                <div key={t.id} className="w-full flex-shrink-0 px-1">
-                  <TestimonialCard t={t} onPlay={() => setVideoOpen(t.video)} />
+              {testimonials.map((item) => (
+                <div key={item.id} className="w-full flex-shrink-0 px-1">
+                  <TestimonialCard item={item} onPlay={() => setVideoOpen(item.video)} watchLabel={t("org.testimonials.watch")} />
                 </div>
               ))}
             </div>
@@ -94,7 +96,7 @@ export function TestimonialsSection() {
               onClick={() => setMobileIdx(Math.min(testimonials.length - 1, mobileIdx + 1))}
               disabled={mobileIdx === testimonials.length - 1}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] disabled:opacity-30"
-              aria-label="Próximo"
+              aria-label="Proximo"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
@@ -109,7 +111,7 @@ export function TestimonialsSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-md bg-[#00CCFF] px-8 py-3 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/20 transition-all hover:shadow-xl hover:brightness-110"
           >
-            Solicite uma Demo
+            {t("org.testimonials.cta")}
           </a>
         </div>
       </div>
@@ -117,7 +119,7 @@ export function TestimonialsSection() {
       {/* Video modal */}
       <Dialog open={!!videoOpen} onOpenChange={() => setVideoOpen(null)}>
         <DialogContent className="max-w-3xl border-0 bg-[#0a0a0a] p-0">
-          <DialogTitle className="sr-only">Depoimento em video</DialogTitle>
+          <DialogTitle className="sr-only">{t("org.testimonials.watch")}</DialogTitle>
           <button
             onClick={() => setVideoOpen(null)}
             className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#ffffff]/20 text-[#ffffff] hover:bg-[#ffffff]/30"
@@ -140,11 +142,13 @@ export function TestimonialsSection() {
 }
 
 function TestimonialCard({
-  t,
+  item,
   onPlay,
+  watchLabel,
 }: {
-  t: (typeof testimonials)[0]
+  item: (typeof testimonials)[0]
   onPlay: () => void
+  watchLabel: string
 }) {
   return (
     <div className="flex flex-col rounded-2xl border border-[#e5e5e5] bg-[#f7f7f8] p-6 transition-shadow hover:shadow-md">
@@ -152,16 +156,16 @@ function TestimonialCard({
       <button
         onClick={onPlay}
         className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-[#0f0f0f] to-[#2a2a2a]"
-        aria-label={`Assistir depoimento de ${t.name}`}
+        aria-label={`${watchLabel} - ${item.name}`}
       >
         <div
           className="flex h-14 w-14 items-center justify-center rounded-full transition-transform group-hover:scale-110"
-          style={{ backgroundColor: `${t.color}cc` }}
+          style={{ backgroundColor: `${item.color}cc` }}
         >
           <Play className="ml-0.5 h-6 w-6 text-[#ffffff]" />
         </div>
         <span className="absolute bottom-2 left-2 rounded-md bg-[#000000]/60 px-2 py-0.5 text-xs text-[#ffffff]">
-          Assistir
+          {watchLabel}
         </span>
       </button>
 
@@ -169,20 +173,20 @@ function TestimonialCard({
       <div className="mt-5 flex items-center gap-3">
         <div
           className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-[#ffffff]"
-          style={{ backgroundColor: t.color }}
+          style={{ backgroundColor: item.color }}
         >
-          {t.initials}
+          {item.initials}
         </div>
         <div>
-          <p className="text-sm font-bold text-[#0f0f0f]">{t.name}</p>
-          <p className="text-xs text-[#6b6b6b]">{t.role}</p>
+          <p className="text-sm font-bold text-[#0f0f0f]">{item.name}</p>
+          <p className="text-xs text-[#6b6b6b]">{item.role}</p>
         </div>
       </div>
 
       {/* Quote */}
       <p className="mt-4 text-sm italic leading-relaxed text-[#6b6b6b]">
         {'"'}
-        {t.quote}
+        {item.quote}
         {'"'}
       </p>
     </div>

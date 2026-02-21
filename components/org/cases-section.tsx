@@ -1,126 +1,116 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { useI18n } from "@/lib/i18n/context"
 
-const cases = [
+interface CaseData {
+  id: string
+  titleKey: string
+  challengeKey: string
+  approachKeys: string[]
+  resultKeys: string[]
+  badge?: string
+  orgName: string
+  orgLogo?: string
+  partnerName?: string
+  partnerLogo?: string
+  caseImage?: string
+}
+
+const cases: CaseData[] = [
   {
     id: "enriquecimento",
-    title: "Enriquecimento de base de fãs identificados",
-    logos: [],
-    badge: null,
-    desafio:
-      "Ampliar a base de sócios-torcedores identificados e, ao mesmo tempo, compreender melhor o perfil dos torcedores, seus hábitos de consumo, interesse em produtos oficiais e barreiras para adesão a planos pagos.",
-    abordagem: [
-      "Survey integrado ao cadastro de sócio-torcedor, coletando informações estratégicas.",
-      "Base para cruzar navegação e potencializar ofertas personalizadas, como upgrades de plano.",
-      "Audiências instantâneas na Plataforma Retize, prontas para ações de ativação em site, e-mail e app.",
-    ],
-    resultados: [
-      "Validação do preço atual dos planos de sócio.",
-      "Base enriquecida com dados estratégicos e intenção de compra.",
-      "Identificação dos motivadores de migração para planos pagos.",
-    ],
+    titleKey: "org.cases.1.title",
+    challengeKey: "org.cases.1.challenge",
+    approachKeys: ["org.cases.1.approach.1", "org.cases.1.approach.2", "org.cases.1.approach.3"],
+    resultKeys: ["org.cases.1.result.1", "org.cases.1.result.2", "org.cases.1.result.3"],
+    orgName: "Confederacao Brasileira de Volei",
+    orgLogo: "/logos/cbv.png",
   },
   {
     id: "cupons",
-    title: "Fomento do uso de cupons de desconto",
-    logos: ["O Burguês", "Imperial eSports"],
-    badge: null,
-    desafio:
-      "Construir uma conexão da hamburgueria com o fã de e-sports além da simples oferta de cupons e aprender mais sobre os hábitos de consumo dos fãs para moldar serviço e o produto.",
-    abordagem: [
-      "Retize Survey para avaliar perfil de consumo e ingredientes favoritos dos fãs da Imperial.",
-      "Coleta de dados da interface do fã com O Burguês, inclusive site da hamburgueria.",
-      'Criação do "Combo goIMP", lanche personalizado para os fãs.',
-    ],
-    resultados: [
-      "TOP 1 cupom mais usado da hamburgueria.",
-      "Conexão real e significativa com o fã de e-sport.",
-    ],
+    titleKey: "org.cases.2.title",
+    challengeKey: "org.cases.2.challenge",
+    approachKeys: ["org.cases.2.approach.1", "org.cases.2.approach.2", "org.cases.2.approach.3"],
+    resultKeys: ["org.cases.2.result.1", "org.cases.2.result.2"],
+    orgName: "Imperial",
+    orgLogo: "/logos/imperial.png",
+    partnerName: "O Burgues",
   },
   {
     id: "patrocinio",
-    title: "Ativações personalizadas de patrocínio",
-    logos: ["H2bet", "Atlético MG"],
-    badge: null,
-    desafio:
-      "Criar jornada de conversão para fãs do Clube Atlético Mineiro com a nova patrocinadora master H2bet.",
-    abordagem: [
-      "Construção de audiências personalizadas com base no histórico digital do fã do Galo.",
-      "Entrega de alto impacto para o torcedor Atleticano com banner em destaque no Aplicativo.",
-      "Engajamento do fã em ações da H2bet com mensagens personalizadas em cada momento da jornada.",
-    ],
-    resultados: [
-      "Taxa de cliques recorde para o segmento.",
-      "Associação afetiva do fã com a marca.",
-      "Análise completa da jornada do fã desde o super app até o canal da H2bet.",
-    ],
+    titleKey: "org.cases.3.title",
+    challengeKey: "org.cases.3.challenge",
+    approachKeys: ["org.cases.3.approach.1", "org.cases.3.approach.2", "org.cases.3.approach.3"],
+    resultKeys: ["org.cases.3.result.1", "org.cases.3.result.2", "org.cases.3.result.3"],
+    orgName: "Atletico MG",
+    orgLogo: "/logos/atletico-mg.png",
+    partnerName: "H2bet",
   },
   {
     id: "exposicao",
-    title: "Mensuração de exposição de mídia",
-    logos: ["Série D"],
-    badge: "Case em andamento",
-    desafio:
-      "Mensurar e valorar a exposição de mídia gerada para patrocinadores do clube durante o Campeonato Brasileiro Série D.",
-    abordagem: [
-      "Elaboração de cálculo personalizado de exposição de mídia por canal.",
-      "Identificação dos melhores canais e momentos para exposição de cada patrocinador.",
-      "Correlação das reações dos fãs nas redes sociais com as exposições de patrocinadores.",
-    ],
-    resultados: [
-      "Lift de impacto das marcas dos patrocinadores.",
-      "Análise completa da jornada do patrocinador em diversas transmissões.",
-      "Análise e relatórios de ROAS.",
-    ],
+    titleKey: "org.cases.4.title",
+    challengeKey: "org.cases.4.challenge",
+    approachKeys: ["org.cases.4.approach.1", "org.cases.4.approach.2", "org.cases.4.approach.3"],
+    resultKeys: ["org.cases.4.result.1", "org.cases.4.result.2", "org.cases.4.result.3"],
+    badge: "org.cases.badge.ongoing",
+    orgName: "Portuguesa de Desportos",
   },
 ]
 
-function CaseCard({ c }: { c: (typeof cases)[0] }) {
+function CaseCard({ c, t }: { c: CaseData; t: (key: string) => string }) {
   return (
     <div className="flex h-full flex-col rounded-2xl border border-[#e5e5e5] bg-[#ffffff] p-6 shadow-sm transition-shadow hover:shadow-md">
-      {/* Top */}
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex flex-wrap gap-2">
-          {c.logos.map((logo) => (
-            <span
-              key={logo}
-              className="rounded-full bg-[#f0f0f0] px-3 py-1 text-xs font-semibold text-[#0f0f0f]"
-            >
-              {logo}
-            </span>
-          ))}
+      {/* Org logo + name */}
+      <div className="flex items-center gap-3">
+        {c.orgLogo && (
+          <Image
+            src={c.orgLogo}
+            alt={c.orgName}
+            width={36}
+            height={36}
+            className="h-9 w-9 object-contain"
+          />
+        )}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-sm font-bold text-[#0f0f0f]">{c.orgName}</span>
+          {c.partnerName && (
+            <>
+              <span className="text-xs text-[#6b6b6b]">{"&"}</span>
+              <span className="text-sm font-bold text-[#0f0f0f]">{c.partnerName}</span>
+            </>
+          )}
         </div>
         {c.badge && (
-          <Badge variant="secondary" className="whitespace-nowrap bg-[#FF0066]/10 text-xs text-[#FF0066]">
-            {c.badge}
+          <Badge variant="secondary" className="ml-auto whitespace-nowrap bg-[#FF0066]/10 text-xs text-[#FF0066]">
+            {t(c.badge)}
           </Badge>
         )}
       </div>
 
-      <h3 className="mt-4 text-lg font-bold text-[#0f0f0f]">{c.title}</h3>
+      <h3 className="mt-4 text-lg font-bold text-[#0f0f0f]">{t(c.titleKey)}</h3>
 
       {/* Desafio */}
       <div className="mt-5">
         <span className="inline-block rounded-md bg-[#0f0f0f] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
-          Desafio
+          {t("org.cases.label.challenge")}
         </span>
-        <p className="mt-2 text-sm leading-relaxed text-[#6b6b6b]">{c.desafio}</p>
+        <p className="mt-2 text-sm leading-relaxed text-[#6b6b6b]">{t(c.challengeKey)}</p>
       </div>
 
       {/* Abordagem */}
       <div className="mt-4">
         <span className="inline-block rounded-md bg-[#6b6b6b] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
-          Abordagem
+          {t("org.cases.label.approach")}
         </span>
         <ul className="mt-2 flex flex-col gap-1.5">
-          {c.abordagem.map((a, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-[#6b6b6b]">
+          {c.approachKeys.map((key) => (
+            <li key={key} className="flex items-start gap-2 text-sm leading-relaxed text-[#6b6b6b]">
               <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#00CCFF]" aria-hidden="true" />
-              {a}
+              {t(key)}
             </li>
           ))}
         </ul>
@@ -129,50 +119,53 @@ function CaseCard({ c }: { c: (typeof cases)[0] }) {
       {/* Resultados */}
       <div className="mt-4">
         <span className="inline-block rounded-md bg-[#6b6b6b] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
-          Resultados
+          {t("org.cases.label.results")}
         </span>
         <ul className="mt-2 flex flex-col gap-1.5">
-          {c.resultados.map((r, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm font-medium leading-relaxed text-[#0f0f0f]">
+          {c.resultKeys.map((key) => (
+            <li key={key} className="flex items-start gap-2 text-sm font-medium leading-relaxed text-[#0f0f0f]">
               <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#FF0066]" aria-hidden="true" />
-              {r}
+              {t(key)}
             </li>
           ))}
         </ul>
       </div>
 
-      {/* CTA */}
-      <div className="mt-auto pt-6">
-        <Button
-          asChild
-          variant="outline"
-          size="sm"
-          className="w-full gap-2 rounded-full border-[#00CCFF] text-[#00CCFF] hover:bg-[#00CCFF]/10 hover:text-[#00CCFF]"
-        >
-          <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
-            Solicite uma demo
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        </Button>
-      </div>
+      {/* Case image placeholder */}
+      {c.caseImage ? (
+        <div className="mt-5 overflow-hidden rounded-xl">
+          <Image
+            src={c.caseImage}
+            alt={t(c.titleKey)}
+            width={600}
+            height={300}
+            className="h-auto w-full object-cover"
+          />
+        </div>
+      ) : (
+        <div className="mt-5 flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-[#e5e5e5] bg-[#f7f7f8]">
+          <span className="text-xs text-[#6b6b6b]/60">Imagem do case</span>
+        </div>
+      )}
     </div>
   )
 }
 
 export function CasesSection() {
+  const { t } = useI18n()
   const [mobileIdx, setMobileIdx] = useState(0)
 
   return (
     <section id="cases" className="bg-[#f7f7f8] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <h2 className="text-balance text-center text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
-          Cases
+          {t("org.cases.title")}
         </h2>
 
         {/* Desktop grid */}
         <div className="mt-12 hidden grid-cols-2 gap-6 md:grid">
           {cases.map((c) => (
-            <CaseCard key={c.id} c={c} />
+            <CaseCard key={c.id} c={c} t={t} />
           ))}
         </div>
 
@@ -185,7 +178,7 @@ export function CasesSection() {
             >
               {cases.map((c) => (
                 <div key={c.id} className="w-full flex-shrink-0 px-1">
-                  <CaseCard c={c} />
+                  <CaseCard c={c} t={t} />
                 </div>
               ))}
             </div>
@@ -217,7 +210,7 @@ export function CasesSection() {
               onClick={() => setMobileIdx(Math.min(cases.length - 1, mobileIdx + 1))}
               disabled={mobileIdx === cases.length - 1}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] disabled:opacity-30"
-              aria-label="Próximo case"
+              aria-label="Proximo case"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
