@@ -14,8 +14,8 @@ export function Header() {
   const { t } = useI18n()
 
   const navItems = [
-    { label: t("header.nav.organizations"), href: "#hero" },
-    { label: t("header.nav.advertisers"), href: "#hero" },
+    { label: t("header.nav.organizations"), href: "/organizacoes-esportivas" },
+    { label: t("header.nav.advertisers"), href: "/marcas-anunciantes" },
     { label: t("header.nav.platform"), href: "#plataforma" },
     { label: t("header.nav.clients"), href: "#clientes" },
     { label: t("header.nav.contact"), href: "#contato" },
