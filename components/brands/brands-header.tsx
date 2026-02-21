@@ -17,11 +17,14 @@ export function BrandsHeader() {
   const navItems = [
     { label: "Retize", href: "/" },
     { label: t("brands.header.orgs"), href: "/organizacoes-esportivas" },
-    { label: t("brands.header.network"), href: "#rede" },
-    { label: t("brands.header.activation"), href: "#ativacao" },
+    { label: t("brands.header.audiences"), href: "#audiencias" },
+    { label: t("brands.header.channels"), href: "#canais" },
+    { label: t("brands.header.packages"), href: "#ativacao" },
     { label: t("brands.header.technology"), href: "#tecnologia" },
     { label: t("brands.header.cases"), href: "#cases" },
   ]
+
+  const WA_URL = "https://wa.me/5511972281050?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Retize!"
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -97,7 +100,7 @@ export function BrandsHeader() {
           )}
           <Button
             className="rounded-full bg-[#FF6600] px-5 text-sm font-semibold text-[#ffffff] hover:bg-[#e65c00]"
-            onClick={() => handleNavClick("#rede")}
+            onClick={() => window.open(WA_URL, "_blank")}
           >
             {t("brands.header.cta")}
           </Button>
@@ -148,7 +151,7 @@ export function BrandsHeader() {
                 )}
                 <Button
                   className="mt-2 w-full rounded-full bg-[#FF6600] text-[#ffffff] hover:bg-[#e65c00]"
-                  onClick={() => handleNavClick("#rede")}
+                  onClick={() => { setMobileOpen(false); window.open(WA_URL, "_blank") }}
                 >
                   {t("brands.header.cta")}
                 </Button>

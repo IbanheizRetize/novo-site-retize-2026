@@ -244,11 +244,11 @@ export function ActivationSection() {
               <div className="group relative flex h-96 flex-col overflow-hidden rounded-2xl md:h-[28rem]">
                 <Image src={card.image} alt="" fill className="object-cover" quality={75} />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/90 via-[#000000]/50 to-[#000000]/20" />
-                <div className="relative z-10 flex h-full flex-col justify-between p-6 md:p-8">
-                  {/* Title at top */}
+                <div className="relative z-10 flex h-full flex-col justify-start p-6 pt-10 md:p-8 md:pt-12">
+                  {/* Title */}
                   <div>
                     <h3
-                      className={`text-2xl font-bold tracking-wide text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-2 md:text-3xl ${
+                      className={`text-3xl font-bold tracking-wide text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-2 md:text-4xl ${
                         card.active ? "-translate-y-2" : ""
                       }`}
                     >
@@ -256,10 +256,10 @@ export function ActivationSection() {
                     </h3>
                   </div>
 
-                  {/* Description + CTA at bottom */}
-                  <div className="flex flex-col items-start">
+                  {/* Description + CTA */}
+                  <div className="mt-6 flex flex-col items-start md:mt-8">
                     <p
-                      className={`max-w-md text-sm leading-relaxed text-[#ffffff] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${
+                      className={`max-w-md text-base leading-relaxed text-[#ffffff] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:text-lg ${
                         card.active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                       }`}
                     >

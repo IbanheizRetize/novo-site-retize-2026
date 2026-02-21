@@ -25,30 +25,11 @@ import {
 import { Button } from "@/components/ui/button"
 import { useI18n } from "@/lib/i18n/context"
 
-/* ── Persona data categories ───────────────────────────────── */
+/* ── Persona data categories (icons only, labels come from i18n) ─ */
 
-const behaviorData = [
-  { icon: User, label: "Demografico" },
-  { icon: TrendingUp, label: "Faixa de renda" },
-  { icon: MapPin, label: "Cidade / Bairro" },
-  { icon: Smartphone, label: "Dispositivo" },
-  { icon: BarChart3, label: "Escolaridade" },
-]
-
-const sportData = [
-  { icon: Trophy, label: "Presenca em jogos" },
-  { icon: ShoppingCart, label: "Preferencias de consumo" },
-  { icon: TrendingUp, label: "Frequencia de compra" },
-  { icon: Heart, label: "Habitos e interesses" },
-  { icon: User, label: "Perfil da entidade" },
-]
-
-const discoveryData = [
-  { icon: Search, label: "Novas audiencias" },
-  { icon: BarChart3, label: "Segmentacoes comportamentais" },
-  { icon: TrendingUp, label: "Insights proprietarios" },
-  { icon: User, label: "Dados 1st party" },
-]
+const behaviorIcons = [User, TrendingUp, MapPin, Smartphone, BarChart3]
+const sportIcons = [Trophy, ShoppingCart, TrendingUp, Heart, User]
+const discoveryIcons = [Search, BarChart3, TrendingUp, User]
 
 /* ── Channel definitions ───────────────────────────────────── */
 
@@ -457,7 +438,7 @@ export function NetworkSection() {
   }
 
   return (
-    <section id="rede" className="overflow-hidden">
+    <section id="audiencias" className="overflow-hidden">
       {/* ─── BLOCK 1: Persona + Audience Intelligence ─── */}
       <div className="relative bg-[#0f0f0f] py-20 lg:py-28">
         {/* Decorative glow */}
@@ -481,10 +462,10 @@ export function NetworkSection() {
                 {t("brands.audiences.persona.behavior")}
               </h3>
               <div className="flex flex-col items-end gap-2">
-                {behaviorData.map(({ icon: Ic, label }) => (
-                  <div key={label} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-3 py-2">
+                {behaviorIcons.map((Ic, i) => (
+                  <div key={i} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-3 py-2">
                     <Ic className="h-3.5 w-3.5 text-[#FF6600]" />
-                    <span className="text-xs text-[#ffffff]/80">{label}</span>
+                    <span className="text-xs text-[#ffffff]/80">{t(`brands.persona.behavior.${i + 1}`)}</span>
                   </div>
                 ))}
               </div>
@@ -506,10 +487,10 @@ export function NetworkSection() {
                   {t("brands.audiences.persona.discovery")}
                 </h3>
                 <div className="flex flex-wrap justify-center gap-2">
-                  {discoveryData.map(({ icon: Ic, label }) => (
-                    <div key={label} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-3 py-2">
+                  {discoveryIcons.map((Ic, i) => (
+                    <div key={i} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-3 py-2">
                       <Ic className="h-3.5 w-3.5 text-[#FFAA00]" />
-                      <span className="text-xs text-[#ffffff]/80">{label}</span>
+                      <span className="text-xs text-[#ffffff]/80">{t(`brands.persona.discovery.${i + 1}`)}</span>
                     </div>
                   ))}
                 </div>
@@ -522,10 +503,10 @@ export function NetworkSection() {
                 {t("brands.audiences.persona.sport")}
               </h3>
               <div className="flex flex-col items-start gap-2">
-                {sportData.map(({ icon: Ic, label }) => (
-                  <div key={label} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-3 py-2">
+                {sportIcons.map((Ic, i) => (
+                  <div key={i} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-3 py-2">
                     <Ic className="h-3.5 w-3.5 text-[#9900FF]" />
-                    <span className="text-xs text-[#ffffff]/80">{label}</span>
+                    <span className="text-xs text-[#ffffff]/80">{t(`brands.persona.sport.${i + 1}`)}</span>
                   </div>
                 ))}
               </div>
@@ -540,10 +521,10 @@ export function NetworkSection() {
                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#FF6600]">
                   {t("brands.audiences.persona.behavior")}
                 </h3>
-                {behaviorData.map(({ icon: Ic, label }) => (
-                  <div key={label} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5 py-1.5">
+                {behaviorIcons.map((Ic, i) => (
+                  <div key={i} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5 py-1.5">
                     <Ic className="h-3 w-3 flex-shrink-0 text-[#FF6600]" />
-                    <span className="text-[11px] text-[#ffffff]/80">{label}</span>
+                    <span className="text-[11px] text-[#ffffff]/80">{t(`brands.persona.behavior.${i + 1}`)}</span>
                   </div>
                 ))}
               </div>
@@ -551,10 +532,10 @@ export function NetworkSection() {
                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#9900FF]">
                   {t("brands.audiences.persona.sport")}
                 </h3>
-                {sportData.map(({ icon: Ic, label }) => (
-                  <div key={label} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5 py-1.5">
+                {sportIcons.map((Ic, i) => (
+                  <div key={i} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5 py-1.5">
                     <Ic className="h-3 w-3 flex-shrink-0 text-[#9900FF]" />
-                    <span className="text-[11px] text-[#ffffff]/80">{label}</span>
+                    <span className="text-[11px] text-[#ffffff]/80">{t(`brands.persona.sport.${i + 1}`)}</span>
                   </div>
                 ))}
               </div>
@@ -576,10 +557,10 @@ export function NetworkSection() {
                 {t("brands.audiences.persona.discovery")}
               </h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {discoveryData.map(({ icon: Ic, label }) => (
-                  <div key={label} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5 py-1.5">
+                {discoveryIcons.map((Ic, i) => (
+                  <div key={i} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5 py-1.5">
                     <Ic className="h-3 w-3 text-[#FFAA00]" />
-                    <span className="text-[11px] text-[#ffffff]/80">{label}</span>
+                    <span className="text-[11px] text-[#ffffff]/80">{t(`brands.persona.discovery.${i + 1}`)}</span>
                   </div>
                 ))}
               </div>
@@ -661,7 +642,7 @@ export function NetworkSection() {
       </div>
 
       {/* ─── BLOCK 2: Channels & Activation Formats ─── */}
-      <div className="bg-[#f7f7f8] py-20 lg:py-28">
+      <div id="canais" className="bg-[#f7f7f8] py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="mx-auto mb-12 max-w-2xl text-center">
             <h3 className="text-balance text-2xl font-bold tracking-tight text-[#0f0f0f] md:text-3xl lg:text-4xl">

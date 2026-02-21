@@ -223,12 +223,29 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.footer.terms": "Termos de Uso",
 
     // Brands Page - Header
-    "brands.header.network": "Rede",
-    "brands.header.activation": "Ativação",
+    "brands.header.audiences": "Audiências",
+    "brands.header.channels": "Canais",
+    "brands.header.packages": "Pacotes",
     "brands.header.technology": "Tecnologia",
     "brands.header.cases": "Cases",
     "brands.header.cta": "Saiba mais",
     "brands.header.orgs": "Organizações Esportivas",
+
+    // Brands Page - Persona labels
+    "brands.persona.behavior.1": "Demográfico",
+    "brands.persona.behavior.2": "Faixa de Renda",
+    "brands.persona.behavior.3": "Cidade / Bairro",
+    "brands.persona.behavior.4": "Dispositivo",
+    "brands.persona.behavior.5": "Escolaridade",
+    "brands.persona.sport.1": "Presença em jogos",
+    "brands.persona.sport.2": "Preferências de consumo",
+    "brands.persona.sport.3": "Frequência de compra",
+    "brands.persona.sport.4": "Hábitos e interesses",
+    "brands.persona.sport.5": "Perfil da entidade",
+    "brands.persona.discovery.1": "Novas audiências",
+    "brands.persona.discovery.2": "Segmentações comportamentais",
+    "brands.persona.discovery.3": "Insights proprietários",
+    "brands.persona.discovery.4": "Dados 1st party",
 
     // Brands Page - Hero
     "brands.hero.title": "Fale com seus clientes através do esporte",
@@ -561,12 +578,29 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.footer.terms": "Terms of Use",
 
     // Brands Page - Header
-    "brands.header.network": "Network",
-    "brands.header.activation": "Activation",
+    "brands.header.audiences": "Audiences",
+    "brands.header.channels": "Channels",
+    "brands.header.packages": "Packages",
     "brands.header.technology": "Technology",
     "brands.header.cases": "Cases",
     "brands.header.cta": "Learn more",
     "brands.header.orgs": "Sports Organizations",
+
+    // Brands Page - Persona labels
+    "brands.persona.behavior.1": "Demographics",
+    "brands.persona.behavior.2": "Income Range",
+    "brands.persona.behavior.3": "City / Neighborhood",
+    "brands.persona.behavior.4": "Device",
+    "brands.persona.behavior.5": "Education",
+    "brands.persona.sport.1": "Game attendance",
+    "brands.persona.sport.2": "Consumption preferences",
+    "brands.persona.sport.3": "Purchase frequency",
+    "brands.persona.sport.4": "Habits and interests",
+    "brands.persona.sport.5": "Entity profile",
+    "brands.persona.discovery.1": "New audiences",
+    "brands.persona.discovery.2": "Behavioral segments",
+    "brands.persona.discovery.3": "Proprietary insights",
+    "brands.persona.discovery.4": "1st party data",
 
     // Brands Page - Hero
     "brands.hero.title": "Reach your customers through sports",
@@ -899,12 +933,29 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.footer.terms": "Términos de Uso",
 
     // Brands Page - Header
-    "brands.header.network": "Red",
-    "brands.header.activation": "Activación",
+    "brands.header.audiences": "Audiencias",
+    "brands.header.channels": "Canales",
+    "brands.header.packages": "Paquetes",
     "brands.header.technology": "Tecnología",
     "brands.header.cases": "Cases",
     "brands.header.cta": "Saber más",
     "brands.header.orgs": "Organizaciones Deportivas",
+
+    // Brands Page - Persona labels
+    "brands.persona.behavior.1": "Demográfico",
+    "brands.persona.behavior.2": "Rango de ingresos",
+    "brands.persona.behavior.3": "Ciudad / Barrio",
+    "brands.persona.behavior.4": "Dispositivo",
+    "brands.persona.behavior.5": "Escolaridad",
+    "brands.persona.sport.1": "Presencia en juegos",
+    "brands.persona.sport.2": "Preferencias de consumo",
+    "brands.persona.sport.3": "Frecuencia de compra",
+    "brands.persona.sport.4": "Hábitos e intereses",
+    "brands.persona.sport.5": "Perfil de la entidad",
+    "brands.persona.discovery.1": "Nuevas audiencias",
+    "brands.persona.discovery.2": "Segmentaciones comportamentales",
+    "brands.persona.discovery.3": "Insights propietarios",
+    "brands.persona.discovery.4": "Datos 1st party",
 
     // Brands Page - Hero
     "brands.hero.title": "Hable con sus clientes a través del deporte",
