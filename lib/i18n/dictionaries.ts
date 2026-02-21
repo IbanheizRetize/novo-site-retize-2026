@@ -222,6 +222,83 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.footer.privacyPortal": "Portal de Privacidade",
     "org.footer.terms": "Termos de Uso",
 
+    // Brands Page - Header
+    "brands.header.network": "Rede",
+    "brands.header.activation": "Ativação",
+    "brands.header.technology": "Tecnologia",
+    "brands.header.cases": "Cases",
+    "brands.header.cta": "Saiba mais",
+    "brands.header.orgs": "Organizações Esportivas",
+
+    // Brands Page - Hero
+    "brands.hero.title": "Fale com seus clientes através do esporte",
+    "brands.hero.subtitle": "Usamos o esporte como um acelerador de jornadas para ativar sua marca de forma personalizada e vender os produtos e serviços",
+    "brands.hero.cta": "Saiba mais",
+    "brands.hero.scroll": "Rolar para baixo",
+
+    // Brands Page - Network
+    "brands.network.title": "RETIZE SPORTS MEDIA NETWORK",
+    "brands.network.text": "Utilize canais oficiais de alto engajamento emocional nas maiores organizações esportivas do Brasil, no futebol, vôlei, e-sports e muito mais!",
+    "brands.network.cta": "Quero ativar no esporte",
+
+    // Brands Page - Activation Platforms
+    "brands.activation.title": "Plataformas de ativação",
+    "brands.activation.1.title": "PROJETOS DE MÍDIA",
+    "brands.activation.1.desc": "Projetos personalizados de ativação na rede de mídia exclusiva da Retize, com segmentação de dados 1st party. Sem vínculo com as organizações esportivas.",
+    "brands.activation.1.cta": "Baixar pacotes 2026",
+    "brands.activation.2.title": "PATROCÍNIO DIGITAL",
+    "brands.activation.2.desc": "Seja um patrocinador oficial das maiores organizações esportivas do Brasil e utilize todo potencial de dados e canais que o esporte pode entregar para sua marca. Vínculo institucional direto com as organizações esportivas.",
+    "brands.activation.2.cta": "Pacote Copa do Mundo 2026",
+    "brands.activation.cta": "Baixe os pacotes de ativação no esporte 2026",
+
+    // Brands Page - Copa 2026 Modal
+    "brands.modal.title": "Baixar Pacote Copa do Mundo 2026",
+    "brands.modal.name": "Nome",
+    "brands.modal.name.placeholder": "Seu nome completo",
+    "brands.modal.company": "Empresa",
+    "brands.modal.company.placeholder": "Nome da empresa",
+    "brands.modal.email": "E-mail",
+    "brands.modal.email.placeholder": "seu@email.com",
+    "brands.modal.phone": "Telefone",
+    "brands.modal.phone.placeholder": "(11) 99999-9999",
+    "brands.modal.submit": "Baixar pacote",
+    "brands.modal.sending": "Enviando...",
+    "brands.modal.success": "Dados enviados com sucesso! O download será iniciado.",
+    "brands.modal.error.required": "Este campo é obrigatório",
+    "brands.modal.error.email": "E-mail inválido",
+    "brands.modal.error.phone": "Telefone inválido (mínimo 10 dígitos)",
+    "brands.modal.error.generic": "Erro ao enviar. Tente novamente.",
+
+    // Brands Page - Technology
+    "brands.tech.title": "Tecnologia proprietária Retize",
+    "brands.tech.card1": "Destaque para patrocinadores com dados e segmentação avançada",
+    "brands.tech.card2": "Você já é um patrocinador no esporte? Realize sua gestão com a plataforma Retize.",
+    "brands.tech.cta": "Solicite uma demo",
+    "brands.tech.screen.title": "Dashboard",
+    "brands.tech.screen.desc": "Dashboard da home mostrando a gestão do patrocinador completa.",
+
+    // Brands Page - Cases
+    "brands.cases.title": "Cases & Depoimentos",
+    "brands.cases.1.title": "Case Banco Carrefour",
+    "brands.cases.1.challenge": "Criar uma campanha de ativação digital para conectar o Banco Carrefour com torcedores das maiores entidades esportivas do Brasil, aumentando awareness e conversão de produtos financeiros.",
+    "brands.cases.1.approach.1": "Segmentação de audiência com dados 1st party das entidades esportivas parceiras da Retize.",
+    "brands.cases.1.approach.2": "Ativação multicanal em sites, apps e CRM das organizações esportivas.",
+    "brands.cases.1.approach.3": "Jornada personalizada de acordo com o perfil de consumo do torcedor.",
+    "brands.cases.1.result.1": "Aumento significativo no volume de leads qualificados.",
+    "brands.cases.1.result.2": "CTR acima da média de mercado para o segmento financeiro.",
+    "brands.cases.2.title": "Samsung x Imperial eSports",
+    "brands.cases.2.challenge": "Promover lançamento de produto Samsung para o público jovem e gamer através do e-sports, gerando awareness e conversão.",
+    "brands.cases.2.approach.1": "Ativação integrada com conteúdo exclusivo nos canais da Imperial eSports.",
+    "brands.cases.2.approach.2": "Retize Survey para identificar hábitos de consumo tecnológico dos fãs.",
+    "brands.cases.2.approach.3": "Campanha segmentada de display e push notifications para audiência gamer.",
+    "brands.cases.2.result.1": "Engajamento recorde nos canais da Imperial durante a campanha.",
+    "brands.cases.2.result.2": "Conversão acima do benchmark para o segmento de eletrônicos.",
+    "brands.cases.cta": "Saiba mais",
+
+    // Brands Page - Partners
+    "brands.partners.title": "Quem joga com a Retize",
+    "brands.partners.cta": "Quero jogar junto",
+
     // Footer
     "footer.tagline": "Sports Media Network",
     "footer.solutions": "Soluções",
@@ -460,6 +537,83 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.footer.privacyPortal": "Privacy Portal",
     "org.footer.terms": "Terms of Use",
 
+    // Brands Page - Header
+    "brands.header.network": "Network",
+    "brands.header.activation": "Activation",
+    "brands.header.technology": "Technology",
+    "brands.header.cases": "Cases",
+    "brands.header.cta": "Learn more",
+    "brands.header.orgs": "Sports Organizations",
+
+    // Brands Page - Hero
+    "brands.hero.title": "Reach your customers through sports",
+    "brands.hero.subtitle": "We use sports as a journey accelerator to activate your brand in a personalized way and sell products and services",
+    "brands.hero.cta": "Learn more",
+    "brands.hero.scroll": "Scroll down",
+
+    // Brands Page - Network
+    "brands.network.title": "RETIZE SPORTS MEDIA NETWORK",
+    "brands.network.text": "Use official high-engagement channels from the biggest sports organizations in Brazil, including football, volleyball, e-sports and much more!",
+    "brands.network.cta": "I want to activate in sports",
+
+    // Brands Page - Activation Platforms
+    "brands.activation.title": "Activation platforms",
+    "brands.activation.1.title": "MEDIA PROJECTS",
+    "brands.activation.1.desc": "Customized activation projects on Retize's exclusive media network, with 1st party data segmentation. No ties to sports organizations.",
+    "brands.activation.1.cta": "Download 2026 packages",
+    "brands.activation.2.title": "DIGITAL SPONSORSHIP",
+    "brands.activation.2.desc": "Be an official sponsor of the biggest sports organizations in Brazil and leverage the full potential of data and channels that sports can deliver for your brand. Direct institutional partnership with sports organizations.",
+    "brands.activation.2.cta": "World Cup 2026 Package",
+    "brands.activation.cta": "Download 2026 sports activation packages",
+
+    // Brands Page - Copa 2026 Modal
+    "brands.modal.title": "Download World Cup 2026 Package",
+    "brands.modal.name": "Name",
+    "brands.modal.name.placeholder": "Your full name",
+    "brands.modal.company": "Company",
+    "brands.modal.company.placeholder": "Company name",
+    "brands.modal.email": "Email",
+    "brands.modal.email.placeholder": "your@email.com",
+    "brands.modal.phone": "Phone",
+    "brands.modal.phone.placeholder": "(11) 99999-9999",
+    "brands.modal.submit": "Download package",
+    "brands.modal.sending": "Sending...",
+    "brands.modal.success": "Data sent successfully! Download will start.",
+    "brands.modal.error.required": "This field is required",
+    "brands.modal.error.email": "Invalid email",
+    "brands.modal.error.phone": "Invalid phone (minimum 10 digits)",
+    "brands.modal.error.generic": "Error sending. Please try again.",
+
+    // Brands Page - Technology
+    "brands.tech.title": "Retize proprietary technology",
+    "brands.tech.card1": "Sponsor highlights with advanced data and segmentation",
+    "brands.tech.card2": "Already a sports sponsor? Manage it with the Retize platform.",
+    "brands.tech.cta": "Request a demo",
+    "brands.tech.screen.title": "Dashboard",
+    "brands.tech.screen.desc": "Home dashboard showing complete sponsor management.",
+
+    // Brands Page - Cases
+    "brands.cases.title": "Cases & Testimonials",
+    "brands.cases.1.title": "Banco Carrefour Case",
+    "brands.cases.1.challenge": "Create a digital activation campaign to connect Banco Carrefour with fans from the biggest sports organizations in Brazil, increasing awareness and conversion of financial products.",
+    "brands.cases.1.approach.1": "Audience segmentation with 1st party data from Retize's partner sports entities.",
+    "brands.cases.1.approach.2": "Multichannel activation on websites, apps and CRM of sports organizations.",
+    "brands.cases.1.approach.3": "Personalized journey according to fan consumption profile.",
+    "brands.cases.1.result.1": "Significant increase in qualified lead volume.",
+    "brands.cases.1.result.2": "CTR above market average for the financial segment.",
+    "brands.cases.2.title": "Samsung x Imperial eSports",
+    "brands.cases.2.challenge": "Promote Samsung product launch to young and gamer audiences through e-sports, generating awareness and conversion.",
+    "brands.cases.2.approach.1": "Integrated activation with exclusive content on Imperial eSports channels.",
+    "brands.cases.2.approach.2": "Retize Survey to identify tech consumption habits of fans.",
+    "brands.cases.2.approach.3": "Segmented display and push notification campaign for gamer audience.",
+    "brands.cases.2.result.1": "Record engagement on Imperial channels during the campaign.",
+    "brands.cases.2.result.2": "Conversion above benchmark for the electronics segment.",
+    "brands.cases.cta": "Learn more",
+
+    // Brands Page - Partners
+    "brands.partners.title": "Who plays with Retize",
+    "brands.partners.cta": "I want to play together",
+
     // Footer
     "footer.tagline": "Sports Media Network",
     "footer.solutions": "Solutions",
@@ -697,6 +851,83 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.footer.privacy": "Política de Privacidad",
     "org.footer.privacyPortal": "Portal de Privacidad",
     "org.footer.terms": "Términos de Uso",
+
+    // Brands Page - Header
+    "brands.header.network": "Red",
+    "brands.header.activation": "Activación",
+    "brands.header.technology": "Tecnología",
+    "brands.header.cases": "Cases",
+    "brands.header.cta": "Saber más",
+    "brands.header.orgs": "Organizaciones Deportivas",
+
+    // Brands Page - Hero
+    "brands.hero.title": "Hable con sus clientes a través del deporte",
+    "brands.hero.subtitle": "Usamos el deporte como un acelerador de jornadas para activar su marca de forma personalizada y vender los productos y servicios",
+    "brands.hero.cta": "Saber más",
+    "brands.hero.scroll": "Desplazar hacia abajo",
+
+    // Brands Page - Network
+    "brands.network.title": "RETIZE SPORTS MEDIA NETWORK",
+    "brands.network.text": "Utilice canales oficiales de alto engagement emocional en las mayores organizaciones deportivas de Brasil, en fútbol, vóley, e-sports y mucho más!",
+    "brands.network.cta": "Quiero activar en el deporte",
+
+    // Brands Page - Activation Platforms
+    "brands.activation.title": "Plataformas de activación",
+    "brands.activation.1.title": "PROYECTOS DE MEDIOS",
+    "brands.activation.1.desc": "Proyectos personalizados de activación en la red de medios exclusiva de Retize, con segmentación de datos 1st party. Sin vínculo con las organizaciones deportivas.",
+    "brands.activation.1.cta": "Descargar paquetes 2026",
+    "brands.activation.2.title": "PATROCINIO DIGITAL",
+    "brands.activation.2.desc": "Sea un patrocinador oficial de las mayores organizaciones deportivas de Brasil y utilice todo el potencial de datos y canales que el deporte puede entregar para su marca. Vínculo institucional directo con las organizaciones deportivas.",
+    "brands.activation.2.cta": "Paquete Copa del Mundo 2026",
+    "brands.activation.cta": "Descargue los paquetes de activación en el deporte 2026",
+
+    // Brands Page - Copa 2026 Modal
+    "brands.modal.title": "Descargar Paquete Copa del Mundo 2026",
+    "brands.modal.name": "Nombre",
+    "brands.modal.name.placeholder": "Su nombre completo",
+    "brands.modal.company": "Empresa",
+    "brands.modal.company.placeholder": "Nombre de la empresa",
+    "brands.modal.email": "Correo electrónico",
+    "brands.modal.email.placeholder": "su@correo.com",
+    "brands.modal.phone": "Teléfono",
+    "brands.modal.phone.placeholder": "(11) 99999-9999",
+    "brands.modal.submit": "Descargar paquete",
+    "brands.modal.sending": "Enviando...",
+    "brands.modal.success": "Datos enviados con éxito! La descarga comenzará.",
+    "brands.modal.error.required": "Este campo es obligatorio",
+    "brands.modal.error.email": "Correo electrónico inválido",
+    "brands.modal.error.phone": "Teléfono inválido (mínimo 10 dígitos)",
+    "brands.modal.error.generic": "Error al enviar. Intente nuevamente.",
+
+    // Brands Page - Technology
+    "brands.tech.title": "Tecnología propietaria Retize",
+    "brands.tech.card1": "Destaque para patrocinadores con datos y segmentación avanzada",
+    "brands.tech.card2": "¿Ya es patrocinador en el deporte? Realice su gestión con la plataforma Retize.",
+    "brands.tech.cta": "Solicite una demo",
+    "brands.tech.screen.title": "Dashboard",
+    "brands.tech.screen.desc": "Dashboard de inicio mostrando la gestión completa del patrocinador.",
+
+    // Brands Page - Cases
+    "brands.cases.title": "Cases y Testimonios",
+    "brands.cases.1.title": "Case Banco Carrefour",
+    "brands.cases.1.challenge": "Crear una campaña de activación digital para conectar Banco Carrefour con los hinchas de las mayores entidades deportivas de Brasil, aumentando awareness y conversión de productos financieros.",
+    "brands.cases.1.approach.1": "Segmentación de audiencia con datos 1st party de las entidades deportivas socias de Retize.",
+    "brands.cases.1.approach.2": "Activación multicanal en sitios, apps y CRM de las organizaciones deportivas.",
+    "brands.cases.1.approach.3": "Jornada personalizada de acuerdo con el perfil de consumo del hincha.",
+    "brands.cases.1.result.1": "Aumento significativo en el volumen de leads calificados.",
+    "brands.cases.1.result.2": "CTR por encima del promedio del mercado para el segmento financiero.",
+    "brands.cases.2.title": "Samsung x Imperial eSports",
+    "brands.cases.2.challenge": "Promover el lanzamiento de un producto Samsung para el público joven y gamer a través del e-sports, generando awareness y conversión.",
+    "brands.cases.2.approach.1": "Activación integrada con contenido exclusivo en los canales de Imperial eSports.",
+    "brands.cases.2.approach.2": "Retize Survey para identificar hábitos de consumo tecnológico de los fans.",
+    "brands.cases.2.approach.3": "Campaña segmentada de display y push notifications para audiencia gamer.",
+    "brands.cases.2.result.1": "Engagement récord en los canales de Imperial durante la campaña.",
+    "brands.cases.2.result.2": "Conversión por encima del benchmark para el segmento de electrónicos.",
+    "brands.cases.cta": "Saber más",
+
+    // Brands Page - Partners
+    "brands.partners.title": "Quién juega con Retize",
+    "brands.partners.cta": "Quiero jugar junto",
 
     // Footer
     "footer.tagline": "Sports Media Network",
