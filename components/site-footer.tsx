@@ -130,19 +130,21 @@ export function SiteFooter() {
             </p>
             <nav className="flex gap-6 text-xs" aria-label="Links legais">
               <a
-                href="/politica-de-privacidade"
+                href="/legal"
                 className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70"
               >
                 {t("footer.privacy")}
               </a>
               <a
-                href="/portal-de-privacidade"
+                href="https://www.privacidade.com.br/portal-de-privacidade?token=e9ef3022620a045a9d0220b162bdc3b5"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70"
               >
                 {t("footer.privacyPortal")}
               </a>
               <a
-                href="/termos-de-uso"
+                href="/legal"
                 className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70"
               >
                 {t("footer.terms")}

@@ -127,13 +127,18 @@ export function OrgFooter() {
               {t("org.footer.copyright")}
             </p>
             <nav className="flex gap-6 text-xs" aria-label="Links legais">
-              <Link href="/politica-de-privacidade" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
+              <Link href="/legal" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
                 {t("org.footer.privacy")}
               </Link>
-              <Link href="/portal-de-privacidade" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
+              <a
+                href="https://www.privacidade.com.br/portal-de-privacidade?token=e9ef3022620a045a9d0220b162bdc3b5"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70"
+              >
                 {t("org.footer.privacyPortal")}
-              </Link>
-              <Link href="/termos-de-uso" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
+              </a>
+              <Link href="/legal" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
                 {t("org.footer.terms")}
               </Link>
             </nav>

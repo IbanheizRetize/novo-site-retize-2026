@@ -371,6 +371,15 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "footer.privacy": "Política de Privacidade",
     "footer.privacyPortal": "Portal de Privacidade",
     "footer.terms": "Termos de Uso",
+
+    // Legal page
+    "legal.page.title": "Informacoes Legais",
+    "legal.tab.privacy": "Política de Privacidade",
+    "legal.tab.terms": "Termos de Uso",
+    "legal.lastUpdate": "Ultima atualizacao: 24 de abril de 2023",
+    "legal.header.home": "Home",
+    "legal.header.organizations": "Organizacoes Esportivas",
+    "legal.header.brands": "Marcas Anunciantes",
   },
 
   en: {
@@ -743,6 +752,15 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "footer.privacy": "Privacy Policy",
     "footer.privacyPortal": "Privacy Portal",
     "footer.terms": "Terms of Use",
+
+    // Legal page
+    "legal.page.title": "Legal Information",
+    "legal.tab.privacy": "Privacy Policy",
+    "legal.tab.terms": "Terms of Use",
+    "legal.lastUpdate": "Last updated: April 24, 2023",
+    "legal.header.home": "Home",
+    "legal.header.organizations": "Sports Organizations",
+    "legal.header.brands": "Advertisers",
   },
 
   es: {
@@ -1115,5 +1133,14 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "footer.privacy": "Política de Privacidad",
     "footer.privacyPortal": "Portal de Privacidad",
     "footer.terms": "Términos de Uso",
+
+    // Legal page
+    "legal.page.title": "Informacion Legal",
+    "legal.tab.privacy": "Politica de Privacidad",
+    "legal.tab.terms": "Terminos de Uso",
+    "legal.lastUpdate": "Ultima actualizacion: 24 de abril de 2023",
+    "legal.header.home": "Home",
+    "legal.header.organizations": "Organizaciones Deportivas",
+    "legal.header.brands": "Marcas Anunciantes",
   },
 }
