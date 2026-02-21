@@ -277,7 +277,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.audiences.channels.direct.formats": "Push,E-mail,WhatsApp,SMS",
     "brands.audiences.channels.offline.title": "Offline",
     "brands.audiences.channels.offline.desc": "Ativações em camarote e matchday nas sedes das entidades, promoção de produtos e experiências exclusivas com clientes e fãs.",
-    "brands.audiences.channels.offline.formats": "Camarote,Matchday,Sampling,Experiência",
+    "brands.audiences.channels.offline.formats": "Camarote,Matchday,Experiência",
     "brands.audiences.channels.branded.title": "Branded Content",
     "brands.audiences.channels.branded.desc": "Quadros patrocinados, séries de conteúdos, inserções de produtos em diferentes momentos e canais das organizações.",
     "brands.audiences.channels.branded.formats": "Série,Quadro,Inserção,Collab",
@@ -311,12 +311,14 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.modal.error.generic": "Erro ao enviar. Tente novamente.",
 
     // Brands Page - Technology
-    "brands.tech.title": "Tecnologia proprietária Retize",
-    "brands.tech.card1": "Destaque para patrocinadores com dados e segmentação avançada",
-    "brands.tech.card2": "Você já é um patrocinador no esporte? Realize sua gestão com a plataforma Retize.",
+    "brands.tech.badge": "PLATAFORMA",
+    "brands.tech.title": "Tecnologia e dados para ativação",
+    "brands.tech.description": "Gerencie suas campanhas e pacotes de patrocínio esportivo com a tecnologia da Retize em múltiplas organizações esportivas ao mesmo tempo.",
+    "brands.tech.feat.1": "Gerenciador de patrocínio esportivo",
+    "brands.tech.feat.2": "Audiências ultra-segmentadas cross organizações esportivas e canais",
+    "brands.tech.feat.3": "Análise e insights de todas campanhas e ativações",
+    "brands.tech.feat.4": "Mensuração de exposição de marca e retorno de mídia com uso de IA",
     "brands.tech.cta": "Solicite uma demo",
-    "brands.tech.screen.title": "Dashboard",
-    "brands.tech.screen.desc": "Dashboard da home mostrando a gestão do patrocinador completa.",
 
     // Brands Page - Cases
     "brands.cases.title": "Cases & Depoimentos",
@@ -633,7 +635,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.audiences.channels.direct.formats": "Push,E-mail,WhatsApp,SMS",
     "brands.audiences.channels.offline.title": "Offline",
     "brands.audiences.channels.offline.desc": "VIP box and matchday activations at the entities' venues, product promotions and exclusive experiences with clients and fans.",
-    "brands.audiences.channels.offline.formats": "VIP Box,Matchday,Sampling,Experience",
+    "brands.audiences.channels.offline.formats": "VIP Box,Matchday,Experience",
     "brands.audiences.channels.branded.title": "Branded Content",
     "brands.audiences.channels.branded.desc": "Sponsored segments, content series, product placements across different moments and channels of the organizations.",
     "brands.audiences.channels.branded.formats": "Series,Segment,Placement,Collab",
@@ -667,12 +669,14 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.modal.error.generic": "Error sending. Please try again.",
 
     // Brands Page - Technology
-    "brands.tech.title": "Retize proprietary technology",
-    "brands.tech.card1": "Sponsor highlights with advanced data and segmentation",
-    "brands.tech.card2": "Already a sports sponsor? Manage it with the Retize platform.",
+    "brands.tech.badge": "PLATFORM",
+    "brands.tech.title": "Technology and data for activation",
+    "brands.tech.description": "Manage your campaigns and sports sponsorship packages with Retize technology across multiple sports organizations at the same time.",
+    "brands.tech.feat.1": "Sports sponsorship manager",
+    "brands.tech.feat.2": "Ultra-segmented audiences across sports organizations and channels",
+    "brands.tech.feat.3": "Analysis and insights of all campaigns and activations",
+    "brands.tech.feat.4": "Brand exposure measurement and media return using AI",
     "brands.tech.cta": "Request a demo",
-    "brands.tech.screen.title": "Dashboard",
-    "brands.tech.screen.desc": "Home dashboard showing complete sponsor management.",
 
     // Brands Page - Cases
     "brands.cases.title": "Cases & Testimonials",
@@ -989,7 +993,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.audiences.channels.direct.formats": "Push,E-mail,WhatsApp,SMS",
     "brands.audiences.channels.offline.title": "Offline",
     "brands.audiences.channels.offline.desc": "Activaciones en palco y matchday en las sedes de las entidades, promoción de productos y experiencias exclusivas con clientes e hinchas.",
-    "brands.audiences.channels.offline.formats": "Palco,Matchday,Sampling,Experiencia",
+    "brands.audiences.channels.offline.formats": "Palco,Matchday,Experiencia",
     "brands.audiences.channels.branded.title": "Branded Content",
     "brands.audiences.channels.branded.desc": "Cuadros patrocinados, series de contenidos, inserciones de productos en diferentes momentos y canales de las organizaciones.",
     "brands.audiences.channels.branded.formats": "Serie,Cuadro,Inserción,Collab",
@@ -1023,12 +1027,14 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.modal.error.generic": "Error al enviar. Intente nuevamente.",
 
     // Brands Page - Technology
-    "brands.tech.title": "Tecnología propietaria Retize",
-    "brands.tech.card1": "Destaque para patrocinadores con datos y segmentación avanzada",
-    "brands.tech.card2": "¿Ya es patrocinador en el deporte? Realice su gestión con la plataforma Retize.",
+    "brands.tech.badge": "PLATAFORMA",
+    "brands.tech.title": "Tecnología y datos para activación",
+    "brands.tech.description": "Gestione sus campañas y paquetes de patrocinio deportivo con la tecnología de Retize en múltiples organizaciones deportivas al mismo tiempo.",
+    "brands.tech.feat.1": "Gestor de patrocinio deportivo",
+    "brands.tech.feat.2": "Audiencias ultra-segmentadas cross organizaciones deportivas y canales",
+    "brands.tech.feat.3": "Análisis e insights de todas las campañas y activaciones",
+    "brands.tech.feat.4": "Medición de exposición de marca y retorno de medios con uso de IA",
     "brands.tech.cta": "Solicite una demo",
-    "brands.tech.screen.title": "Dashboard",
-    "brands.tech.screen.desc": "Dashboard de inicio mostrando la gestión completa del patrocinador.",
 
     // Brands Page - Cases
     "brands.cases.title": "Cases y Testimonios",
