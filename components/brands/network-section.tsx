@@ -644,15 +644,15 @@ export function NetworkSection() {
                   </div>
                 ))}
                 {/* +20 organizations */}
-                <div className="flex flex-col items-center gap-2">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-dashed border-[#FF6600]/30 bg-[#FF6600]/5 md:h-20 md:w-20">
-                    <span className="text-center text-[10px] font-bold leading-tight text-[#FF6600]/70">
+                <div className="col-span-full flex items-center justify-center md:col-span-1 md:flex-col md:gap-2">
+                  <div className="flex items-center gap-2 rounded-2xl border border-dashed border-[#FF6600]/30 bg-[#FF6600]/5 px-4 py-3 md:h-20 md:w-20 md:flex-col md:justify-center md:gap-0 md:px-0 md:py-0">
+                    <span className="text-sm font-bold text-[#FF6600]/70 md:text-[10px]">
                       {"+ 20"}
                     </span>
+                    <span className="text-xs font-semibold text-[#ffffff]/50 md:text-center md:text-[8px]">
+                      {"Organizações Esportivas"}
+                    </span>
                   </div>
-                  <span className="text-center text-[10px] font-semibold text-[#ffffff]/40">
-                    organizacoes
-                  </span>
                 </div>
               </div>
             </div>
