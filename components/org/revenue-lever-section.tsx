@@ -71,11 +71,11 @@ export function RevenueLeverSection() {
               />
 
               {/* Content */}
-              <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-8">
-                <h3 className="text-xl font-bold text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-1 md:text-2xl">
+              <div className="relative z-10 flex h-full flex-col items-center justify-center p-6 text-center md:p-8">
+                <h3 className="text-xl font-bold text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-4 md:text-2xl">
                   {t(lever.titleKey)}
                 </h3>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-[#ffffff]/80 opacity-0 transition-all duration-300 group-hover:opacity-100">
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-[#ffffff]/80 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   {t(lever.descKey)}
                 </p>
               </div>

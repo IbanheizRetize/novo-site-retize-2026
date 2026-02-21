@@ -39,7 +39,7 @@ export function PartnersSection() {
   const { t } = useI18n()
 
   return (
-    <section className="bg-[#ffffff] py-20 lg:py-28">
+    <section className="bg-[#ffffff] pt-4 pb-20 lg:pt-4 lg:pb-28">
       <div className="mx-auto max-w-5xl px-4 lg:px-8">
         <div className="text-center">
           <h2 className="text-balance text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">

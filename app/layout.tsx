@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { Suspense } from 'react'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { I18nProvider } from '@/lib/i18n/context'
@@ -27,9 +28,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="font-sans antialiased">
-        <I18nProvider>
-          {children}
-        </I18nProvider>
+        <Suspense>
+          <I18nProvider>
+            {children}
+          </I18nProvider>
+        </Suspense>
         <Analytics />
       </body>
     </html>

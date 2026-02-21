@@ -8,30 +8,27 @@ import { useI18n } from "@/lib/i18n/context"
 const testimonials = [
   {
     id: "ricardo",
-    name: "Ricardo Bonetti",
-    role: "COO Imperial eSports",
-    quote:
-      "Uma empresa extremamente dedicada, o atendimento sempre foi muito proximo, nos ajudando entender nossos problemas, expertise nesse mercado de analise de dados, com certeza vai nos trazer negocios.",
+    nameKey: "org.testimonials.1.name",
+    roleKey: "org.testimonials.1.role",
+    quoteKey: "org.testimonials.1.quote",
     video: "/videos/testimonial-1.mp4",
     initials: "RB",
     color: "#00CCFF",
   },
   {
     id: "erich",
-    name: "Erich Beting",
-    role: "CEO Maquina do Esporte",
-    quote:
-      "A gente conseguiu finalmente fazer com que a publicidade tivesse logica dentro de aparicao para publico, tivesse uma boa entrega e alem disso, a gente conta com profissionais que tem ajudado a gente no dia a dia.",
+    nameKey: "org.testimonials.2.name",
+    roleKey: "org.testimonials.2.role",
+    quoteKey: "org.testimonials.2.quote",
     video: "/videos/testimonial-2.mp4",
     initials: "EB",
     color: "#FF0066",
   },
   {
     id: "debora",
-    name: "Debora Saldanha",
-    role: "Head de Inovacao, Clube Atletico Mineiro",
-    quote:
-      "Com a Retize, estruturamos um modelo de dados e engajamento no SuperApp do Galo que possibilita uma verdadeira hiper personalizacao, permitindo que marcas e parceiros conversem diretamente com os torcedores.",
+    nameKey: "org.testimonials.3.name",
+    roleKey: "org.testimonials.3.role",
+    quoteKey: "org.testimonials.3.quote",
     video: "/videos/testimonial-3.mp4",
     initials: "DS",
     color: "#00cc88",
@@ -44,7 +41,7 @@ export function TestimonialsSection() {
   const [mobileIdx, setMobileIdx] = useState(0)
 
   return (
-    <section className="bg-[#ffffff] py-20 lg:py-28">
+    <section className="bg-[#ffffff] py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <h2 className="text-balance text-center text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
           {t("org.testimonials.title")}
@@ -53,7 +50,12 @@ export function TestimonialsSection() {
         {/* Desktop */}
         <div className="mt-12 hidden grid-cols-3 gap-6 md:grid">
           {testimonials.map((item) => (
-            <TestimonialCard key={item.id} item={item} onPlay={() => setVideoOpen(item.video)} watchLabel={t("org.testimonials.watch")} />
+            <TestimonialCard
+              key={item.id}
+              item={item}
+              onPlay={() => setVideoOpen(item.video)}
+              t={t}
+            />
           ))}
         </div>
 
@@ -66,7 +68,11 @@ export function TestimonialsSection() {
             >
               {testimonials.map((item) => (
                 <div key={item.id} className="w-full flex-shrink-0 px-1">
-                  <TestimonialCard item={item} onPlay={() => setVideoOpen(item.video)} watchLabel={t("org.testimonials.watch")} />
+                  <TestimonialCard
+                    item={item}
+                    onPlay={() => setVideoOpen(item.video)}
+                    t={t}
+                  />
                 </div>
               ))}
             </div>
@@ -144,11 +150,11 @@ export function TestimonialsSection() {
 function TestimonialCard({
   item,
   onPlay,
-  watchLabel,
+  t,
 }: {
   item: (typeof testimonials)[0]
   onPlay: () => void
-  watchLabel: string
+  t: (key: string) => string
 }) {
   return (
     <div className="flex flex-col rounded-2xl border border-[#e5e5e5] bg-[#f7f7f8] p-6 transition-shadow hover:shadow-md">
@@ -156,7 +162,7 @@ function TestimonialCard({
       <button
         onClick={onPlay}
         className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-[#0f0f0f] to-[#2a2a2a]"
-        aria-label={`${watchLabel} - ${item.name}`}
+        aria-label={`${t("org.testimonials.watch")} - ${t(item.nameKey)}`}
       >
         <div
           className="flex h-14 w-14 items-center justify-center rounded-full transition-transform group-hover:scale-110"
@@ -165,7 +171,7 @@ function TestimonialCard({
           <Play className="ml-0.5 h-6 w-6 text-[#ffffff]" />
         </div>
         <span className="absolute bottom-2 left-2 rounded-md bg-[#000000]/60 px-2 py-0.5 text-xs text-[#ffffff]">
-          {watchLabel}
+          {t("org.testimonials.watch")}
         </span>
       </button>
 
@@ -178,15 +184,15 @@ function TestimonialCard({
           {item.initials}
         </div>
         <div>
-          <p className="text-sm font-bold text-[#0f0f0f]">{item.name}</p>
-          <p className="text-xs text-[#6b6b6b]">{item.role}</p>
+          <p className="text-sm font-bold text-[#0f0f0f]">{t(item.nameKey)}</p>
+          <p className="text-xs text-[#6b6b6b]">{t(item.roleKey)}</p>
         </div>
       </div>
 
       {/* Quote */}
       <p className="mt-4 text-sm italic leading-relaxed text-[#6b6b6b]">
         {'"'}
-        {item.quote}
+        {t(item.quoteKey)}
         {'"'}
       </p>
     </div>

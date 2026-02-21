@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useI18n } from "@/lib/i18n/context"
@@ -20,8 +21,20 @@ export function OrgHero() {
       id="org-hero"
       className="relative flex h-dvh min-h-[600px] items-end overflow-hidden pb-20 md:items-center md:pb-0"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-[#0a0a0a]" aria-hidden="true" />
+      {/* Background image */}
+      <Image
+        src="/images/org-hero-bg.jpg"
+        alt=""
+        fill
+        className="object-cover"
+        priority
+        quality={85}
+      />
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-[#000000]/55" aria-hidden="true" />
+
+      {/* Color accents */}
       <div
         className="absolute top-0 left-0 h-full w-1/2 opacity-20"
         style={{
@@ -36,7 +49,6 @@ export function OrgHero() {
         }}
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-[#000000]/45" aria-hidden="true" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-4 pt-24 text-center md:pt-0">

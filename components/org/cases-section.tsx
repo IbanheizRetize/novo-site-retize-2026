@@ -131,7 +131,10 @@ function CaseCard({ c, t }: { c: CaseData; t: (key: string) => string }) {
         </ul>
       </div>
 
-      {/* Case image placeholder */}
+      {/* Spacer to push image to the bottom */}
+      <div className="flex-grow" />
+
+      {/* Case image - always at bottom */}
       {c.caseImage ? (
         <div className="mt-5 overflow-hidden rounded-xl">
           <Image
