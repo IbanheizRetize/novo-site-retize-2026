@@ -248,6 +248,11 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.persona.discovery.3": "Insights proprietários",
     "brands.persona.discovery.4": "Dados 1st party",
 
+    // Brands Page - Network stats
+    "brands.network.stat.people": "pessoas identificadas",
+    "brands.network.stat.devices": "dispositivos descobertos",
+    "brands.network.orgs.title": "Organizações da nossa network",
+
     // Brands Page - Hero
     "brands.hero.title": "Fale com seus clientes através do esporte",
     "brands.hero.subtitle": "Usamos o esporte como um acelerador de jornadas para ativar sua marca de forma personalizada e vender os produtos e serviços",
@@ -615,6 +620,11 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.persona.discovery.3": "Proprietary insights",
     "brands.persona.discovery.4": "1st party data",
 
+    // Brands Page - Network stats
+    "brands.network.stat.people": "identified people",
+    "brands.network.stat.devices": "discovered devices",
+    "brands.network.orgs.title": "Organizations in our network",
+
     // Brands Page - Hero
     "brands.hero.title": "Reach your customers through sports",
     "brands.hero.subtitle": "We use sports as a journey accelerator to activate your brand in a personalized way and sell products and services",
@@ -981,6 +991,11 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.persona.discovery.2": "Segmentaciones comportamentales",
     "brands.persona.discovery.3": "Insights propietarios",
     "brands.persona.discovery.4": "Datos 1st party",
+
+    // Brands Page - Network stats
+    "brands.network.stat.people": "personas identificadas",
+    "brands.network.stat.devices": "dispositivos descubiertos",
+    "brands.network.orgs.title": "Organizaciones de nuestra network",
 
     // Brands Page - Hero
     "brands.hero.title": "Hable con sus clientes a través del deporte",

@@ -585,20 +585,20 @@ export function NetworkSection() {
                   <Users className="h-5 w-5 text-[#FF6600] md:h-6 md:w-6" />
                   <span className="text-2xl font-bold text-[#ffffff] md:text-4xl">+8M</span>
                 </div>
-                <p className="mt-1 text-center text-xs text-[#ffffff]/50 md:text-sm">pessoas identificadas</p>
+                <p className="mt-1 text-center text-xs text-[#ffffff]/50 md:text-sm">{t("brands.network.stat.people")}</p>
               </div>
               <div className="flex flex-col items-center justify-center bg-[#141414] px-4 py-6 md:py-8">
                 <div className="flex items-center gap-2">
                   <Wifi className="h-5 w-5 text-[#9900FF] md:h-6 md:w-6" />
                   <span className="text-2xl font-bold text-[#ffffff] md:text-4xl">+100M</span>
                 </div>
-                <p className="mt-1 text-center text-xs text-[#ffffff]/50 md:text-sm">dispositivos descobertos</p>
+                <p className="mt-1 text-center text-xs text-[#ffffff]/50 md:text-sm">{t("brands.network.stat.devices")}</p>
               </div>
             </div>
             {/* Logos grid */}
             <div className="px-6 py-8 md:px-10 md:py-10">
               <p className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-[#FF6600]">
-                Organizacoes da nossa network
+                {t("brands.network.orgs.title")}
               </p>
               <div ref={logosRef} className="grid grid-cols-3 gap-4 md:grid-cols-7 md:gap-6">
                 {ecosystemOrgs.map((org) => (
