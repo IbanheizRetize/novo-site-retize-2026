@@ -244,30 +244,30 @@ export function ActivationSection() {
               <div className="group relative flex h-96 flex-col overflow-hidden rounded-2xl md:h-[28rem]">
                 <Image src={card.image} alt="" fill className="object-cover" quality={75} />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/90 via-[#000000]/50 to-[#000000]/20" />
-                <div className="relative z-10 flex h-full flex-col justify-start p-6 pt-10 md:p-8 md:pt-12">
+                <div className="relative z-10 flex h-full flex-col p-6 pt-10 md:p-8 md:pt-12">
                   {/* Title */}
-                  <div>
-                    <h3
-                      className={`text-3xl font-bold tracking-wide text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-2 md:text-4xl ${
-                        card.active ? "-translate-y-2" : ""
-                      }`}
-                    >
-                      {card.title}
-                    </h3>
-                  </div>
+                  <h3
+                    className={`text-3xl font-bold tracking-wide text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-2 md:text-4xl ${
+                      card.active ? "-translate-y-2" : ""
+                    }`}
+                  >
+                    {card.title}
+                  </h3>
 
-                  {/* Description + CTA */}
-                  <div className="mt-6 flex flex-col items-start md:mt-8">
-                    <p
-                      className={`max-w-md text-base leading-relaxed text-[#ffffff] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:text-lg ${
-                        card.active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-                      }`}
-                    >
-                      {card.desc}
-                    </p>
+                  {/* Description */}
+                  <p
+                    className={`mt-6 max-w-md text-base leading-relaxed text-[#ffffff] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:mt-8 md:text-lg ${
+                      card.active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                    }`}
+                  >
+                    {card.desc}
+                  </p>
+
+                  {/* CTA pinned to bottom */}
+                  <div className="mt-auto">
                     <Button
                       size="sm"
-                      className={`mt-4 rounded-md bg-[#FF6600] px-6 text-sm font-semibold text-[#ffffff] transition-all duration-300 hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100 ${
+                      className={`rounded-md bg-[#FF6600] px-6 text-sm font-semibold text-[#ffffff] transition-all duration-300 hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100 ${
                         card.active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                       }`}
                       onClick={card.onCta}
