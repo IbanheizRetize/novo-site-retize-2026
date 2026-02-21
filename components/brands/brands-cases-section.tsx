@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { useI18n } from "@/lib/i18n/context"
 
 interface BrandCase {
@@ -44,6 +45,7 @@ const brandTestimonials = [
     nameKey: "brands.testimonials.1.name",
     roleKey: "brands.testimonials.1.role",
     quoteKey: "brands.testimonials.1.quote",
+    video: "/videos/testimonial-1.mp4",
     initials: "PP",
     color: "#FF6600",
   },
@@ -52,6 +54,7 @@ const brandTestimonials = [
     nameKey: "brands.testimonials.2.name",
     roleKey: "brands.testimonials.2.role",
     quoteKey: "brands.testimonials.2.quote",
+    video: "/videos/testimonial-2.mp4",
     initials: "RB",
     color: "#9900FF",
   },
@@ -164,45 +167,8 @@ export function BrandsCasesSection() {
           </div>
         </div>
 
-        {/* Testimonials */}
-        <div className="mt-16">
-          <h3 className="text-balance text-center text-2xl font-bold tracking-tight text-[#0f0f0f] md:text-3xl">
-            {t("brands.testimonials.title")}
-          </h3>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {brandTestimonials.map((item) => (
-              <div
-                key={item.id}
-                className="flex flex-col rounded-2xl border border-[#e5e5e5] bg-[#ffffff] p-6 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <div className="flex items-center gap-4">
-                  <div
-                    className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-[#ffffff]"
-                    style={{ backgroundColor: item.color }}
-                  >
-                    {item.initials}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-[#0f0f0f]">{t(item.nameKey)}</p>
-                    <p className="text-xs text-[#6b6b6b]">{t(item.roleKey)}</p>
-                  </div>
-                </div>
-                <p className="mt-4 flex-1 text-sm italic leading-relaxed text-[#6b6b6b]">
-                  {'"'}{t(item.quoteKey)}{'"'}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-12 flex justify-center">
-          <Button
-            size="lg"
-            className="rounded-md bg-[#FF6600] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110"
-          >
-            {t("brands.cases.cta")}
-          </Button>
-        </div>
+        {/* Testimonials (home-style with video) */}
+        <TestimonialsBlock t={t} />
       </div>
 
       {/* Floating side arrows -- mobile only */}
@@ -224,8 +190,159 @@ export function BrandsCasesSection() {
           >
             <ChevronRight className="h-5 w-5" />
           </button>
-        </>
-      )}
+          </>
+        )}
     </section>
+  )
+}
+
+/* ─── Testimonials Block (home-style with video) ─── */
+
+function TestimonialsBlock({ t }: { t: (k: string) => string }) {
+  const [videoOpen, setVideoOpen] = useState<string | null>(null)
+  const [mobileIdx, setMobileIdx] = useState(0)
+
+  return (
+    <div className="mt-16">
+      <h3 className="text-balance text-center text-2xl font-bold tracking-tight text-[#0f0f0f] md:text-3xl">
+        {t("brands.testimonials.title")}
+      </h3>
+
+      {/* Desktop */}
+      <div className="mt-10 hidden grid-cols-2 gap-6 md:grid">
+        {brandTestimonials.map((item) => (
+          <TestimonialCard
+            key={item.id}
+            item={item}
+            onPlay={() => setVideoOpen(item.video)}
+            t={t}
+          />
+        ))}
+      </div>
+
+      {/* Mobile carousel */}
+      <div className="relative mt-8 md:hidden">
+        <div className="overflow-hidden">
+          <div
+            className="flex transition-transform duration-300"
+            style={{ transform: `translateX(-${mobileIdx * 100}%)` }}
+          >
+            {brandTestimonials.map((item) => (
+              <div key={item.id} className="w-full flex-shrink-0 px-1">
+                <TestimonialCard
+                  item={item}
+                  onPlay={() => setVideoOpen(item.video)}
+                  t={t}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <button
+            onClick={() => setMobileIdx(Math.max(0, mobileIdx - 1))}
+            disabled={mobileIdx === 0}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] disabled:opacity-30"
+            aria-label="Anterior"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <div className="flex gap-2">
+            {brandTestimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setMobileIdx(i)}
+                className={`h-2 rounded-full transition-all ${
+                  i === mobileIdx ? "w-6 bg-[#FF6600]" : "w-2 bg-[#0f0f0f]/20"
+                }`}
+                aria-label={`Depoimento ${i + 1}`}
+              />
+            ))}
+          </div>
+          <button
+            onClick={() => setMobileIdx(Math.min(brandTestimonials.length - 1, mobileIdx + 1))}
+            disabled={mobileIdx === brandTestimonials.length - 1}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] disabled:opacity-30"
+            aria-label="Proximo"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Video modal */}
+      <Dialog open={!!videoOpen} onOpenChange={() => setVideoOpen(null)}>
+        <DialogContent className="max-w-3xl border-0 bg-[#0a0a0a] p-0">
+          <DialogTitle className="sr-only">{"Video"}</DialogTitle>
+          <button
+            onClick={() => setVideoOpen(null)}
+            className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#ffffff]/20 text-[#ffffff] hover:bg-[#ffffff]/30"
+            aria-label="Fechar"
+          >
+            <X className="h-4 w-4" />
+          </button>
+          {videoOpen && (
+            <video
+              src={videoOpen}
+              controls
+              autoPlay
+              className="aspect-video w-full rounded-lg"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
+
+function TestimonialCard({
+  item,
+  onPlay,
+  t,
+}: {
+  item: (typeof brandTestimonials)[0]
+  onPlay: () => void
+  t: (key: string) => string
+}) {
+  return (
+    <div className="flex flex-col rounded-2xl border border-[#e5e5e5] bg-[#ffffff] p-6 transition-shadow hover:shadow-md">
+      {/* Video placeholder */}
+      <button
+        onClick={onPlay}
+        className="group/play relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-[#0f0f0f] to-[#2a2a2a]"
+        aria-label={`Assistir - ${t(item.nameKey)}`}
+      >
+        <div
+          className="flex h-14 w-14 items-center justify-center rounded-full transition-transform group-hover/play:scale-110"
+          style={{ backgroundColor: `${item.color}cc` }}
+        >
+          <Play className="ml-0.5 h-6 w-6 text-[#ffffff]" />
+        </div>
+        <span className="absolute bottom-2 left-2 rounded-md bg-[#000000]/60 px-2 py-0.5 text-xs text-[#ffffff]">
+          {"Assistir depoimento"}
+        </span>
+      </button>
+
+      {/* Person */}
+      <div className="mt-5 flex items-center gap-3">
+        <div
+          className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-[#ffffff]"
+          style={{ backgroundColor: item.color }}
+        >
+          {item.initials}
+        </div>
+        <div>
+          <p className="text-sm font-bold text-[#0f0f0f]">{t(item.nameKey)}</p>
+          <p className="text-xs text-[#6b6b6b]">{t(item.roleKey)}</p>
+        </div>
+      </div>
+
+      {/* Quote */}
+      <p className="mt-4 text-sm italic leading-relaxed text-[#6b6b6b]">
+        {'"'}
+        {t(item.quoteKey)}
+        {'"'}
+      </p>
+    </div>
   )
 }

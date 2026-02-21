@@ -193,17 +193,15 @@ export function ActivationSection() {
 
   useEffect(() => {
     if (typeof window === "undefined") return
-    const mq = window.matchMedia("(max-width: 767px)")
-    if (!mq.matches) return
 
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.target === card1Ref.current) setCard1Active(e.isIntersecting)
-          if (e.target === card2Ref.current) setCard2Active(e.isIntersecting)
+          if (e.target === card1Ref.current) setCard1Active(e.isIntersecting || e.intersectionRatio > 0.15)
+          if (e.target === card2Ref.current) setCard2Active(e.isIntersecting || e.intersectionRatio > 0.15)
         })
       },
-      { threshold: 0.3 }
+      { threshold: [0, 0.15, 0.3] }
     )
     if (card1Ref.current) obs.observe(card1Ref.current)
     if (card2Ref.current) obs.observe(card2Ref.current)
@@ -266,8 +264,8 @@ export function ActivationSection() {
 
                   {/* Description */}
                   <p
-                    className={`mt-6 max-w-md text-base leading-relaxed text-[#ffffff] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:mt-8 md:text-lg ${
-                      card.active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                    className={`mt-6 max-w-md text-base leading-relaxed text-[#ffffff] transition-all duration-500 md:mt-8 md:text-lg md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 ${
+                      card.active ? "translate-y-0 opacity-100" : "max-md:translate-y-4 max-md:opacity-0"
                     }`}
                   >
                     {card.desc}
@@ -277,8 +275,8 @@ export function ActivationSection() {
                   <div className="mt-auto">
                     <Button
                       size="sm"
-                      className={`rounded-md bg-[#FF6600] px-6 text-sm font-semibold text-[#ffffff] transition-all duration-300 hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100 ${
-                        card.active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                      className={`rounded-md bg-[#FF6600] px-6 text-sm font-semibold text-[#ffffff] transition-all duration-500 hover:brightness-110 md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 ${
+                        card.active ? "translate-y-0 opacity-100" : "max-md:translate-y-4 max-md:opacity-0"
                       }`}
                       onClick={card.onCta}
                     >

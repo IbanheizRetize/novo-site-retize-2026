@@ -54,34 +54,34 @@ export function TechSection() {
       <div className="pointer-events-none absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0)", backgroundSize: "32px 32px" }} />
 
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className="grid items-center gap-10 lg:grid-cols-[5fr_7fr] lg:gap-14">
           {/* Left: Text content */}
           <div>
-            <span className="inline-block rounded-full border border-[#FF6600]/30 bg-[#FF6600]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#FF6600]">
+            <span className="inline-block rounded-full border border-[#FF6600]/30 bg-[#FF6600]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#FF6600]">
               {t("brands.tech.badge")}
             </span>
 
-            <h2 className="mt-5 text-balance text-3xl font-bold tracking-tight text-[#ffffff] md:text-4xl lg:text-5xl">
+            <h2 className="mt-4 text-balance text-2xl font-bold tracking-tight text-[#ffffff] md:text-3xl lg:text-4xl">
               {t("brands.tech.title")}
             </h2>
 
-            <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-[#ffffff]/60 md:text-lg">
+            <p className="mt-3 max-w-lg text-pretty text-sm leading-relaxed text-[#ffffff]/60 lg:text-base">
               {t("brands.tech.description")}
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 lg:mt-6 lg:gap-2">
+            <div className="mt-6 flex flex-col gap-2 lg:mt-5 lg:gap-1.5">
               {features.map((feat, i) => (
                 <div
                   key={i}
-                  className={`flex items-center gap-3 rounded-lg border border-[#ffffff]/5 bg-[#ffffff]/[0.03] px-3 py-3 transition-all duration-500 lg:py-2.5 ${
+                  className={`flex items-center gap-2.5 rounded-lg border border-[#ffffff]/5 bg-[#ffffff]/[0.03] px-3 py-2 transition-all duration-500 ${
                     isInView ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
                   }`}
                   style={{ transitionDelay: `${i * 120}ms` }}
                 >
-                  <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#FF6600]/15 lg:h-7 lg:w-7">
-                    <feat.icon className="h-4 w-4 text-[#FF6600]" aria-hidden="true" />
+                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-[#FF6600]/15">
+                    <feat.icon className="h-3.5 w-3.5 text-[#FF6600]" aria-hidden="true" />
                   </span>
-                  <span className="text-sm font-medium leading-snug text-[#ffffff]/90">
+                  <span className="text-xs font-medium leading-snug text-[#ffffff]/90 lg:text-sm">
                     {feat.text}
                   </span>
                 </div>
@@ -91,8 +91,7 @@ export function TechSection() {
             {/* Desktop CTA */}
             <Button
               asChild
-              size="lg"
-              className="mt-8 hidden rounded-full bg-[#FF6600] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110 md:inline-flex"
+              className="mt-6 hidden rounded-full bg-[#FF6600] px-6 py-2 text-sm font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110 md:inline-flex"
             >
               <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
                 {t("brands.tech.cta")}
@@ -101,7 +100,7 @@ export function TechSection() {
           </div>
 
           {/* Right: Platform carousel */}
-          <div className="lg:sticky lg:top-24">
+          <div>
             {/* Browser chrome */}
             <div
               className="overflow-hidden rounded-2xl border border-[#ffffff]/10 bg-[#1a1a1a] shadow-2xl"
