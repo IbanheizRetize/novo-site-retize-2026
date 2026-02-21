@@ -24,25 +24,25 @@ async function main() {
     .toBuffer();
   console.log(`Cropped to ${size}x${size} square`);
 
-  // Write cropped square as PNG to project directory
-  const projectDir = "/vercel/share/v0-project";
+  // Write to /tmp (always writable)
+  const outDir = "/tmp/favicons";
+  fs.mkdirSync(outDir, { recursive: true });
 
-  // 32x32 icon
   const fav32 = await sharp(squareBuffer).resize(32, 32, { fit: "cover" }).png().toBuffer();
-  fs.writeFileSync(path.join(projectDir, "app/icon.png"), fav32);
-  console.log("Written app/icon.png (32x32)");
+  fs.writeFileSync(path.join(outDir, "icon-32.png"), fav32);
+  console.log("Written icon-32.png (32x32)");
 
-  // 180x180 apple icon
   const apple180 = await sharp(squareBuffer).resize(180, 180, { fit: "cover" }).png().toBuffer();
-  fs.writeFileSync(path.join(projectDir, "app/apple-icon.png"), apple180);
-  console.log("Written app/apple-icon.png (180x180)");
+  fs.writeFileSync(path.join(outDir, "apple-icon.png"), apple180);
+  console.log("Written apple-icon.png (180x180)");
 
-  // Also write 512 for OG
   const icon512 = await sharp(squareBuffer).resize(512, 512, { fit: "cover" }).png().toBuffer();
-  fs.writeFileSync(path.join(projectDir, "public/icon-512.png"), icon512);
-  console.log("Written public/icon-512.png (512x512)");
+  fs.writeFileSync(path.join(outDir, "icon-512.png"), icon512);
+  console.log("Written icon-512.png (512x512)");
 
-  console.log("Done! All favicons generated from original image.");
+  console.log("Output dir:", outDir);
+  console.log("Files:", fs.readdirSync(outDir));
+  console.log("Done!");
 }
 
 main().catch(console.error);

@@ -12,12 +12,7 @@ export const metadata: Metadata = {
   description:
     'Estruturamos e ativamos dados de fas para transformar audiencia em receita sustentavel para clubes e marcas.',
   generator: 'v0.app',
-  icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/images/retize-isotipo-source.jpg',
-  },
+
 }
 
 export const viewport: Viewport = {
