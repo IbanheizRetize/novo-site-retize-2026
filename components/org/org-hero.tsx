@@ -19,7 +19,7 @@ export function OrgHero() {
   return (
     <section
       id="org-hero"
-      className="relative flex h-dvh min-h-[600px] items-end overflow-hidden pb-20 md:items-center md:pb-0"
+      className="relative flex h-dvh min-h-[600px] items-center overflow-hidden md:items-center"
     >
       {/* Background image */}
       <Image
@@ -51,8 +51,8 @@ export function OrgHero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-4 pt-24 text-center md:pt-0">
-        <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-[#ffffff] sm:text-4xl md:text-5xl lg:text-6xl">
+      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 text-center">
+        <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-[#ffffff] sm:text-4xl md:text-5xl lg:text-6xl">
           {t("org.hero.title")}
         </h1>
         <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-[#ffffff]/85 sm:text-lg md:text-xl">
@@ -60,7 +60,7 @@ export function OrgHero() {
         </p>
         <Button
           size="lg"
-          className="mt-8 rounded-md bg-[#00CCFF] px-8 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/30 transition-all hover:shadow-xl hover:shadow-[#00CCFF]/40 hover:brightness-110"
+          className="mt-8 rounded-md bg-[#00CCFF] px-8 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/30 transition-all hover:shadow-xl hover:shadow-[#00CCFF]/40 hover:brightness-110 md:mt-8"
           onClick={handleScroll}
         >
           {t("org.hero.cta")}
