@@ -43,7 +43,7 @@ function ActivationCard({
 }) {
   return (
     <div className="group relative flex h-80 flex-col overflow-hidden rounded-2xl md:h-96">
-      <Image src={image} alt="" fill className="object-cover" quality={80} />
+      <Image src={image} alt="" fill className="object-cover" quality={75} />
       <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 via-[#000000]/50 to-[#000000]/30" />
       <div
         className={`relative z-10 flex h-full flex-col items-center justify-center p-6 text-center md:p-8 ${
