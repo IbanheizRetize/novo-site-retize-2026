@@ -27,7 +27,7 @@ export function BrandsHero() {
         fill
         className="object-cover"
         priority
-        quality={85}
+        quality={75}
       />
       <div className="absolute inset-0 bg-[#000000]/55" aria-hidden="true" />
       <div
