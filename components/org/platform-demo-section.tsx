@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Maximize2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { useI18n } from "@/lib/i18n/context"
 
 interface Module {
@@ -76,6 +77,7 @@ export function PlatformDemoSection() {
   const [current, setCurrent] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
+  const [expandedVideo, setExpandedVideo] = useState<string | null>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const goTo = useCallback(
@@ -198,6 +200,19 @@ export function PlatformDemoSection() {
                   </button>
                 </div>
               )}
+
+              {/* Expand button - always visible at bottom right */}
+              <button
+                onClick={() => {
+                  videoRef.current?.pause()
+                  setIsPlaying(false)
+                  setExpandedVideo(modules[current].video)
+                }}
+                className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#000000]/60 text-[#ffffff] transition-colors hover:bg-[#000000]/80"
+                aria-label="Expandir video"
+              >
+                <Maximize2 className="h-4 w-4" />
+              </button>
             </div>
 
             {/* Nav arrows */}
@@ -279,6 +294,28 @@ export function PlatformDemoSection() {
           </Button>
         </div>
       </div>
+
+      {/* Expanded video modal */}
+      <Dialog open={!!expandedVideo} onOpenChange={() => setExpandedVideo(null)}>
+        <DialogContent className="max-w-4xl border-0 bg-[#0a0a0a] p-0">
+          <DialogTitle className="sr-only">{mod.name}</DialogTitle>
+          <button
+            onClick={() => setExpandedVideo(null)}
+            className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#ffffff]/20 text-[#ffffff] hover:bg-[#ffffff]/30"
+            aria-label="Fechar"
+          >
+            <X className="h-4 w-4" />
+          </button>
+          {expandedVideo && (
+            <video
+              src={expandedVideo}
+              controls
+              autoPlay
+              className="aspect-video w-full rounded-lg"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   )
 }
