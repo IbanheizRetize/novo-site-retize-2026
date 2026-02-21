@@ -100,7 +100,7 @@ function LeverCard({
           {t(lever.titleKey)}
         </h3>
         <p
-          className={`mt-3 max-w-md text-sm leading-relaxed text-[#ffffff]/80 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${
+          className={`mt-3 max-w-md text-sm leading-relaxed text-[#ffffff] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${
             mobileActive ? "translate-y-0 opacity-100" : "opacity-0"
           }`}
         >
