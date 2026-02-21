@@ -15,7 +15,7 @@ export function OrgHeader() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navItems = [
-    { label: "Retize", href: "/" },
+    { label: "Home", href: "/" },
     { label: t("org.header.brands"), href: "/marcas-anunciantes" },
     { label: t("org.header.useCases"), href: "#alavancas" },
     { label: t("org.header.platform"), href: "#plataforma" },

@@ -15,7 +15,7 @@ export function BrandsHeader() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navItems = [
-    { label: "Retize", href: "/" },
+    { label: "Home", href: "/" },
     { label: t("brands.header.orgs"), href: "/organizacoes-esportivas" },
     { label: t("brands.header.audiences"), href: "#audiencias" },
     { label: t("brands.header.channels"), href: "#canais" },
