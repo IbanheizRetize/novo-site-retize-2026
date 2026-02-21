@@ -219,6 +219,7 @@ export function ActivationSection() {
       image: "/images/brands-media-projects.jpg",
       onCta: () => setPacotesModalOpen(true),
       active: card1Active,
+      accent: "#FF6600",
     },
     {
       ref: card2Ref,
@@ -228,6 +229,7 @@ export function ActivationSection() {
       image: "/images/brands-digital-sponsorship.jpg",
       onCta: () => setCopaModalOpen(true),
       active: card2Active,
+      accent: "#9900FF",
     },
   ]
 
@@ -242,8 +244,16 @@ export function ActivationSection() {
           {cards.map((card, i) => (
             <div key={i} ref={card.ref}>
               <div className="group relative flex h-96 flex-col overflow-hidden rounded-2xl md:h-[28rem]">
-                <Image src={card.image} alt="" fill className="object-cover" quality={75} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/90 via-[#000000]/50 to-[#000000]/20" />
+                <Image src={card.image} alt="" fill className="object-cover transition-transform duration-500 group-hover:scale-105" quality={75} />
+                <div className={`absolute inset-0 transition-opacity duration-500 group-hover:opacity-70 ${card.active ? "opacity-70" : "opacity-60"}`} style={{ backgroundColor: "#000000" }} />
+                <div className={`absolute inset-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-25 ${card.active ? "opacity-25" : "opacity-15"}`} style={{ backgroundColor: card.accent }} />
+
+                {/* Accent top bar (alavancas-style) */}
+                <div
+                  className={`absolute top-0 left-0 h-1 transition-all duration-500 group-hover:w-full ${card.active ? "w-full" : "w-0"}`}
+                  style={{ backgroundColor: card.accent }}
+                  aria-hidden="true"
+                />
                 <div className="relative z-10 flex h-full flex-col p-6 pt-10 md:p-8 md:pt-12">
                   {/* Title */}
                   <h3

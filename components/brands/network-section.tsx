@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useCallback, useEffect } from "react"
+import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import {
   ChevronLeft,
@@ -411,31 +411,20 @@ function ChannelCard({ channelKey, Icon, color }: { channelKey: string; Icon: Re
 
 export function NetworkSection() {
   const { t } = useI18n()
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const totalSlides = channels.length
-
-  const checkSlide = useCallback(() => {
-    const el = scrollRef.current
-    if (!el) return
-    const slideWidth = el.scrollWidth / totalSlides
-    const idx = Math.round(el.scrollLeft / slideWidth)
-    setCurrentSlide(idx)
-  }, [totalSlides])
+  const [channelSlide, setChannelSlide] = useState(0)
+  const channelsSectionRef = useRef<HTMLDivElement>(null)
+  const [isChannelsInView, setIsChannelsInView] = useState(false)
 
   useEffect(() => {
-    const el = scrollRef.current
+    const el = channelsSectionRef.current
     if (!el) return
-    el.addEventListener("scroll", checkSlide, { passive: true })
-    return () => el.removeEventListener("scroll", checkSlide)
-  }, [checkSlide])
-
-  const scrollToSlide = (idx: number) => {
-    const el = scrollRef.current
-    if (!el) return
-    const slideWidth = el.scrollWidth / totalSlides
-    el.scrollTo({ left: slideWidth * idx, behavior: "smooth" })
-  }
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsChannelsInView(entry.isIntersecting),
+      { threshold: 0.15 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section id="audiencias" className="overflow-hidden">
@@ -522,7 +511,7 @@ export function NetworkSection() {
                   {t("brands.audiences.persona.behavior")}
                 </h3>
                 {behaviorIcons.map((Ic, i) => (
-                  <div key={i} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5 py-1.5">
+                  <div key={i} className="flex h-9 items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5">
                     <Ic className="h-3 w-3 flex-shrink-0 text-[#FF6600]" />
                     <span className="text-[11px] text-[#ffffff]/80">{t(`brands.persona.behavior.${i + 1}`)}</span>
                   </div>
@@ -533,9 +522,9 @@ export function NetworkSection() {
                   {t("brands.audiences.persona.sport")}
                 </h3>
                 {sportIcons.map((Ic, i) => (
-                  <div key={i} className="flex items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5 py-1.5">
+                  <div key={i} className="flex h-9 items-center gap-2 rounded-lg border border-[#333333] bg-[#1a1a1a] px-2.5">
                     <Ic className="h-3 w-3 flex-shrink-0 text-[#9900FF]" />
-                    <span className="text-[11px] text-[#ffffff]/80">{t(`brands.persona.sport.${i + 1}`)}</span>
+                    <span className="text-[11px] text-[#ffffff]/80">{i === 1 ? t("brands.persona.sport.2.short") : t(`brands.persona.sport.${i + 1}`)}</span>
                   </div>
                 ))}
               </div>
@@ -642,7 +631,7 @@ export function NetworkSection() {
       </div>
 
       {/* ─── BLOCK 2: Channels & Activation Formats ─── */}
-      <div id="canais" className="bg-[#f7f7f8] py-20 lg:py-28">
+      <div id="canais" ref={channelsSectionRef} className="relative bg-[#f7f7f8] py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="mx-auto mb-12 max-w-2xl text-center">
             <h3 className="text-balance text-2xl font-bold tracking-tight text-[#0f0f0f] md:text-3xl lg:text-4xl">
@@ -657,27 +646,29 @@ export function NetworkSection() {
             ))}
           </div>
 
-          {/* Mobile: slide carousel */}
+          {/* Mobile: translateX carousel with arrows + dots like Cases */}
           <div className="relative md:hidden">
-            <div
-              ref={scrollRef}
-              className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth"
-            >
-              {channels.map(({ key, Icon, color }) => (
-                <div key={key} className="snap-center">
-                  <ChannelCard channelKey={key} Icon={Icon} color={color} />
-                </div>
-              ))}
+            <div className="overflow-hidden">
+              <div
+                className="flex transition-transform duration-300"
+                style={{ transform: `translateX(-${channelSlide * 100}%)` }}
+              >
+                {channels.map(({ key, Icon, color }) => (
+                  <div key={key} className="w-full flex-shrink-0 px-1">
+                    <ChannelCard channelKey={key} Icon={Icon} color={color} />
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Pagination lines */}
+            {/* Dots pagination */}
             <div className="mt-6 flex items-center justify-center gap-2">
               {channels.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => scrollToSlide(i)}
-                  className={`h-1 rounded-full transition-all ${
-                    i === currentSlide ? "w-8 bg-[#FF6600]" : "w-4 bg-[#cccccc]"
+                  onClick={() => setChannelSlide(i)}
+                  className={`h-2 rounded-full transition-all ${
+                    i === channelSlide ? "w-6 bg-[#FF6600]" : "w-2 bg-[#0f0f0f]/20"
                   }`}
                   aria-label={`Slide ${i + 1}`}
                 />
@@ -685,6 +676,28 @@ export function NetworkSection() {
             </div>
           </div>
         </div>
+
+        {/* Floating side arrows -- mobile only, visible when channels section is in viewport */}
+        {isChannelsInView && (
+          <>
+            <button
+              onClick={() => setChannelSlide(Math.max(0, channelSlide - 1))}
+              disabled={channelSlide === 0}
+              className="fixed top-1/2 left-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0 md:hidden"
+              aria-label="Canal anterior"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              onClick={() => setChannelSlide(Math.min(channels.length - 1, channelSlide + 1))}
+              disabled={channelSlide === channels.length - 1}
+              className="fixed top-1/2 right-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0 md:hidden"
+              aria-label="Proximo canal"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </>
+        )}
       </div>
     </section>
   )
