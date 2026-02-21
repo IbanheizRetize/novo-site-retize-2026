@@ -405,6 +405,8 @@ export function NetworkSection() {
   const [channelSlide, setChannelSlide] = useState(0)
   const channelsSectionRef = useRef<HTMLDivElement>(null)
   const [isChannelsInView, setIsChannelsInView] = useState(false)
+  const logosRef = useRef<HTMLDivElement>(null)
+  const [logosInView, setLogosInView] = useState(false)
 
   useEffect(() => {
     const el = channelsSectionRef.current
@@ -412,6 +414,17 @@ export function NetworkSection() {
     const observer = new IntersectionObserver(
       ([entry]) => setIsChannelsInView(entry.isIntersecting),
       { threshold: 0.15 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const el = logosRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setLogosInView(true) },
+      { threshold: 0.3 }
     )
     observer.observe(el)
     return () => observer.disconnect()
@@ -587,7 +600,7 @@ export function NetworkSection() {
               <p className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-[#FF6600]">
                 Organizacoes da nossa network
               </p>
-              <div className="grid grid-cols-3 gap-4 md:grid-cols-7 md:gap-6">
+              <div ref={logosRef} className="grid grid-cols-3 gap-4 md:grid-cols-7 md:gap-6">
                 {ecosystemOrgs.map((org) => (
                   <div key={org.name} className="group flex flex-col items-center gap-2">
                     <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#333333] bg-[#1a1a1a] p-2.5 shadow-md transition-all group-hover:border-[#FF6600]/50 group-hover:shadow-[#FF6600]/20 md:h-20 md:w-20 md:p-3">
@@ -596,7 +609,9 @@ export function NetworkSection() {
                         alt={org.name}
                         width={80}
                         height={80}
-                        className="h-full w-full object-contain brightness-0 invert transition-all group-hover:brightness-100 group-hover:invert-0"
+                        className={`h-full w-full object-contain transition-all md:brightness-0 md:invert md:group-hover:brightness-100 md:group-hover:invert-0 ${
+                          logosInView ? "brightness-100 invert-0" : "brightness-0 invert"
+                        }`}
                       />
                     </div>
                     <span className="text-center text-[10px] font-semibold text-[#ffffff]/50 transition-colors group-hover:text-[#FF6600]">

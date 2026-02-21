@@ -338,6 +338,15 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.cases.2.result.2": "Conversão acima do benchmark para o segmento de eletrônicos.",
     "brands.cases.cta": "Saiba mais",
 
+    // Brands Page - Testimonials
+    "brands.testimonials.title": "O que dizem nossos parceiros",
+    "brands.testimonials.1.name": "Pedro Paiva",
+    "brands.testimonials.1.role": "Head de Marketing Digital, Banco Carrefour",
+    "brands.testimonials.1.quote": "A parceria com a Retize nos permitiu alcançar audiências altamente qualificadas dentro do universo esportivo. A segmentação de dados 1st party e a capacidade de ativação multicanal trouxeram resultados acima das nossas expectativas em leads e conversão.",
+    "brands.testimonials.2.name": "Ricardo Bonetti",
+    "brands.testimonials.2.role": "CEO, Imperial eSports",
+    "brands.testimonials.2.quote": "A ativação da Samsung através da plataforma Retize foi um marco para a Imperial. A tecnologia de segmentação permitiu entregar a mensagem certa para o público gamer, gerando um engajamento sem precedentes nos nossos canais e uma experiência memorável para os fãs.",
+
     // Brands Page - Partners
     "brands.partners.title": "Quem joga com a Retize",
     "brands.partners.cta": "Quero jogar junto",
@@ -696,6 +705,15 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.cases.2.result.2": "Conversion above benchmark for the electronics segment.",
     "brands.cases.cta": "Learn more",
 
+    // Brands Page - Testimonials
+    "brands.testimonials.title": "What our partners say",
+    "brands.testimonials.1.name": "Pedro Paiva",
+    "brands.testimonials.1.role": "Head of Digital Marketing, Banco Carrefour",
+    "brands.testimonials.1.quote": "The partnership with Retize allowed us to reach highly qualified audiences within the sports universe. The 1st party data segmentation and multichannel activation capability delivered results above our expectations in leads and conversion.",
+    "brands.testimonials.2.name": "Ricardo Bonetti",
+    "brands.testimonials.2.role": "CEO, Imperial eSports",
+    "brands.testimonials.2.quote": "Samsung's activation through the Retize platform was a milestone for Imperial. The segmentation technology allowed us to deliver the right message to the gaming audience, generating unprecedented engagement on our channels and a memorable experience for fans.",
+
     // Brands Page - Partners
     "brands.partners.title": "Who plays with Retize",
     "brands.partners.cta": "I want to play together",
@@ -1053,6 +1071,15 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.cases.2.result.1": "Engagement récord en los canales de Imperial durante la campaña.",
     "brands.cases.2.result.2": "Conversión por encima del benchmark para el segmento de electrónicos.",
     "brands.cases.cta": "Saber más",
+
+    // Brands Page - Testimonials
+    "brands.testimonials.title": "Lo que dicen nuestros socios",
+    "brands.testimonials.1.name": "Pedro Paiva",
+    "brands.testimonials.1.role": "Head de Marketing Digital, Banco Carrefour",
+    "brands.testimonials.1.quote": "La asociación con Retize nos permitió alcanzar audiencias altamente calificadas dentro del universo deportivo. La segmentación de datos 1st party y la capacidad de activación multicanal entregaron resultados por encima de nuestras expectativas en leads y conversión.",
+    "brands.testimonials.2.name": "Ricardo Bonetti",
+    "brands.testimonials.2.role": "CEO, Imperial eSports",
+    "brands.testimonials.2.quote": "La activación de Samsung a través de la plataforma Retize fue un hito para Imperial. La tecnología de segmentación permitió entregar el mensaje correcto al público gamer, generando un engagement sin precedentes en nuestros canales y una experiencia memorable para los fans.",
 
     // Brands Page - Partners
     "brands.partners.title": "Quién juega con Retize",

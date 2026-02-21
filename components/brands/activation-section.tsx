@@ -203,7 +203,7 @@ export function ActivationSection() {
           if (e.target === card2Ref.current) setCard2Active(e.isIntersecting)
         })
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     )
     if (card1Ref.current) obs.observe(card1Ref.current)
     if (card2Ref.current) obs.observe(card2Ref.current)

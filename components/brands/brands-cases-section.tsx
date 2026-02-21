@@ -38,6 +38,25 @@ const cases: BrandCase[] = [
   },
 ]
 
+const brandTestimonials = [
+  {
+    id: "pedro",
+    nameKey: "brands.testimonials.1.name",
+    roleKey: "brands.testimonials.1.role",
+    quoteKey: "brands.testimonials.1.quote",
+    initials: "PP",
+    color: "#FF6600",
+  },
+  {
+    id: "ricardo",
+    nameKey: "brands.testimonials.2.name",
+    roleKey: "brands.testimonials.2.role",
+    quoteKey: "brands.testimonials.2.quote",
+    initials: "RB",
+    color: "#9900FF",
+  },
+]
+
 function CaseCard({ c, t }: { c: BrandCase; t: (k: string) => string }) {
   return (
     <div className="flex h-full flex-col rounded-2xl border border-[#e5e5e5] bg-[#ffffff] p-6 shadow-sm transition-shadow hover:shadow-md">
@@ -141,6 +160,37 @@ export function BrandsCasesSection() {
                 }`}
                 aria-label={`Case ${i + 1}`}
               />
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonials */}
+        <div className="mt-16">
+          <h3 className="text-balance text-center text-2xl font-bold tracking-tight text-[#0f0f0f] md:text-3xl">
+            {t("brands.testimonials.title")}
+          </h3>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {brandTestimonials.map((item) => (
+              <div
+                key={item.id}
+                className="flex flex-col rounded-2xl border border-[#e5e5e5] bg-[#ffffff] p-6 shadow-sm transition-shadow hover:shadow-md"
+              >
+                <div className="flex items-center gap-4">
+                  <div
+                    className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-[#ffffff]"
+                    style={{ backgroundColor: item.color }}
+                  >
+                    {item.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-[#0f0f0f]">{t(item.nameKey)}</p>
+                    <p className="text-xs text-[#6b6b6b]">{t(item.roleKey)}</p>
+                  </div>
+                </div>
+                <p className="mt-4 flex-1 text-sm italic leading-relaxed text-[#6b6b6b]">
+                  {'"'}{t(item.quoteKey)}{'"'}
+                </p>
+              </div>
             ))}
           </div>
         </div>

@@ -69,29 +69,30 @@ export function TechSection() {
               {t("brands.tech.description")}
             </p>
 
-            <div className="mt-10 flex flex-col gap-5">
+            <div className="mt-8 flex flex-col gap-3 lg:mt-6 lg:gap-2">
               {features.map((feat, i) => (
                 <div
                   key={i}
-                  className={`flex items-start gap-4 rounded-xl border border-[#ffffff]/5 bg-[#ffffff]/[0.03] p-4 transition-all duration-500 ${
+                  className={`flex items-center gap-3 rounded-lg border border-[#ffffff]/5 bg-[#ffffff]/[0.03] px-3 py-3 transition-all duration-500 lg:py-2.5 ${
                     isInView ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
                   }`}
                   style={{ transitionDelay: `${i * 120}ms` }}
                 >
-                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#FF6600]/15">
-                    <feat.icon className="h-5 w-5 text-[#FF6600]" aria-hidden="true" />
+                  <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#FF6600]/15 lg:h-7 lg:w-7">
+                    <feat.icon className="h-4 w-4 text-[#FF6600]" aria-hidden="true" />
                   </span>
-                  <span className="pt-2 text-sm font-medium leading-snug text-[#ffffff]/90 md:text-base">
+                  <span className="text-sm font-medium leading-snug text-[#ffffff]/90">
                     {feat.text}
                   </span>
                 </div>
               ))}
             </div>
 
+            {/* Desktop CTA */}
             <Button
               asChild
               size="lg"
-              className="mt-10 rounded-full bg-[#FF6600] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110"
+              className="mt-8 hidden rounded-full bg-[#FF6600] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110 md:inline-flex"
             >
               <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
                 {t("brands.tech.cta")}
@@ -175,6 +176,19 @@ export function TechSection() {
                   aria-label={`Slide ${idx + 1}`}
                 />
               ))}
+            </div>
+
+            {/* Mobile CTA - after slides */}
+            <div className="mt-8 flex justify-center md:hidden">
+              <Button
+                asChild
+                size="lg"
+                className="w-full max-w-xs rounded-full bg-[#FF6600] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110"
+              >
+                <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
+                  {t("brands.tech.cta")}
+                </a>
+              </Button>
             </div>
           </div>
         </div>
