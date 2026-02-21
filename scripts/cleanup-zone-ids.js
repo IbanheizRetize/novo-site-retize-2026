@@ -1,7 +1,9 @@
-import { readdir, unlink, stat } from 'fs/promises';
-import { join } from 'path';
+import { readdir, unlink } from 'fs/promises';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const ROOT = '/vercel/share/v0-project';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, '..');
 
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
