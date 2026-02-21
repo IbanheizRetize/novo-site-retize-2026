@@ -265,14 +265,14 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.audiences.channels.branded.formats": "Série,Quadro,Inserção,Collab",
 
     // Brands Page - Activation Platforms
-    "brands.activation.title": "Plataformas de ativação",
+    "brands.activation.title": "Plataformas de mídia e oferta",
     "brands.activation.1.title": "PROJETOS DE MÍDIA",
     "brands.activation.1.desc": "Projetos personalizados de ativação na rede de mídia exclusiva da Retize, com segmentação de dados 1st party. Sem vínculo com as organizações esportivas.",
     "brands.activation.1.cta": "Baixar pacotes 2026",
     "brands.activation.2.title": "PATROCÍNIO DIGITAL",
     "brands.activation.2.desc": "Seja um patrocinador oficial das maiores organizações esportivas do Brasil e utilize todo potencial de dados e canais que o esporte pode entregar para sua marca. Vínculo institucional direto com as organizações esportivas.",
     "brands.activation.2.cta": "Pacote Copa do Mundo 2026",
-    "brands.activation.cta": "Baixe os pacotes de ativação no esporte 2026",
+    "brands.modal.pacotes.title": "Baixar Pacotes de Mídia 2026",
 
     // Brands Page - Copa 2026 Modal
     "brands.modal.title": "Baixar Pacote Copa do Mundo 2026",
@@ -603,14 +603,14 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.audiences.channels.branded.formats": "Series,Segment,Placement,Collab",
 
     // Brands Page - Activation Platforms
-    "brands.activation.title": "Activation platforms",
+    "brands.activation.title": "Media and offer platforms",
     "brands.activation.1.title": "MEDIA PROJECTS",
     "brands.activation.1.desc": "Customized activation projects on Retize's exclusive media network, with 1st party data segmentation. No ties to sports organizations.",
     "brands.activation.1.cta": "Download 2026 packages",
     "brands.activation.2.title": "DIGITAL SPONSORSHIP",
     "brands.activation.2.desc": "Be an official sponsor of the biggest sports organizations in Brazil and leverage the full potential of data and channels that sports can deliver for your brand. Direct institutional partnership with sports organizations.",
     "brands.activation.2.cta": "World Cup 2026 Package",
-    "brands.activation.cta": "Download 2026 sports activation packages",
+    "brands.modal.pacotes.title": "Download Media Packages 2026",
 
     // Brands Page - Copa 2026 Modal
     "brands.modal.title": "Download World Cup 2026 Package",
@@ -941,14 +941,14 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.audiences.channels.branded.formats": "Serie,Cuadro,Inserción,Collab",
 
     // Brands Page - Activation Platforms
-    "brands.activation.title": "Plataformas de activación",
+    "brands.activation.title": "Plataformas de medios y oferta",
     "brands.activation.1.title": "PROYECTOS DE MEDIOS",
     "brands.activation.1.desc": "Proyectos personalizados de activación en la red de medios exclusiva de Retize, con segmentación de datos 1st party. Sin vínculo con las organizaciones deportivas.",
     "brands.activation.1.cta": "Descargar paquetes 2026",
     "brands.activation.2.title": "PATROCINIO DIGITAL",
     "brands.activation.2.desc": "Sea un patrocinador oficial de las mayores organizaciones deportivas de Brasil y utilice todo el potencial de datos y canales que el deporte puede entregar para su marca. Vínculo institucional directo con las organizaciones deportivas.",
     "brands.activation.2.cta": "Paquete Copa del Mundo 2026",
-    "brands.activation.cta": "Descargue los paquetes de activación en el deporte 2026",
+    "brands.modal.pacotes.title": "Descargar Paquetes de Medios 2026",
 
     // Brands Page - Copa 2026 Modal
     "brands.modal.title": "Descargar Paquete Copa del Mundo 2026",

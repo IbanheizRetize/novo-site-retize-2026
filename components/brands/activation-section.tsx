@@ -7,10 +7,10 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { X } from "lucide-react"
 import { useI18n } from "@/lib/i18n/context"
 
-const PDF_PATROCINIO_URL =
-  "https://storage.googleapis.com/retize-prod-public/novo-site-retize/retize-hero-desktop-final.mp4"
+const PDF_PACOTES_URL =
+  "https://storage.googleapis.com/retize-prod-public/novo-site-retize/retize-pacotes-patrocinio-digital.pdf"
 const PDF_COPA_URL =
-  "https://storage.googleapis.com/retize-prod-public/novo-site-retize/retize-hero-desktop-final.mp4"
+  "https://storage.googleapis.com/retize-prod-public/novo-site-retize/retize-pacote-copa-do-mundo-2026"
 
 function formatPhone(value: string): string {
   const digits = value.replace(/\D/g, "").slice(0, 11)
@@ -26,90 +26,24 @@ interface FormErrors {
   phone?: string
 }
 
-function ActivationCard({
+function LeadFormModal({
+  open,
+  onOpenChange,
   title,
-  desc,
-  ctaLabel,
-  image,
-  onCta,
-  mobileActive,
+  pdfUrl,
+  source,
 }: {
+  open: boolean
+  onOpenChange: (v: boolean) => void
   title: string
-  desc: string
-  ctaLabel: string
-  image: string
-  onCta: () => void
-  mobileActive: boolean
+  pdfUrl: string
+  source: string
 }) {
-  return (
-    <div className="group relative flex h-80 flex-col overflow-hidden rounded-2xl md:h-96">
-      <Image src={image} alt="" fill className="object-cover" quality={75} />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 via-[#000000]/50 to-[#000000]/30" />
-      <div
-        className={`relative z-10 flex h-full flex-col items-center justify-center p-6 text-center md:p-8 ${
-          mobileActive ? "" : ""
-        }`}
-      >
-        <h3
-          className={`text-2xl font-bold tracking-wide text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-4 md:text-3xl ${
-            mobileActive ? "-translate-y-4" : ""
-          }`}
-        >
-          {title}
-        </h3>
-        <p
-          className={`mt-3 max-w-md text-sm leading-relaxed text-[#ffffff] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${
-            mobileActive ? "translate-y-0 opacity-100" : "opacity-0"
-          }`}
-        >
-          {desc}
-        </p>
-        <Button
-          size="sm"
-          className={`mt-4 rounded-md bg-[#FF6600] px-6 text-sm font-semibold text-[#ffffff] transition-all duration-300 hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100 ${
-            mobileActive ? "translate-y-0 opacity-100" : "opacity-0"
-          }`}
-          onClick={onCta}
-        >
-          {ctaLabel}
-        </Button>
-      </div>
-    </div>
-  )
-}
-
-export function ActivationSection() {
   const { t } = useI18n()
-  const [modalOpen, setModalOpen] = useState(false)
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "" })
   const [errors, setErrors] = useState<FormErrors>({})
   const [sending, setSending] = useState(false)
   const [success, setSuccess] = useState(false)
-
-  // Mobile auto-reveal
-  const card1Ref = useRef<HTMLDivElement>(null)
-  const card2Ref = useRef<HTMLDivElement>(null)
-  const [card1Active, setCard1Active] = useState(false)
-  const [card2Active, setCard2Active] = useState(false)
-
-  useEffect(() => {
-    if (typeof window === "undefined") return
-    const mq = window.matchMedia("(max-width: 767px)")
-    if (!mq.matches) return
-
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.target === card1Ref.current) setCard1Active(e.isIntersecting)
-          if (e.target === card2Ref.current) setCard2Active(e.isIntersecting)
-        })
-      },
-      { threshold: 0.6 }
-    )
-    if (card1Ref.current) obs.observe(card1Ref.current)
-    if (card2Ref.current) obs.observe(card2Ref.current)
-    return () => obs.disconnect()
-  }, [])
 
   const validate = (): boolean => {
     const e: FormErrors = {}
@@ -136,14 +70,14 @@ export function ActivationSection() {
           company: form.company,
           email: form.email,
           phone: form.phone,
-          source: "copa-2026-modal",
+          source,
         }),
       })
       if (!res.ok) throw new Error()
       setSuccess(true)
-      window.open(PDF_COPA_URL, "_blank")
+      window.open(pdfUrl, "_blank")
       setTimeout(() => {
-        setModalOpen(false)
+        onOpenChange(false)
         setSuccess(false)
         setForm({ name: "", company: "", email: "", phone: "" })
       }, 3000)
@@ -155,6 +89,149 @@ export function ActivationSection() {
   }
 
   return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-md border-[#e5e5e5] bg-[#ffffff] p-0">
+        <DialogTitle className="sr-only">{title}</DialogTitle>
+        <div className="relative p-6">
+          <button
+            onClick={() => onOpenChange(false)}
+            className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f7f7f8] text-[#6b6b6b] hover:bg-[#e5e5e5]"
+            aria-label="Fechar"
+          >
+            <X className="h-4 w-4" />
+          </button>
+
+          <h3 className="text-xl font-bold text-[#0f0f0f]">{title}</h3>
+
+          {success ? (
+            <div className="mt-6 rounded-lg bg-[#00cc88]/10 p-4 text-center">
+              <p className="font-medium text-[#00cc88]">{t("brands.modal.success")}</p>
+            </div>
+          ) : (
+            <div className="mt-6 flex flex-col gap-4">
+              <div>
+                <label htmlFor={`lead-name-${source}`} className="mb-1 block text-sm font-medium text-[#0f0f0f]">
+                  {t("brands.modal.name")}
+                </label>
+                <input
+                  id={`lead-name-${source}`}
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder={t("brands.modal.name.placeholder")}
+                  className="w-full rounded-lg border border-[#e5e5e5] bg-[#f7f7f8] px-4 py-2.5 text-sm text-[#0f0f0f] outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600]"
+                />
+                {errors.name && <p className="mt-1 text-xs text-[#ff3333]">{errors.name}</p>}
+              </div>
+              <div>
+                <label htmlFor={`lead-company-${source}`} className="mb-1 block text-sm font-medium text-[#0f0f0f]">
+                  {t("brands.modal.company")}
+                </label>
+                <input
+                  id={`lead-company-${source}`}
+                  type="text"
+                  value={form.company}
+                  onChange={(e) => setForm({ ...form, company: e.target.value })}
+                  placeholder={t("brands.modal.company.placeholder")}
+                  className="w-full rounded-lg border border-[#e5e5e5] bg-[#f7f7f8] px-4 py-2.5 text-sm text-[#0f0f0f] outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600]"
+                />
+                {errors.company && <p className="mt-1 text-xs text-[#ff3333]">{errors.company}</p>}
+              </div>
+              <div>
+                <label htmlFor={`lead-email-${source}`} className="mb-1 block text-sm font-medium text-[#0f0f0f]">
+                  {t("brands.modal.email")}
+                </label>
+                <input
+                  id={`lead-email-${source}`}
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  placeholder={t("brands.modal.email.placeholder")}
+                  className="w-full rounded-lg border border-[#e5e5e5] bg-[#f7f7f8] px-4 py-2.5 text-sm text-[#0f0f0f] outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600]"
+                />
+                {errors.email && <p className="mt-1 text-xs text-[#ff3333]">{errors.email}</p>}
+              </div>
+              <div>
+                <label htmlFor={`lead-phone-${source}`} className="mb-1 block text-sm font-medium text-[#0f0f0f]">
+                  {t("brands.modal.phone")}
+                </label>
+                <input
+                  id={`lead-phone-${source}`}
+                  type="tel"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: formatPhone(e.target.value) })}
+                  placeholder={t("brands.modal.phone.placeholder")}
+                  className="w-full rounded-lg border border-[#e5e5e5] bg-[#f7f7f8] px-4 py-2.5 text-sm text-[#0f0f0f] outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600]"
+                />
+                {errors.phone && <p className="mt-1 text-xs text-[#ff3333]">{errors.phone}</p>}
+              </div>
+              <Button
+                className="mt-2 w-full rounded-lg bg-[#FF6600] py-3 text-base font-semibold text-[#ffffff] hover:brightness-110"
+                onClick={handleSubmit}
+                disabled={sending}
+              >
+                {sending ? t("brands.modal.sending") : t("brands.modal.submit")}
+              </Button>
+            </div>
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+export function ActivationSection() {
+  const { t } = useI18n()
+  const [pacotesModalOpen, setPacotesModalOpen] = useState(false)
+  const [copaModalOpen, setCopaModalOpen] = useState(false)
+
+  // Mobile auto-reveal
+  const card1Ref = useRef<HTMLDivElement>(null)
+  const card2Ref = useRef<HTMLDivElement>(null)
+  const [card1Active, setCard1Active] = useState(false)
+  const [card2Active, setCard2Active] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const mq = window.matchMedia("(max-width: 767px)")
+    if (!mq.matches) return
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.target === card1Ref.current) setCard1Active(e.isIntersecting)
+          if (e.target === card2Ref.current) setCard2Active(e.isIntersecting)
+        })
+      },
+      { threshold: 0.5 }
+    )
+    if (card1Ref.current) obs.observe(card1Ref.current)
+    if (card2Ref.current) obs.observe(card2Ref.current)
+    return () => obs.disconnect()
+  }, [])
+
+  const cards = [
+    {
+      ref: card1Ref,
+      title: t("brands.activation.1.title"),
+      desc: t("brands.activation.1.desc"),
+      cta: t("brands.activation.1.cta"),
+      image: "/images/brands-media-projects.jpg",
+      onCta: () => setPacotesModalOpen(true),
+      active: card1Active,
+    },
+    {
+      ref: card2Ref,
+      title: t("brands.activation.2.title"),
+      desc: t("brands.activation.2.desc"),
+      cta: t("brands.activation.2.cta"),
+      image: "/images/brands-digital-sponsorship.jpg",
+      onCta: () => setCopaModalOpen(true),
+      active: card2Active,
+    },
+  ]
+
+  return (
     <section id="ativacao" className="bg-[#ffffff] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <h2 className="text-balance text-center text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
@@ -162,133 +239,66 @@ export function ActivationSection() {
         </h2>
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div ref={card1Ref}>
-            <ActivationCard
-              title={t("brands.activation.1.title")}
-              desc={t("brands.activation.1.desc")}
-              ctaLabel={t("brands.activation.1.cta")}
-              image="/images/brands-media-projects.jpg"
-              onCta={() => window.open(PDF_PATROCINIO_URL, "_blank")}
-              mobileActive={card1Active}
-            />
-          </div>
-          <div ref={card2Ref}>
-            <ActivationCard
-              title={t("brands.activation.2.title")}
-              desc={t("brands.activation.2.desc")}
-              ctaLabel={t("brands.activation.2.cta")}
-              image="/images/brands-digital-sponsorship.jpg"
-              onCta={() => setModalOpen(true)}
-              mobileActive={card2Active}
-            />
-          </div>
-        </div>
+          {cards.map((card, i) => (
+            <div key={i} ref={card.ref}>
+              <div className="group relative flex h-96 flex-col overflow-hidden rounded-2xl md:h-[28rem]">
+                <Image src={card.image} alt="" fill className="object-cover" quality={75} />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/90 via-[#000000]/50 to-[#000000]/20" />
+                <div className="relative z-10 flex h-full flex-col justify-between p-6 md:p-8">
+                  {/* Title at top */}
+                  <div>
+                    <h3
+                      className={`text-2xl font-bold tracking-wide text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-2 md:text-3xl ${
+                        card.active ? "-translate-y-2" : ""
+                      }`}
+                    >
+                      {card.title}
+                    </h3>
+                  </div>
 
-        <div className="mt-10 flex justify-center">
-          <Button
-            size="lg"
-            className="rounded-md bg-[#9900FF] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#9900FF]/20 transition-all hover:shadow-xl hover:brightness-110"
-            onClick={() => window.open(PDF_PATROCINIO_URL, "_blank")}
-          >
-            {t("brands.activation.cta")}
-          </Button>
+                  {/* Description + CTA at bottom */}
+                  <div className="flex flex-col items-start">
+                    <p
+                      className={`max-w-md text-sm leading-relaxed text-[#ffffff] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${
+                        card.active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                      }`}
+                    >
+                      {card.desc}
+                    </p>
+                    <Button
+                      size="sm"
+                      className={`mt-4 rounded-md bg-[#FF6600] px-6 text-sm font-semibold text-[#ffffff] transition-all duration-300 hover:brightness-110 group-hover:translate-y-0 group-hover:opacity-100 ${
+                        card.active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                      }`}
+                      onClick={card.onCta}
+                    >
+                      {card.cta}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
+      {/* Pacotes 2026 Modal */}
+      <LeadFormModal
+        open={pacotesModalOpen}
+        onOpenChange={setPacotesModalOpen}
+        title={t("brands.modal.pacotes.title")}
+        pdfUrl={PDF_PACOTES_URL}
+        source="pacotes-midia-2026"
+      />
+
       {/* Copa 2026 Modal */}
-      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="max-w-md border-[#e5e5e5] bg-[#ffffff] p-0">
-          <DialogTitle className="sr-only">{t("brands.modal.title")}</DialogTitle>
-          <div className="relative p-6">
-            <button
-              onClick={() => setModalOpen(false)}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f7f7f8] text-[#6b6b6b] hover:bg-[#e5e5e5]"
-              aria-label="Fechar"
-            >
-              <X className="h-4 w-4" />
-            </button>
-
-            <h3 className="text-xl font-bold text-[#0f0f0f]">{t("brands.modal.title")}</h3>
-
-            {success ? (
-              <div className="mt-6 rounded-lg bg-[#00cc88]/10 p-4 text-center">
-                <p className="font-medium text-[#00cc88]">{t("brands.modal.success")}</p>
-              </div>
-            ) : (
-              <div className="mt-6 flex flex-col gap-4">
-                {/* Name */}
-                <div>
-                  <label htmlFor="lead-name" className="mb-1 block text-sm font-medium text-[#0f0f0f]">
-                    {t("brands.modal.name")}
-                  </label>
-                  <input
-                    id="lead-name"
-                    type="text"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder={t("brands.modal.name.placeholder")}
-                    className="w-full rounded-lg border border-[#e5e5e5] bg-[#f7f7f8] px-4 py-2.5 text-sm text-[#0f0f0f] outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600]"
-                  />
-                  {errors.name && <p className="mt-1 text-xs text-[#ff3333]">{errors.name}</p>}
-                </div>
-                {/* Company */}
-                <div>
-                  <label htmlFor="lead-company" className="mb-1 block text-sm font-medium text-[#0f0f0f]">
-                    {t("brands.modal.company")}
-                  </label>
-                  <input
-                    id="lead-company"
-                    type="text"
-                    value={form.company}
-                    onChange={(e) => setForm({ ...form, company: e.target.value })}
-                    placeholder={t("brands.modal.company.placeholder")}
-                    className="w-full rounded-lg border border-[#e5e5e5] bg-[#f7f7f8] px-4 py-2.5 text-sm text-[#0f0f0f] outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600]"
-                  />
-                  {errors.company && <p className="mt-1 text-xs text-[#ff3333]">{errors.company}</p>}
-                </div>
-                {/* Email */}
-                <div>
-                  <label htmlFor="lead-email" className="mb-1 block text-sm font-medium text-[#0f0f0f]">
-                    {t("brands.modal.email")}
-                  </label>
-                  <input
-                    id="lead-email"
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder={t("brands.modal.email.placeholder")}
-                    className="w-full rounded-lg border border-[#e5e5e5] bg-[#f7f7f8] px-4 py-2.5 text-sm text-[#0f0f0f] outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600]"
-                  />
-                  {errors.email && <p className="mt-1 text-xs text-[#ff3333]">{errors.email}</p>}
-                </div>
-                {/* Phone */}
-                <div>
-                  <label htmlFor="lead-phone" className="mb-1 block text-sm font-medium text-[#0f0f0f]">
-                    {t("brands.modal.phone")}
-                  </label>
-                  <input
-                    id="lead-phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: formatPhone(e.target.value) })}
-                    placeholder={t("brands.modal.phone.placeholder")}
-                    className="w-full rounded-lg border border-[#e5e5e5] bg-[#f7f7f8] px-4 py-2.5 text-sm text-[#0f0f0f] outline-none focus:border-[#FF6600] focus:ring-1 focus:ring-[#FF6600]"
-                  />
-                  {errors.phone && <p className="mt-1 text-xs text-[#ff3333]">{errors.phone}</p>}
-                </div>
-
-                <Button
-                  className="mt-2 w-full rounded-lg bg-[#FF6600] py-3 text-base font-semibold text-[#ffffff] hover:brightness-110"
-                  onClick={handleSubmit}
-                  disabled={sending}
-                >
-                  {sending ? t("brands.modal.sending") : t("brands.modal.submit")}
-                </Button>
-              </div>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
+      <LeadFormModal
+        open={copaModalOpen}
+        onOpenChange={setCopaModalOpen}
+        title={t("brands.modal.title")}
+        pdfUrl={PDF_COPA_URL}
+        source="copa-2026-modal"
+      />
     </section>
   )
 }
