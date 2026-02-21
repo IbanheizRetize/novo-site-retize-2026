@@ -236,10 +236,25 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.hero.cta": "Saiba mais",
     "brands.hero.scroll": "Rolar para baixo",
 
-    // Brands Page - Network
-    "brands.network.title": "RETIZE SPORTS MEDIA NETWORK",
-    "brands.network.text": "Utilize canais oficiais de alto engajamento emocional nas maiores organizações esportivas do Brasil, no futebol, vôlei, e-sports e muito mais!",
-    "brands.network.cta": "Quero ativar no esporte",
+    // Brands Page - Audiences Section
+    "brands.audiences.title": "Audiências e canais exclusivos",
+    "brands.audiences.subtitle": "Conecte sua marca às audiências 1st party das principais organizações esportivas do Brasil.",
+    "brands.audiences.persona.text": "A Retize conecta diretamente na base 1st party das entidades esportivas parceiras, permitindo segmentação avançada e comunicação ultra personalizada com cada fã. Nossa tecnologia transforma dados proprietários em inteligência acionável para campanhas de alta performance, ativando mensagens certas no momento certo.",
+    "brands.audiences.persona.cta": "Explorar possibilidades de ativação",
+    "brands.audiences.persona.behavior": "Comportamento",
+    "brands.audiences.persona.sport": "Esporte",
+    "brands.audiences.persona.discovery": "Descobertas",
+    "brands.audiences.channels.title": "Canais e Formatos de Ativação",
+    "brands.audiences.channels.display.title": "Campanhas Display",
+    "brands.audiences.channels.display.desc": "Formatos IAB para ativação em sites e apps das principais organizações esportivas do país.",
+    "brands.audiences.channels.social.title": "Social Media",
+    "brands.audiences.channels.social.desc": "Postagens em múltiplos formatos nas redes sociais das organizações da nossa network de mídia.",
+    "brands.audiences.channels.tv.title": "TV",
+    "brands.audiences.channels.tv.desc": "Ativação em L, full video e QRCode nas transmissões e conteúdos exibidos nas TVs de nossos parceiros.",
+    "brands.audiences.channels.messaging.title": "Mensageria",
+    "brands.audiences.channels.messaging.desc": "Ativações diretas com os fãs de esporte através de e-mail, WhatsApp e push notification.",
+    "brands.audiences.ecosystem.title": "Algumas organizações esportivas do nosso ecossistema",
+    "brands.audiences.ecosystem.subtitle": "Conectamos marcas às audiências proprietárias das principais entidades esportivas do país.",
 
     // Brands Page - Activation Platforms
     "brands.activation.title": "Plataformas de ativação",
@@ -551,10 +566,25 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.hero.cta": "Learn more",
     "brands.hero.scroll": "Scroll down",
 
-    // Brands Page - Network
-    "brands.network.title": "RETIZE SPORTS MEDIA NETWORK",
-    "brands.network.text": "Use official high-engagement channels from the biggest sports organizations in Brazil, including football, volleyball, e-sports and much more!",
-    "brands.network.cta": "I want to activate in sports",
+    // Brands Page - Audiences Section
+    "brands.audiences.title": "Exclusive audiences and channels",
+    "brands.audiences.subtitle": "Connect your brand to the 1st party audiences of Brazil's leading sports organizations.",
+    "brands.audiences.persona.text": "Retize connects directly to the 1st party base of partner sports entities, enabling advanced segmentation and ultra-personalized communication with each fan. Our technology transforms proprietary data into actionable intelligence for high-performance campaigns, delivering the right messages at the right time.",
+    "brands.audiences.persona.cta": "Explore activation possibilities",
+    "brands.audiences.persona.behavior": "Behavior",
+    "brands.audiences.persona.sport": "Sports",
+    "brands.audiences.persona.discovery": "Discoveries",
+    "brands.audiences.channels.title": "Channels and Activation Formats",
+    "brands.audiences.channels.display.title": "Display Campaigns",
+    "brands.audiences.channels.display.desc": "IAB formats for activation on websites and apps of the country's leading sports organizations.",
+    "brands.audiences.channels.social.title": "Social Media",
+    "brands.audiences.channels.social.desc": "Multi-format posts on social media channels of our media network organizations.",
+    "brands.audiences.channels.tv.title": "TV",
+    "brands.audiences.channels.tv.desc": "L-overlay activation, full video and QR Code on broadcasts and content aired on our partners' TVs.",
+    "brands.audiences.channels.messaging.title": "Messaging",
+    "brands.audiences.channels.messaging.desc": "Direct activations with sports fans via email, WhatsApp and push notification.",
+    "brands.audiences.ecosystem.title": "Some sports organizations in our ecosystem",
+    "brands.audiences.ecosystem.subtitle": "We connect brands to the proprietary audiences of the country's leading sports entities.",
 
     // Brands Page - Activation Platforms
     "brands.activation.title": "Activation platforms",
@@ -866,10 +896,25 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.hero.cta": "Saber más",
     "brands.hero.scroll": "Desplazar hacia abajo",
 
-    // Brands Page - Network
-    "brands.network.title": "RETIZE SPORTS MEDIA NETWORK",
-    "brands.network.text": "Utilice canales oficiales de alto engagement emocional en las mayores organizaciones deportivas de Brasil, en fútbol, vóley, e-sports y mucho más!",
-    "brands.network.cta": "Quiero activar en el deporte",
+    // Brands Page - Audiences Section
+    "brands.audiences.title": "Audiencias y canales exclusivos",
+    "brands.audiences.subtitle": "Conecte su marca a las audiencias 1st party de las principales organizaciones deportivas de Brasil.",
+    "brands.audiences.persona.text": "Retize conecta directamente a la base 1st party de las entidades deportivas socias, permitiendo segmentación avanzada y comunicación ultra personalizada con cada hincha. Nuestra tecnología transforma datos propietarios en inteligencia accionable para campañas de alta performance, activando mensajes correctos en el momento correcto.",
+    "brands.audiences.persona.cta": "Explorar posibilidades de activación",
+    "brands.audiences.persona.behavior": "Comportamiento",
+    "brands.audiences.persona.sport": "Deporte",
+    "brands.audiences.persona.discovery": "Descubrimientos",
+    "brands.audiences.channels.title": "Canales y Formatos de Activación",
+    "brands.audiences.channels.display.title": "Campañas Display",
+    "brands.audiences.channels.display.desc": "Formatos IAB para activación en sitios y apps de las principales organizaciones deportivas del país.",
+    "brands.audiences.channels.social.title": "Social Media",
+    "brands.audiences.channels.social.desc": "Publicaciones en múltiples formatos en las redes sociales de las organizaciones de nuestra network de medios.",
+    "brands.audiences.channels.tv.title": "TV",
+    "brands.audiences.channels.tv.desc": "Activación en L, full video y QRCode en las transmisiones y contenidos exhibidos en las TVs de nuestros socios.",
+    "brands.audiences.channels.messaging.title": "Mensajería",
+    "brands.audiences.channels.messaging.desc": "Activaciones directas con los hinchas de deporte a través de e-mail, WhatsApp y push notification.",
+    "brands.audiences.ecosystem.title": "Algunas organizaciones deportivas de nuestro ecosistema",
+    "brands.audiences.ecosystem.subtitle": "Conectamos marcas a las audiencias propietarias de las principales entidades deportivas del país.",
 
     // Brands Page - Activation Platforms
     "brands.activation.title": "Plataformas de activación",
