@@ -5,6 +5,7 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { useI18n } from "@/lib/i18n/context"
+import { trackCarouselNavigate } from "@/lib/gtag"
 
 interface CaseData {
   id: string
@@ -199,8 +200,15 @@ export function CasesSection() {
             onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
             onTouchEnd={(e) => {
               const delta = e.changedTouches[0].clientX - touchStartX.current
-              if (delta > 50) setMobileIdx((i) => Math.max(0, i - 1))
-              else if (delta < -50) setMobileIdx((i) => Math.min(cases.length - 1, i + 1))
+              if (delta > 50) {
+                const next = Math.max(0, mobileIdx - 1)
+                setMobileIdx(next)
+                trackCarouselNavigate({ carousel_id: "cases_org", slide_index: next, direction: "swipe_prev" })
+              } else if (delta < -50) {
+                const next = Math.min(cases.length - 1, mobileIdx + 1)
+                setMobileIdx(next)
+                trackCarouselNavigate({ carousel_id: "cases_org", slide_index: next, direction: "swipe_next" })
+              }
             }}
           >
             <div
@@ -220,7 +228,10 @@ export function CasesSection() {
             {cases.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setMobileIdx(i)}
+                onClick={() => {
+                  setMobileIdx(i)
+                  trackCarouselNavigate({ carousel_id: "cases_org", slide_index: i, direction: "dot" })
+                }}
                 className={`h-2 rounded-full transition-all ${
                   i === mobileIdx ? "w-6 bg-[#00CCFF]" : "w-2 bg-[#0f0f0f]/20"
                 }`}
@@ -235,7 +246,11 @@ export function CasesSection() {
       {isInView && (
         <>
           <button
-            onClick={() => setMobileIdx(Math.max(0, mobileIdx - 1))}
+            onClick={() => {
+              const next = Math.max(0, mobileIdx - 1)
+              setMobileIdx(next)
+              trackCarouselNavigate({ carousel_id: "cases_org", slide_index: next, direction: "prev" })
+            }}
             disabled={mobileIdx === 0}
             className="fixed top-1/2 left-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm opacity-40 hover:opacity-100 transition-all disabled:opacity-0 md:hidden"
             aria-label="Case anterior"
@@ -243,7 +258,11 @@ export function CasesSection() {
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
-            onClick={() => setMobileIdx(Math.min(cases.length - 1, mobileIdx + 1))}
+            onClick={() => {
+              const next = Math.min(cases.length - 1, mobileIdx + 1)
+              setMobileIdx(next)
+              trackCarouselNavigate({ carousel_id: "cases_org", slide_index: next, direction: "next" })
+            }}
             disabled={mobileIdx === cases.length - 1}
             className="fixed top-1/2 right-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm opacity-40 hover:opacity-100 transition-all disabled:opacity-0 md:hidden"
             aria-label="Proximo case"

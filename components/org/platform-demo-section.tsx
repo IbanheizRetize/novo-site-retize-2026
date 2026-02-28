@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Play, Pause, Maximize2, X } from "lucide-rea
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { useI18n } from "@/lib/i18n/context"
+import { trackVideoPlay, trackCarouselNavigate, trackExternalLinkClick } from "@/lib/gtag"
 
 interface Module {
   id: string
@@ -84,6 +85,7 @@ export function PlatformDemoSection() {
       const next = (idx + modules.length) % modules.length
       setCurrent(next)
       setIsPlaying(false)
+      trackCarouselNavigate({ carousel_id: "platform_demo", slide_index: next })
     },
     []
   )
@@ -110,7 +112,10 @@ export function PlatformDemoSection() {
     if (!v) return
     if (v.paused) {
       v.play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true)
+          trackVideoPlay({ video_id: "platform_demo_" + modules[current].id })
+        })
         .catch(() => {})
     } else {
       v.pause()
@@ -273,7 +278,7 @@ export function PlatformDemoSection() {
             size="lg"
             className="rounded-md bg-[#00CCFF] px-8 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/20 transition-all hover:shadow-xl hover:brightness-110"
           >
-            <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer" onClick={() => trackExternalLinkClick({ link_url: "https://wa.me/5511930601050", link_text: "WhatsApp - Platform Demo CTA" })}>
               {t("org.platform.cta")}
             </a>
           </Button>

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
 import { useI18n } from "@/lib/i18n/context"
+import { trackGenerateLead, trackFileDownload } from "@/lib/gtag"
 
 const PDF_PACOTES_URL =
   "https://storage.googleapis.com/retize-prod-public/novo-site-retize/retize-pacotes-patrocinio-digital.pdf"
@@ -76,6 +77,8 @@ function LeadFormModal({
       if (!res.ok) throw new Error()
       setSuccess(true)
       window.open(pdfUrl, "_blank")
+      trackGenerateLead({ form_id: source })
+      trackFileDownload({ file_name: pdfUrl, link_text: title })
       setTimeout(() => {
         onOpenChange(false)
         setSuccess(false)

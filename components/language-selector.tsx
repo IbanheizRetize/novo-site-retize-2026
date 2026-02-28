@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { useI18n } from "@/lib/i18n/context"
 import type { Locale } from "@/lib/i18n/dictionaries"
+import { trackLanguageChange } from "@/lib/gtag"
 
 /* ── Flag SVG components (round) ─────────────────────────── */
 
@@ -114,6 +115,7 @@ export function LanguageSelector({ variant = "dark" }: LanguageSelectorProps) {
               key={loc.code}
               onClick={() => {
                 setLocale(loc.code)
+                trackLanguageChange({ from_locale: locale, to_locale: loc.code })
                 setOpen(false)
               }}
               className="flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm transition-colors hover:bg-[#f7f7f8]"

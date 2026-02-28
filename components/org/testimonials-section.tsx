@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Play, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { useI18n } from "@/lib/i18n/context"
+import { trackVideoPlay, trackCarouselNavigate, trackExternalLinkClick } from "@/lib/gtag"
 
 const DESKTOP_VISIBLE = 3
 
@@ -88,7 +89,12 @@ export function TestimonialsSection() {
                 <div key={item.id} className="w-1/3 flex-shrink-0 px-3">
                   <TestimonialCard
                     item={item}
-                    onPlay={() => item.video && setVideoOpen(item.video)}
+                    onPlay={() => {
+                      if (item.video) {
+                        setVideoOpen(item.video)
+                        trackVideoPlay({ video_id: "testimonial_" + item.id })
+                      }
+                    }}
                     t={t}
                   />
                 </div>
@@ -97,7 +103,11 @@ export function TestimonialsSection() {
           </div>
 
           <button
-            onClick={() => setDesktopIdx((i) => Math.max(0, i - 1))}
+            onClick={() => {
+              const next = Math.max(0, desktopIdx - 1)
+              setDesktopIdx(next)
+              trackCarouselNavigate({ carousel_id: "testimonials", slide_index: next, direction: "prev" })
+            }}
             disabled={desktopIdx === 0}
             className="absolute top-1/2 -left-5 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] opacity-50 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/20 disabled:opacity-0"
             aria-label="Anterior"
@@ -105,7 +115,11 @@ export function TestimonialsSection() {
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
-            onClick={() => setDesktopIdx((i) => Math.min(desktopMax, i + 1))}
+            onClick={() => {
+              const next = Math.min(desktopMax, desktopIdx + 1)
+              setDesktopIdx(next)
+              trackCarouselNavigate({ carousel_id: "testimonials", slide_index: next, direction: "next" })
+            }}
             disabled={desktopIdx === desktopMax}
             className="absolute top-1/2 -right-5 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] opacity-50 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/20 disabled:opacity-0"
             aria-label="Próximo"
@@ -117,7 +131,10 @@ export function TestimonialsSection() {
             {Array.from({ length: desktopMax + 1 }).map((_, i) => (
               <button
                 key={i}
-                onClick={() => setDesktopIdx(i)}
+                onClick={() => {
+                  setDesktopIdx(i)
+                  trackCarouselNavigate({ carousel_id: "testimonials", slide_index: i, direction: "dot" })
+                }}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   i === desktopIdx ? "w-6 bg-[#00CCFF]" : "w-2 bg-[#0f0f0f]/20"
                 }`}
@@ -134,8 +151,15 @@ export function TestimonialsSection() {
             onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
             onTouchEnd={(e) => {
               const delta = e.changedTouches[0].clientX - touchStartX.current
-              if (delta > 50) setMobileIdx((i) => Math.max(0, i - 1))
-              else if (delta < -50) setMobileIdx((i) => Math.min(mobileMax, i + 1))
+              if (delta > 50) {
+                const next = Math.max(0, mobileIdx - 1)
+                setMobileIdx(next)
+                trackCarouselNavigate({ carousel_id: "testimonials_mobile", slide_index: next, direction: "swipe_prev" })
+              } else if (delta < -50) {
+                const next = Math.min(mobileMax, mobileIdx + 1)
+                setMobileIdx(next)
+                trackCarouselNavigate({ carousel_id: "testimonials_mobile", slide_index: next, direction: "swipe_next" })
+              }
             }}
           >
             <div
@@ -146,7 +170,12 @@ export function TestimonialsSection() {
                 <div key={item.id} className="w-full flex-shrink-0 px-1">
                   <TestimonialCard
                     item={item}
-                    onPlay={() => item.video && setVideoOpen(item.video)}
+                    onPlay={() => {
+                      if (item.video) {
+                        setVideoOpen(item.video)
+                        trackVideoPlay({ video_id: "testimonial_" + item.id })
+                      }
+                    }}
                     t={t}
                   />
                 </div>
@@ -156,7 +185,11 @@ export function TestimonialsSection() {
 
           <div className="mt-6 flex items-center justify-center gap-4">
             <button
-              onClick={() => setMobileIdx((i) => Math.max(0, i - 1))}
+              onClick={() => {
+              const next = Math.max(0, mobileIdx - 1)
+              setMobileIdx(next)
+              trackCarouselNavigate({ carousel_id: "testimonials_mobile", slide_index: next, direction: "prev" })
+            }}
               disabled={mobileIdx === 0}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] opacity-50 transition-opacity hover:opacity-100 disabled:opacity-30"
               aria-label="Anterior"
@@ -167,7 +200,10 @@ export function TestimonialsSection() {
               {testimonials.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setMobileIdx(i)}
+                  onClick={() => {
+                    setMobileIdx(i)
+                    trackCarouselNavigate({ carousel_id: "testimonials_mobile", slide_index: i, direction: "dot" })
+                  }}
                   className={`h-2 rounded-full transition-all ${
                     i === mobileIdx ? "w-6 bg-[#00CCFF]" : "w-2 bg-[#0f0f0f]/20"
                   }`}
@@ -176,7 +212,11 @@ export function TestimonialsSection() {
               ))}
             </div>
             <button
-              onClick={() => setMobileIdx((i) => Math.min(mobileMax, i + 1))}
+              onClick={() => {
+              const next = Math.min(mobileMax, mobileIdx + 1)
+              setMobileIdx(next)
+              trackCarouselNavigate({ carousel_id: "testimonials_mobile", slide_index: next, direction: "next" })
+            }}
               disabled={mobileIdx === mobileMax}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] opacity-50 transition-opacity hover:opacity-100 disabled:opacity-30"
               aria-label="Próximo"
@@ -192,6 +232,7 @@ export function TestimonialsSection() {
             href="https://wa.me/5511930601050"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackExternalLinkClick({ link_url: "https://wa.me/5511930601050", link_text: "WhatsApp - Testimonials CTA" })}
             className="inline-flex items-center justify-center rounded-md bg-[#00CCFF] px-8 py-3 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/20 transition-all hover:shadow-xl hover:brightness-110"
           >
             {t("org.testimonials.cta")}

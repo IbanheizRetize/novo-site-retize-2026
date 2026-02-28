@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import { I18nProvider } from '@/lib/i18n/context'
+import { GA_MEASUREMENT_ID } from '@/lib/gtag'
 import './globals.css'
 
 const _inter = Inter({ subsets: ['latin'] })
@@ -35,6 +37,19 @@ export default function RootLayout({
           </I18nProvider>
         </Suspense>
         <Analytics />
+
+        {/* Google Analytics 4 */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}</Script>
       </body>
     </html>
   )

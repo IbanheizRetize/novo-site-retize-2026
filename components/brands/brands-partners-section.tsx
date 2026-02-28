@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useI18n } from "@/lib/i18n/context"
+import { trackExternalLinkClick } from "@/lib/gtag"
 
 const brands: { name: string; logo: string }[] = [
   { name: "Banco Carrefour",     logo: "/logos/banco-carrefour.png" },
@@ -57,7 +58,7 @@ export function BrandsPartnersSection() {
             size="lg"
             className="rounded-md bg-[#FF6600] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110"
           >
-            <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer" onClick={() => trackExternalLinkClick({ link_url: "https://wa.me/5511930601050", link_text: "WhatsApp - Brands Partners CTA" })}>
               {t("brands.partners.cta")}
             </a>
           </Button>

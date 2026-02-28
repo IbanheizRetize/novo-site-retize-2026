@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { useI18n } from "@/lib/i18n/context"
+import { trackContactFormSubmit, trackExternalLinkClick } from "@/lib/gtag"
 
 const achievementKeys = [
   { key: "arenahub", logo: "/logos/arena-hub.png", logoClass: "h-6 w-6" },
@@ -62,6 +63,7 @@ export function ContactSection() {
         setStatus("error")
       } else {
         setStatus("success")
+        trackContactFormSubmit({ form_id: "contact_main" })
       }
     } catch {
       setErrorMessage(t("contact.form.error"))
@@ -119,7 +121,12 @@ export function ContactSection() {
               size="lg"
               className="mt-5 w-full rounded-full bg-[#4700d1] px-6 text-base font-semibold text-[#ffffff] hover:bg-[#3a00a8]"
             >
-              <a href="https://calendly.com/nicolas-ibanheiz/retize-ads" target="_blank" rel="noopener noreferrer">{t("contact.achievements.cta")}</a>
+              <a
+                href="https://calendly.com/nicolas-ibanheiz/retize-ads"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackExternalLinkClick({ link_url: "https://calendly.com/nicolas-ibanheiz/retize-ads", link_text: "Calendly - Agendar reuniao" })}
+              >{t("contact.achievements.cta")}</a>
             </Button>
           </div>
 

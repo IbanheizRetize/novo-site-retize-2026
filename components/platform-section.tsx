@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useState, useEffect, useCallback, useRef } from "react"
 import { Database, TrendingUp, MonitorSmartphone, BrainCircuit, ChevronLeft, ChevronRight } from "lucide-react"
 import { useI18n } from "@/lib/i18n/context"
+import { trackCarouselNavigate } from "@/lib/gtag"
 
 const slides = [
   { src: "/prints/plataforma.png", tooltipKey: "platform.slide.analytics" },
@@ -74,8 +75,15 @@ export function PlatformSection() {
               onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
               onTouchEnd={(e) => {
                 const delta = e.changedTouches[0].clientX - touchStartX.current
-                if (delta > 50) setCurrent((c) => (c - 1 + slides.length) % slides.length)
-                else if (delta < -50) setCurrent((c) => (c + 1) % slides.length)
+                if (delta > 50) {
+                  const next = (current - 1 + slides.length) % slides.length
+                  setCurrent(next)
+                  trackCarouselNavigate({ carousel_id: "platform", slide_index: next, direction: "swipe_prev" })
+                } else if (delta < -50) {
+                  const next = (current + 1) % slides.length
+                  setCurrent(next)
+                  trackCarouselNavigate({ carousel_id: "platform", slide_index: next, direction: "swipe_next" })
+                }
               }}
             >
               {/* Slides container */}
@@ -105,14 +113,22 @@ export function PlatformSection() {
 
               {/* Side arrows */}
               <button
-                onClick={() => setCurrent((current - 1 + slides.length) % slides.length)}
+                onClick={() => {
+                  const next = (current - 1 + slides.length) % slides.length
+                  setCurrent(next)
+                  trackCarouselNavigate({ carousel_id: "platform", slide_index: next, direction: "prev" })
+                }}
                 className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm opacity-40 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/80"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
-                onClick={() => setCurrent((current + 1) % slides.length)}
+                onClick={() => {
+                  const next = (current + 1) % slides.length
+                  setCurrent(next)
+                  trackCarouselNavigate({ carousel_id: "platform", slide_index: next, direction: "next" })
+                }}
                 className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm opacity-40 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/80"
                 aria-label="Próximo"
               >
@@ -126,7 +142,10 @@ export function PlatformSection() {
               {slides.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setCurrent(idx)}
+                  onClick={() => {
+                    setCurrent(idx)
+                    trackCarouselNavigate({ carousel_id: "platform", slide_index: idx, direction: "dot" })
+                  }}
                   className={`h-2 rounded-full border border-[#cccccc] transition-all duration-300 ${
                     idx === current ? "w-6 bg-[#4700d1]" : "w-2 bg-[#d4d4d4]"
                   }`}

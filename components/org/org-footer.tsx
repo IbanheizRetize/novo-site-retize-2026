@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n/context"
+import { trackExternalLinkClick } from "@/lib/gtag"
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -94,6 +95,7 @@ export function OrgFooter() {
                 href="https://wa.me/5511930601050"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackExternalLinkClick({ link_url: "https://wa.me/5511930601050", link_text: "WhatsApp" })}
                 className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#00CCFF]"
               >
                 WhatsApp
@@ -111,6 +113,7 @@ export function OrgFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.label}
+                  onClick={() => trackExternalLinkClick({ link_url: link.href, link_text: link.label })}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ffffff]/20 text-[#ffffff]/50 transition-colors hover:border-[#00CCFF]/50 hover:text-[#00CCFF]"
                 >
                   <link.Icon className="h-4 w-4" />
@@ -133,6 +136,7 @@ export function OrgFooter() {
                 href="https://www.privacidade.com.br/portal-de-privacidade?token=e9ef3022620a045a9d0220b162bdc3b5"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackExternalLinkClick({ link_url: "https://www.privacidade.com.br/portal-de-privacidade?token=e9ef3022620a045a9d0220b162bdc3b5", link_text: "Portal de Privacidade" })}
                 className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70"
               >
                 {t("org.footer.privacyPortal")}

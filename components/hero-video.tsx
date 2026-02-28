@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from "react"
 import { Building2, BarChart3, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useI18n } from "@/lib/i18n/context"
+import { trackCtaClick, trackVideoPlay } from "@/lib/gtag"
 
 const POSTER_URL =
   "https://storage.googleapis.com/retize-prod-public/novo-site-retize/retize-hero-poster-1600.jpg"
@@ -19,6 +20,7 @@ export function HeroVideo() {
 
   const handleCanPlay = useCallback(() => {
     setVideoReady(true)
+    trackVideoPlay({ video_id: "hero_background" })
   }, [])
 
   useEffect(() => {
@@ -76,7 +78,7 @@ export function HeroVideo() {
             size="lg"
             className="w-[300px] justify-center rounded border-0 bg-gradient-to-r from-[#00CCFF] to-[#00a3cc] px-7 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#00CCFF]/30 transition-all hover:shadow-xl hover:shadow-[#00CCFF]/40 hover:brightness-110"
           >
-            <a href="/organizacoes-esportivas">
+            <a href="/organizacoes-esportivas" onClick={() => trackCtaClick({ cta_id: "hero_orgs", cta_text: t("hero.btn.orgs") })}>
               <Building2 className="mr-2 h-5 w-5" />
               {t("hero.btn.orgs")}
             </a>
@@ -86,7 +88,7 @@ export function HeroVideo() {
             size="lg"
             className="w-[300px] justify-center rounded border-0 bg-gradient-to-r from-[#FF6600] to-[#ff8533] px-7 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/30 transition-all hover:shadow-xl hover:shadow-[#FF6600]/40 hover:brightness-110"
           >
-            <a href="/marcas-anunciantes">
+            <a href="/marcas-anunciantes" onClick={() => trackCtaClick({ cta_id: "hero_brands", cta_text: t("hero.btn.brands") })}>
               <BarChart3 className="mr-2 h-5 w-5" />
               {t("hero.btn.brands")}
             </a>

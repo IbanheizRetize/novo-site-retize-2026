@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useI18n } from "@/lib/i18n/context"
+import { trackExternalLinkClick } from "@/lib/gtag"
 
 const levers = [
   {
@@ -145,7 +146,7 @@ export function RevenueLeverSection() {
             size="lg"
             className="rounded-md bg-[#00CCFF] px-8 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/20 transition-all hover:shadow-xl hover:shadow-[#FF0066]/20 hover:brightness-110"
           >
-            <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer" onClick={() => trackExternalLinkClick({ link_url: "https://wa.me/5511930601050", link_text: "WhatsApp - Revenue Levers CTA" })}>
               {t("org.levers.cta")}
             </a>
           </Button>

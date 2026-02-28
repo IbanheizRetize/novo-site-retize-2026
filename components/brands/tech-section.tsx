@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { Shield, Users, BarChart3, BrainCircuit, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useI18n } from "@/lib/i18n/context"
+import { trackExternalLinkClick, trackCarouselNavigate } from "@/lib/gtag"
 
 const slides = [
   { src: "/prints/plataforma.png", tooltipKey: "platform.slide.analytics" },
@@ -95,7 +96,7 @@ export function TechSection() {
               asChild
               className="mt-6 hidden rounded-full bg-[#FF6600] px-6 py-2 text-sm font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110 md:inline-flex"
             >
-              <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer" onClick={() => trackExternalLinkClick({ link_url: "https://wa.me/5511930601050", link_text: "WhatsApp - Tech Section desktop" })}>
                 {t("brands.tech.cta")}
               </a>
             </Button>
@@ -111,8 +112,15 @@ export function TechSection() {
               onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
               onTouchEnd={(e) => {
                 const delta = e.changedTouches[0].clientX - touchStartX.current
-                if (delta > 50) setCurrent((c) => (c - 1 + slides.length) % slides.length)
-                else if (delta < -50) setCurrent((c) => (c + 1) % slides.length)
+                if (delta > 50) {
+                  const next = (current - 1 + slides.length) % slides.length
+                  setCurrent(next)
+                  trackCarouselNavigate({ carousel_id: "tech", slide_index: next, direction: "swipe_prev" })
+                } else if (delta < -50) {
+                  const next = (current + 1) % slides.length
+                  setCurrent(next)
+                  trackCarouselNavigate({ carousel_id: "tech", slide_index: next, direction: "swipe_next" })
+                }
               }}
             >
               {/* Slide area */}
@@ -143,14 +151,22 @@ export function TechSection() {
 
                 {/* Side arrows */}
                 <button
-                  onClick={() => setCurrent((current - 1 + slides.length) % slides.length)}
+                  onClick={() => {
+                    const next = (current - 1 + slides.length) % slides.length
+                    setCurrent(next)
+                    trackCarouselNavigate({ carousel_id: "tech", slide_index: next, direction: "prev" })
+                  }}
                   className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm opacity-40 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/80"
                   aria-label="Anterior"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <button
-                  onClick={() => setCurrent((current + 1) % slides.length)}
+                  onClick={() => {
+                    const next = (current + 1) % slides.length
+                    setCurrent(next)
+                    trackCarouselNavigate({ carousel_id: "tech", slide_index: next, direction: "next" })
+                  }}
                   className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm opacity-40 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/80"
                   aria-label="Proximo"
                 >
@@ -164,7 +180,10 @@ export function TechSection() {
               {slides.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setCurrent(idx)}
+                  onClick={() => {
+                    setCurrent(idx)
+                    trackCarouselNavigate({ carousel_id: "tech", slide_index: idx, direction: "dot" })
+                  }}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     idx === current ? "w-7 bg-[#FF6600]" : "w-2 bg-[#ffffff]/20"
                   }`}
@@ -180,7 +199,7 @@ export function TechSection() {
                 size="lg"
                 className="w-full max-w-xs rounded-full bg-[#FF6600] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110"
               >
-                <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer" onClick={() => trackExternalLinkClick({ link_url: "https://wa.me/5511930601050", link_text: "WhatsApp - Tech Section mobile" })}>
                   {t("brands.tech.cta")}
                 </a>
               </Button>

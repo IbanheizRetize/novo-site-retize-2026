@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { LanguageSelector } from "@/components/language-selector"
 import { useI18n } from "@/lib/i18n/context"
+import { trackCtaClick } from "@/lib/gtag"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -75,7 +76,7 @@ export function Header() {
             asChild
             className="rounded-full bg-[#4700d1] px-5 text-sm font-semibold text-[#ffffff] hover:bg-[#3a00a8]"
           >
-            <a href="#contato">{t("header.cta")}</a>
+            <a href="#contato" onClick={() => trackCtaClick({ cta_id: "header_contact", cta_text: t("header.cta") })}>{t("header.cta")}</a>
           </Button>
           <LanguageSelector variant={scrolled ? "dark" : "light"} />
         </nav>
@@ -121,7 +122,7 @@ export function Header() {
                   asChild
                   className="mt-2 w-full rounded-full bg-[#4700d1] text-[#ffffff] hover:bg-[#3a00a8]"
                 >
-                  <a href="#contato" onClick={() => setMobileOpen(false)}>
+                  <a href="#contato" onClick={() => { setMobileOpen(false); trackCtaClick({ cta_id: "header_contact_mobile", cta_text: t("header.cta") }) }}>
                     {t("header.cta")}
                   </a>
                 </Button>
