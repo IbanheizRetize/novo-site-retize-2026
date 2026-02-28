@@ -19,6 +19,7 @@ const testimonials = [
     thumbnail: "/depoimentos/debora.png",
     initials: "DS",
     color: "#00cc88",
+    orgLogo: "/logos/atletico-mg.png",
   },
   {
     id: "henrique",
@@ -28,6 +29,7 @@ const testimonials = [
     photo: "/depoimentos/henrique.jpeg",
     initials: "HN",
     color: "#4700d1",
+    orgLogo: "/logos/cbv.png",
   },
   {
     id: "ricardo",
@@ -38,6 +40,7 @@ const testimonials = [
     thumbnail: "/depoimentos/ricardo.png",
     initials: "RB",
     color: "#00CCFF",
+    orgLogo: "/logos/imperial.png",
   },
   {
     id: "erich",
@@ -48,6 +51,7 @@ const testimonials = [
     thumbnail: "/depoimentos/erich.png",
     initials: "EB",
     color: "#FF0066",
+    orgLogo: "/logos/maquina.png",
   },
   {
     id: "daniel",
@@ -58,6 +62,7 @@ const testimonials = [
     thumbnail: "/depoimentos/daniel.png",
     initials: "DG",
     color: "#FF6600",
+    orgLogo: "/logos/lpf.png",
   },
 ]
 
@@ -302,12 +307,18 @@ function TestimonialCard({
       )}
 
       <div className="mt-5 flex items-center gap-3">
-        <div
-          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-[#ffffff]"
-          style={{ backgroundColor: item.color }}
-        >
-          {item.initials}
-        </div>
+        {"orgLogo" in item && item.orgLogo ? (
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#ffffff] border border-[#e5e5e5] p-1.5">
+            <Image src={item.orgLogo} alt={t(item.nameKey)} width={28} height={28} className="h-full w-full object-contain" />
+          </div>
+        ) : (
+          <div
+            className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-[#ffffff]"
+            style={{ backgroundColor: item.color }}
+          >
+            {item.initials}
+          </div>
+        )}
         <div>
           <p className="text-sm font-bold text-[#0f0f0f]">{t(item.nameKey)}</p>
           <p className="text-xs text-[#6b6b6b]">{t(item.roleKey)}</p>
