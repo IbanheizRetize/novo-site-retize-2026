@@ -10,7 +10,7 @@ Website institucional da Retize desenvolvido com Next.js 16, focado em atrair or
 - **Estilização:** Tailwind CSS 4.1.9
 - **UI Components:** Radix UI + shadcn/ui
 - **Package Manager:** pnpm
-- **Analytics:** Vercel Analytics
+- **Analytics:** Vercel Analytics + Google Analytics 4 (GA4)
 - **Gerenciamento de Formulários:** react-hook-form + zod
 - **Ícones:** Lucide React
 - **Carousel:** Embla Carousel
@@ -179,7 +179,305 @@ Combina `clsx` + `tailwind-merge` para evitar conflitos de classes Tailwind.
 - **Status:** Em desenvolvimento
 - Atualmente contém apenas título placeholder
 
-## 🛠️ Convenções de Desenvolvimento
+## � Google Analytics 4
+
+**Measurement ID:** `G-8NX7K07YH0`
+
+A coleta é inicializada via `next/script` (strategy `afterInteractive`) no [app/layout.tsx](app/layout.tsx), garantindo que o script carregue em todas as páginas sem bloquear a renderização. A função auxiliar tipada em [lib/gtag.ts](lib/gtag.ts) centraliza todos os eventos.
+
+### Pageviews
+
+Pageviews são coletados **automaticamente** pela chamada `gtag('config', 'G-8NX7K07YH0')` presente no layout raiz. Qualquer navegação entre rotas do App Router dispara um novo `page_view` sem código adicional.
+
+| Página | Rota |
+|--------|------|
+| Home | `/` |
+| Organizações Esportivas | `/organizacoes-esportivas` |
+| Marcas Anunciantes | `/marcas-anunciantes` |
+| Legal | `/legal` |
+
+### Eventos Personalizados
+
+#### `contact_form_submit` — Envio do formulário de contato
+
+| Parâmetro | Tipo | Valor | Arquivo |
+|-----------|------|-------|---------|
+| `form_id` | string | `"contact_main"` | [contact-section.tsx](components/contact-section.tsx) |
+
+Disparado após sucesso na requisição `POST /api/contact`.
+
+---
+
+#### `generate_lead` — Captura de lead via modal de PDF
+
+| Parâmetro | Tipo | Exemplo de valor | Arquivo |
+|-----------|------|------------------|---------|
+| `form_id` | string | `"pacotes-patrocinio"` / `"copa-2026"` | [activation-section.tsx](components/brands/activation-section.tsx) |
+
+Disparado após sucesso na requisição `POST /api/leads/copa-2026`. O campo `form_id` corresponde ao parâmetro `source` enviado pelo formulário.
+
+---
+
+#### `file_download` — Download de PDF após lead
+
+| Parâmetro | Tipo | Exemplo de valor | Arquivo |
+|-----------|------|------------------|---------|
+| `file_name` | string | URL do PDF no GCS | [activation-section.tsx](components/brands/activation-section.tsx) |
+| `link_text` | string | Título do modal | [activation-section.tsx](components/brands/activation-section.tsx) |
+
+Disparado junto com `generate_lead`, no momento em que o PDF é aberto via `window.open()`.
+
+---
+
+#### `cta_click` — Clique em botões de CTA internos
+
+| Parâmetro | Tipo | Valores possíveis | Arquivo |
+|-----------|------|-------------------|---------|
+| `cta_id` | string | `"hero_orgs"` \| `"hero_brands"` \| `"header_contact"` \| `"header_contact_mobile"` | [hero-video.tsx](components/hero-video.tsx), [header.tsx](components/header.tsx) |
+| `cta_text` | string | Texto traduzido do botão | idem |
+
+---
+
+#### `external_link_click` — Clique em links externos
+
+| Parâmetro | Tipo | Descrição | Arquivos |
+|-----------|------|-----------|----------|
+| `link_url` | string | URL completa do destino | vários |
+| `link_text` | string | Rótulo legível do link | vários |
+
+Links rastreados:
+
+| `link_text` | Destino |
+|-------------|--------|
+| `WhatsApp - Header desktop/mobile` | `https://wa.me/5511930601050` | Headers org e brands |
+| `WhatsApp - Tech Section desktop/mobile` | `https://wa.me/5511930601050` | [tech-section.tsx](components/brands/tech-section.tsx) |
+| `WhatsApp - Platform Demo CTA` | `https://wa.me/5511930601050` | [platform-demo-section.tsx](components/org/platform-demo-section.tsx) |
+| `WhatsApp - Revenue Levers CTA` | `https://wa.me/5511930601050` | [revenue-lever-section.tsx](components/org/revenue-lever-section.tsx) |
+| `WhatsApp - Testimonials CTA` | `https://wa.me/5511930601050` | [testimonials-section.tsx](components/org/testimonials-section.tsx) |
+| `WhatsApp - Brands Partners CTA` | `https://wa.me/5511930601050` | [brands-partners-section.tsx](components/brands/brands-partners-section.tsx) |
+| `WhatsApp - Org Partners CTA` | `https://wa.me/5511930601050` | [partners-section.tsx](components/org/partners-section.tsx) |
+| `WhatsApp` | `https://wa.me/5511930601050` | Footers org e brands |
+| `Calendly - Agendar reuniao` | `https://calendly.com/nicolas-ibanheiz/retize-ads` | [contact-section.tsx](components/contact-section.tsx) |
+| `Instagram` / `LinkedIn` / `Linktree` | URLs das redes sociais | Footers org e brands |
+| `Portal de Privacidade` | `https://www.privacidade.com.br/...` | Footers org e brands |
+
+---
+
+#### `video_start` — Início de reprodução de vídeo
+
+| Parâmetro | Tipo | Valores possíveis | Arquivo |
+|-----------|------|-------------------|---------|
+| `video_id` | string | veja tabela abaixo | vários |
+
+| `video_id` | Descrição | Arquivo |
+|------------|-----------|--------|
+| `hero_background` | Vídeo de fundo do hero (autoplay) | [hero-video.tsx](components/hero-video.tsx) |
+| `platform_demo_analytics` | Demo do módulo Analytics | [platform-demo-section.tsx](components/org/platform-demo-section.tsx) |
+| `platform_demo_survey` | Demo do módulo Survey | idem |
+| `platform_demo_track` | Demo do módulo Track | idem |
+| `platform_demo_cdp` | Demo do módulo CDP | idem |
+| `platform_demo_ads` | Demo do módulo Ads | idem |
+| `platform_demo_crm` | Demo do módulo CRM | idem |
+| `testimonial_debora` | Depoimento Débora | [testimonials-section.tsx](components/org/testimonials-section.tsx) |
+| `testimonial_ricardo` | Depoimento Ricardo | idem |
+| `testimonial_erich` | Depoimento Erich | idem |
+| `testimonial_daniel` | Depoimento Daniel | idem |
+| `testimonial_brands_ricardo` | Depoimento Ricardo (página brands) | [brands-cases-section.tsx](components/brands/brands-cases-section.tsx) |
+
+---
+
+#### `carousel_navigate` — Navegação em carrosséis
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `carousel_id` | string | Identificador do carrossel (veja tabela abaixo) |
+| `slide_index` | number | Índice do slide de destino (0-based) |
+| `direction` | string | `"prev"` \| `"next"` \| `"dot"` \| `"swipe_prev"` \| `"swipe_next"` |
+
+| `carousel_id` | Seção | Arquivo |
+|---------------|-------|---------|
+| `platform` | Carousel da plataforma (home) | [platform-section.tsx](components/platform-section.tsx) |
+| `tech` | Carousel de tecnologia (brands) | [tech-section.tsx](components/brands/tech-section.tsx) |
+| `platform_demo` | Seletor de módulos da plataforma | [platform-demo-section.tsx](components/org/platform-demo-section.tsx) |
+| `cases_org` | Carousel de cases (orgs, mobile) | [cases-section.tsx](components/org/cases-section.tsx) |
+| `cases_brands` | Carousel de cases (brands, mobile) | [brands-cases-section.tsx](components/brands/brands-cases-section.tsx) |
+| `testimonials` | Carousel de depoimentos (desktop) | [testimonials-section.tsx](components/org/testimonials-section.tsx) |
+| `testimonials_mobile` | Carousel de depoimentos (mobile) | idem |
+| `testimonials_brands` | Carousel de depoimentos brands (mobile) | [brands-cases-section.tsx](components/brands/brands-cases-section.tsx) |
+
+---
+
+#### `language_change` — Troca de idioma
+
+| Parâmetro | Tipo | Valores possíveis | Arquivo |
+|-----------|------|-------------------|---------|
+| `from_locale` | string | `"pt-BR"` \| `"en"` \| `"es"` | [language-selector.tsx](components/language-selector.tsx) |
+| `to_locale` | string | `"pt-BR"` \| `"en"` \| `"es"` | idem |
+
+---
+
+### Utilitário `lib/gtag.ts`
+
+```ts
+import { trackContactFormSubmit } from '@/lib/gtag'
+
+// Disparar evento
+trackContactFormSubmit({ form_id: 'contact_main' })
+```
+
+Funções exportadas: `event`, `trackContactFormSubmit`, `trackGenerateLead`, `trackFileDownload`, `trackExternalLinkClick`, `trackVideoPlay`, `trackCarouselNavigate`, `trackLanguageChange`, `trackCtaClick`.
+
+A função base `event()` é segura para SSR — retorna sem erro se `window.gtag` não estiver disponível.
+## 📈 Google Analytics 4
+
+**Measurement ID:** `G-8NX7K07YH0`
+
+A coleta é inicializada via `next/script` (strategy `afterInteractive`) no [app/layout.tsx](app/layout.tsx), garantindo que o script carregue em todas as páginas sem bloquear a renderização. A função auxiliar tipada em [lib/gtag.ts](lib/gtag.ts) centraliza todos os eventos.
+
+### Pageviews
+
+Pageviews são coletados **automaticamente** pela chamada `gtag('config', 'G-8NX7K07YH0')` presente no layout raiz. Qualquer navegação entre rotas do App Router dispara um novo `page_view` sem código adicional.
+
+| Página | Rota |
+|--------|------|
+| Home | `/` |
+| Organizações Esportivas | `/organizacoes-esportivas` |
+| Marcas Anunciantes | `/marcas-anunciantes` |
+| Legal | `/legal` |
+
+### Eventos Personalizados
+
+#### `contact_form_submit` — Envio do formulário de contato
+
+| Parâmetro | Tipo | Valor | Arquivo |
+|-----------|------|-------|---------|
+| `form_id` | string | `"contact_main"` | [contact-section.tsx](components/contact-section.tsx) |
+
+Disparado após sucesso na requisição `POST /api/contact`.
+
+---
+
+#### `generate_lead` — Captura de lead via modal de PDF
+
+| Parâmetro | Tipo | Exemplo de valor | Arquivo |
+|-----------|------|------------------|---------|
+| `form_id` | string | `"pacotes-patrocinio"` / `"copa-2026"` | [activation-section.tsx](components/brands/activation-section.tsx) |
+
+Disparado após sucesso na requisição `POST /api/leads/copa-2026`. O campo `form_id` corresponde ao parâmetro `source` enviado pelo formulário.
+
+---
+
+#### `file_download` — Download de PDF após lead
+
+| Parâmetro | Tipo | Exemplo de valor | Arquivo |
+|-----------|------|------------------|---------|
+| `file_name` | string | URL do PDF no GCS | [activation-section.tsx](components/brands/activation-section.tsx) |
+| `link_text` | string | Título do modal | [activation-section.tsx](components/brands/activation-section.tsx) |
+
+Disparado junto com `generate_lead`, no momento em que o PDF é aberto via `window.open()`.
+
+---
+
+#### `cta_click` — Clique em botões de CTA internos
+
+| Parâmetro | Tipo | Valores possíveis | Arquivo |
+|-----------|------|-------------------|---------|
+| `cta_id` | string | `"hero_orgs"` \| `"hero_brands"` \| `"header_contact"` \| `"header_contact_mobile"` | [hero-video.tsx](components/hero-video.tsx), [header.tsx](components/header.tsx) |
+| `cta_text` | string | Texto traduzido do botão | idem |
+
+---
+
+#### `external_link_click` — Clique em links externos
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `link_url` | string | URL completa do destino |
+| `link_text` | string | Rótulo legível do link |
+
+Links rastreados:
+
+| `link_text` | Destino | Arquivo |
+|-------------|---------|---------|
+| `WhatsApp - Header desktop/mobile` | `https://wa.me/5511930601050` | [brands-header.tsx](components/brands/brands-header.tsx), [org-header.tsx](components/org/org-header.tsx) |
+| `WhatsApp - Tech Section desktop/mobile` | `https://wa.me/5511930601050` | [tech-section.tsx](components/brands/tech-section.tsx) |
+| `WhatsApp - Platform Demo CTA` | `https://wa.me/5511930601050` | [platform-demo-section.tsx](components/org/platform-demo-section.tsx) |
+| `WhatsApp - Revenue Levers CTA` | `https://wa.me/5511930601050` | [revenue-lever-section.tsx](components/org/revenue-lever-section.tsx) |
+| `WhatsApp - Testimonials CTA` | `https://wa.me/5511930601050` | [testimonials-section.tsx](components/org/testimonials-section.tsx) |
+| `WhatsApp - Brands Partners CTA` | `https://wa.me/5511930601050` | [brands-partners-section.tsx](components/brands/brands-partners-section.tsx) |
+| `WhatsApp - Org Partners CTA` | `https://wa.me/5511930601050` | [partners-section.tsx](components/org/partners-section.tsx) |
+| `WhatsApp` | `https://wa.me/5511930601050` | Footers org e brands |
+| `Calendly - Agendar reuniao` | `https://calendly.com/nicolas-ibanheiz/retize-ads` | [contact-section.tsx](components/contact-section.tsx) |
+| `Instagram` / `LinkedIn` / `Linktree` | URLs das redes sociais | Footers org e brands |
+| `Portal de Privacidade` | `https://www.privacidade.com.br/...` | Footers org e brands |
+
+---
+
+#### `video_start` — Início de reprodução de vídeo
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `video_id` | string | Identificador único do vídeo (veja tabela abaixo) |
+
+| `video_id` | Descrição | Arquivo |
+|------------|-----------|---------|
+| `hero_background` | Vídeo de fundo do hero (autoplay) | [hero-video.tsx](components/hero-video.tsx) |
+| `platform_demo_analytics` | Demo do módulo Analytics | [platform-demo-section.tsx](components/org/platform-demo-section.tsx) |
+| `platform_demo_survey` | Demo do módulo Survey | idem |
+| `platform_demo_track` | Demo do módulo Track | idem |
+| `platform_demo_cdp` | Demo do módulo CDP | idem |
+| `platform_demo_ads` | Demo do módulo Ads | idem |
+| `platform_demo_crm` | Demo do módulo CRM | idem |
+| `testimonial_debora` | Depoimento Débora | [testimonials-section.tsx](components/org/testimonials-section.tsx) |
+| `testimonial_ricardo` | Depoimento Ricardo | idem |
+| `testimonial_erich` | Depoimento Erich | idem |
+| `testimonial_daniel` | Depoimento Daniel | idem |
+| `testimonial_brands_ricardo` | Depoimento Ricardo (página brands) | [brands-cases-section.tsx](components/brands/brands-cases-section.tsx) |
+
+---
+
+#### `carousel_navigate` — Navegação em carrosseis
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `carousel_id` | string | Identificador do carrossel (veja tabela abaixo) |
+| `slide_index` | number | Índice do slide de destino (0-based) |
+| `direction` | string | `"prev"` \| `"next"` \| `"dot"` \| `"swipe_prev"` \| `"swipe_next"` |
+
+| `carousel_id` | Seção | Arquivo |
+|---------------|-------|---------|
+| `platform` | Carousel da plataforma (home) | [platform-section.tsx](components/platform-section.tsx) |
+| `tech` | Carousel de tecnologia (brands) | [tech-section.tsx](components/brands/tech-section.tsx) |
+| `platform_demo` | Seletor de módulos da plataforma | [platform-demo-section.tsx](components/org/platform-demo-section.tsx) |
+| `cases_org` | Carousel de cases (orgs, mobile) | [cases-section.tsx](components/org/cases-section.tsx) |
+| `cases_brands` | Carousel de cases (brands, mobile) | [brands-cases-section.tsx](components/brands/brands-cases-section.tsx) |
+| `testimonials` | Carousel de depoimentos (desktop) | [testimonials-section.tsx](components/org/testimonials-section.tsx) |
+| `testimonials_mobile` | Carousel de depoimentos (mobile) | idem |
+| `testimonials_brands` | Carousel de depoimentos brands (mobile) | [brands-cases-section.tsx](components/brands/brands-cases-section.tsx) |
+
+---
+
+#### `language_change` — Troca de idioma
+
+| Parâmetro | Tipo | Valores possíveis | Arquivo |
+|-----------|------|-------------------|---------|
+| `from_locale` | string | `"pt-BR"` \| `"en"` \| `"es"` | [language-selector.tsx](components/language-selector.tsx) |
+| `to_locale` | string | `"pt-BR"` \| `"en"` \| `"es"` | idem |
+
+---
+
+### Utilitário `lib/gtag.ts`
+
+```ts
+import { trackContactFormSubmit } from '@/lib/gtag'
+
+// Disparar evento
+trackContactFormSubmit({ form_id: 'contact_main' })
+```
+
+Funções exportadas: `event`, `trackContactFormSubmit`, `trackGenerateLead`, `trackFileDownload`, `trackExternalLinkClick`, `trackVideoPlay`, `trackCarouselNavigate`, `trackLanguageChange`, `trackCtaClick`.
+
+A função base `event()` é segura para SSR — retorna sem erro se `window.gtag` não estiver disponível.
+## �🛠️ Convenções de Desenvolvimento
 
 ### Imports
 
@@ -231,7 +529,7 @@ Organize arquivos em public/ por categoria:
 - ✅ Animações de scroll e números
 - ✅ Página completa de organizações esportivas
 - ✅ SEO básico e meta tags
-- ✅ Analytics (Vercel)
+- ✅ Analytics (Vercel + GA4)
 
 ### Em Desenvolvimento 🔨
 - 🔨 Página de marcas anunciantes (placeholder)
