@@ -3,10 +3,10 @@ name: CI — Production
 on:
   pull_request:
     branches:
-      - Production
+      - production
   push:
     branches:
-      - Production
+      - production
 
 jobs:
   ci:
