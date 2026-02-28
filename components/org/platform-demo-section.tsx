@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Maximize2, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Pause, Maximize2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { useI18n } from "@/lib/i18n/context"
@@ -17,52 +17,52 @@ interface Module {
 
 const modules: Module[] = [
   {
-    id: "track",
-    name: "Retize Track",
+    id: "analytics",
+    name: "Retize Analytics",
     tagKeys: ["org.platform.tag.measure", "org.platform.tag.discover"],
-    bulletKeys: ["org.platform.track.1", "org.platform.track.2", "org.platform.track.3"],
-    video: "/videos/retize-track.mp4",
-    poster: "",
+    bulletKeys: ["org.platform.analytics.1", "org.platform.analytics.2", "org.platform.analytics.3"],
+    video: "/plataforma/analytics.mp4",
+    poster: "/plataforma/thumb-analytics.png",
   },
   {
     id: "survey",
     name: "Retize Survey",
     tagKeys: ["org.platform.tag.discover", "org.platform.tag.activate"],
     bulletKeys: ["org.platform.survey.1", "org.platform.survey.2", "org.platform.survey.3"],
-    video: "/videos/retize-survey.mp4",
-    poster: "",
+    video: "/plataforma/survey.mp4",
+    poster: "/plataforma/thumb-survey.png",
   },
   {
-    id: "analytics",
-    name: "Retize Analytics",
+    id: "track",
+    name: "Retize Track",
     tagKeys: ["org.platform.tag.measure", "org.platform.tag.discover"],
-    bulletKeys: ["org.platform.analytics.1", "org.platform.analytics.2", "org.platform.analytics.3"],
-    video: "/videos/retize-analytics.mp4",
-    poster: "",
+    bulletKeys: ["org.platform.track.1", "org.platform.track.2", "org.platform.track.3"],
+    video: "/plataforma/track.mp4",
+    poster: "/plataforma/thumb-track.png",
   },
   {
     id: "cdp",
     name: "Retize CDP",
     tagKeys: ["org.platform.tag.discover", "org.platform.tag.activate"],
     bulletKeys: ["org.platform.cdp.1", "org.platform.cdp.2", "org.platform.cdp.3"],
-    video: "/videos/retize-cdp.mp4",
-    poster: "",
-  },
-  {
-    id: "crm",
-    name: "Retize CRM",
-    tagKeys: ["org.platform.tag.activate", "org.platform.tag.measure"],
-    bulletKeys: ["org.platform.crm.1", "org.platform.crm.2", "org.platform.crm.3"],
-    video: "/videos/retize-crm.mp4",
-    poster: "",
+    video: "/plataforma/cdp.mp4",
+    poster: "/plataforma/thumb-cdp.png",
   },
   {
     id: "ads",
     name: "Retize Ads",
     tagKeys: ["org.platform.tag.activate", "org.platform.tag.measure"],
     bulletKeys: ["org.platform.ads.1", "org.platform.ads.2", "org.platform.ads.3"],
-    video: "/videos/retize-ads.mp4",
-    poster: "",
+    video: "/plataforma/ads.mp4",
+    poster: "/plataforma/thumb-ads.png",
+  },
+  {
+    id: "crm",
+    name: "Retize CRM",
+    tagKeys: ["org.platform.tag.activate", "org.platform.tag.measure"],
+    bulletKeys: ["org.platform.crm.1", "org.platform.crm.2", "org.platform.crm.3"],
+    video: "/plataforma/crm.mp4",
+    poster: "/plataforma/thumb-crm.png",
   },
 ]
 
@@ -76,7 +76,6 @@ export function PlatformDemoSection() {
   const { t } = useI18n()
   const [current, setCurrent] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [isMuted, setIsMuted] = useState(true)
   const [expandedVideo, setExpandedVideo] = useState<string | null>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -119,13 +118,6 @@ export function PlatformDemoSection() {
     }
   }
 
-  const toggleMute = () => {
-    const v = videoRef.current
-    if (!v) return
-    v.muted = !v.muted
-    setIsMuted(v.muted)
-  }
-
   const mod = modules[current]
 
   return (
@@ -166,7 +158,7 @@ export function PlatformDemoSection() {
               <video
                 ref={videoRef}
                 className="h-full w-full object-cover"
-                muted={isMuted}
+                muted
                 loop
                 playsInline
                 preload="metadata"
@@ -190,13 +182,6 @@ export function PlatformDemoSection() {
                     aria-label="Pausar"
                   >
                     <Pause className="h-4 w-4" />
-                  </button>
-                  <button
-                    onClick={toggleMute}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#000000]/60 text-[#ffffff] transition-colors hover:bg-[#000000]/80"
-                    aria-label={isMuted ? "Ativar som" : "Desativar som"}
-                  >
-                    {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
                   </button>
                 </div>
               )}
@@ -288,7 +273,7 @@ export function PlatformDemoSection() {
             size="lg"
             className="rounded-md bg-[#00CCFF] px-8 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/20 transition-all hover:shadow-xl hover:brightness-110"
           >
-            <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
               {t("org.platform.cta")}
             </a>
           </Button>
@@ -309,8 +294,10 @@ export function PlatformDemoSection() {
           {expandedVideo && (
             <video
               src={expandedVideo}
-              controls
               autoPlay
+              muted
+              loop
+              playsInline
               className="aspect-video w-full rounded-lg"
             />
           )}

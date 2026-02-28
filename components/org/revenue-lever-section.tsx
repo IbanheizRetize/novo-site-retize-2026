@@ -129,6 +129,9 @@ export function RevenueLeverSection() {
         <h2 className="text-balance text-center text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
           {t("org.levers.title")}
         </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-center text-base leading-relaxed text-[#0f0f0f]/60 md:text-lg">
+          {t("org.levers.subtitle")}
+        </p>
 
         <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-2">
           {levers.map((lever) => (
@@ -142,7 +145,7 @@ export function RevenueLeverSection() {
             size="lg"
             className="rounded-md bg-[#00CCFF] px-8 text-base font-semibold text-[#0f0f0f] shadow-lg shadow-[#00CCFF]/20 transition-all hover:shadow-xl hover:shadow-[#FF0066]/20 hover:brightness-110"
           >
-            <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
               {t("org.levers.cta")}
             </a>
           </Button>

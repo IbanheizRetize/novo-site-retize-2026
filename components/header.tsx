@@ -66,7 +66,7 @@ export function Header() {
                 color: scrolled ? "#0f0f0f" : "#ffffff",
                 transition: "color 0.3s ease",
               }}
-              className="text-sm font-medium hover:opacity-80"
+              className="cursor-pointer text-sm font-medium hover:opacity-80"
             >
               {item.label}
             </a>

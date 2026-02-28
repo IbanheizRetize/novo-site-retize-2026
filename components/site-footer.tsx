@@ -41,9 +41,8 @@ export function SiteFooter() {
   const { t } = useI18n()
 
   const footerSolucoes = [
-    { label: t("footer.solutions.platform"), href: "#plataforma" },
-    { label: t("footer.solutions.clubs"), href: "#hero" },
-    { label: t("footer.solutions.brands"), href: "#hero" },
+    { label: t("footer.solutions.clubs"), href: "/organizacoes-esportivas" },
+    { label: t("footer.solutions.brands"), href: "/marcas-anunciantes" },
   ]
 
   return (
@@ -92,7 +91,7 @@ export function SiteFooter() {
                 contato@retize.com.br
               </a>
               <a
-                href="https://wa.me/5511972281050"
+                href="https://wa.me/5511930601050"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#ffffff]"

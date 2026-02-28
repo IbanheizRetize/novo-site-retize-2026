@@ -20,14 +20,53 @@ const achievementKeys = [
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
+interface FormFields {
+  name: string
+  email: string
+  company: string
+  message: string
+  newsletter: boolean
+}
+
 export function ContactSection() {
   const [status, setStatus] = useState<FormStatus>("idle")
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [fields, setFields] = useState<FormFields>({
+    name: "",
+    email: "",
+    company: "",
+    message: "",
+    newsletter: false,
+  })
   const { t } = useI18n()
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const setField = <K extends keyof FormFields>(key: K, value: FormFields[K]) =>
+    setFields((prev) => ({ ...prev, [key]: value }))
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setStatus("loading")
-    setTimeout(() => setStatus("success"), 1500)
+    setErrorMessage("")
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
+      })
+
+      const data = (await res.json()) as { ok: boolean; errors?: string[] }
+
+      if (!res.ok || !data.ok) {
+        setErrorMessage(data.errors?.[0] ?? t("contact.form.error"))
+        setStatus("error")
+      } else {
+        setStatus("success")
+      }
+    } catch {
+      setErrorMessage(t("contact.form.error"))
+      setStatus("error")
+    }
   }
 
   return (
@@ -80,7 +119,7 @@ export function ContactSection() {
               size="lg"
               className="mt-5 w-full rounded-full bg-[#4700d1] px-6 text-base font-semibold text-[#ffffff] hover:bg-[#3a00a8]"
             >
-              <a href="#contato">{t("contact.achievements.cta")}</a>
+              <a href="https://calendly.com/nicolas-ibanheiz/retize-ads" target="_blank" rel="noopener noreferrer">{t("contact.achievements.cta")}</a>
             </Button>
           </div>
 
@@ -97,6 +136,15 @@ export function ContactSection() {
                 <p className="text-sm text-[#6b6b6b]">
                   {t("contact.form.success.desc")}
                 </p>
+                <button
+                  onClick={() => {
+                    setStatus("idle")
+                    setFields({ name: "", email: "", company: "", message: "", newsletter: false })
+                  }}
+                  className="mt-2 text-sm font-medium text-[#4700d1] underline-offset-4 hover:underline"
+                >
+                  Enviar outra mensagem
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="mt-5 flex flex-1 flex-col gap-4">
@@ -107,6 +155,8 @@ export function ContactSection() {
                   <Input
                     id="name"
                     required
+                    value={fields.name}
+                    onChange={(e) => setField("name", e.target.value)}
                     placeholder={t("contact.form.name.placeholder")}
                     className="mt-1 rounded-xl border-[#e5e5e5] bg-[#f7f7f8] text-[#0f0f0f] placeholder:text-[#6b6b6b]/50"
                   />
@@ -119,6 +169,8 @@ export function ContactSection() {
                     id="email"
                     type="email"
                     required
+                    value={fields.email}
+                    onChange={(e) => setField("email", e.target.value)}
                     placeholder={t("contact.form.email.placeholder")}
                     className="mt-1 rounded-xl border-[#e5e5e5] bg-[#f7f7f8] text-[#0f0f0f] placeholder:text-[#6b6b6b]/50"
                   />
@@ -129,6 +181,8 @@ export function ContactSection() {
                   </Label>
                   <Input
                     id="company"
+                    value={fields.company}
+                    onChange={(e) => setField("company", e.target.value)}
                     placeholder={t("contact.form.company.placeholder")}
                     className="mt-1 rounded-xl border-[#e5e5e5] bg-[#f7f7f8] text-[#0f0f0f] placeholder:text-[#6b6b6b]/50"
                   />
@@ -141,21 +195,27 @@ export function ContactSection() {
                     id="message"
                     required
                     rows={4}
+                    value={fields.message}
+                    onChange={(e) => setField("message", e.target.value)}
                     placeholder={t("contact.form.message.placeholder")}
                     className="mt-1 resize-none rounded-xl border-[#e5e5e5] bg-[#f7f7f8] text-[#0f0f0f] placeholder:text-[#6b6b6b]/50"
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <Checkbox id="newsletter" />
+                  <Checkbox
+                    id="newsletter"
+                    checked={fields.newsletter}
+                    onCheckedChange={(checked) => setField("newsletter", !!checked)}
+                  />
                   <Label htmlFor="newsletter" className="text-sm text-[#6b6b6b]">
                     {t("contact.form.newsletter")}
                   </Label>
                 </div>
 
                 {status === "error" && (
-                  <div className="flex items-center gap-2 text-sm text-red-600">
-                    <AlertCircle className="h-4 w-4" />
-                    {t("contact.form.error")}
+                  <div className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{errorMessage || t("contact.form.error")}</span>
                   </div>
                 )}
 
@@ -184,7 +244,7 @@ export function ContactSection() {
                 className="w-full rounded-full border-green-600 text-green-700 hover:bg-green-50 hover:text-green-800"
               >
                 <a
-                  href="https://wa.me/5511972281050"
+                  href="https://wa.me/5511930601050"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -1,8 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import { useState, useEffect, useCallback } from "react"
-import { Database, TrendingUp, MonitorSmartphone, BrainCircuit } from "lucide-react"
+import { useState, useEffect, useCallback, useRef } from "react"
+import { Database, TrendingUp, MonitorSmartphone, BrainCircuit, ChevronLeft, ChevronRight } from "lucide-react"
 import { useI18n } from "@/lib/i18n/context"
 
 const slides = [
@@ -16,7 +16,7 @@ export function PlatformSection() {
   const { t } = useI18n()
   const [current, setCurrent] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
-  const [showTooltip, setShowTooltip] = useState(false)
+  const touchStartX = useRef(0)
 
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % slides.length)
@@ -69,8 +69,14 @@ export function PlatformSection() {
           <div>
             <div
               className="group relative overflow-hidden rounded-2xl shadow-2xl"
-              onMouseEnter={() => { setIsHovered(true); setShowTooltip(true) }}
-              onMouseLeave={() => { setIsHovered(false); setShowTooltip(false) }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+              onTouchEnd={(e) => {
+                const delta = e.changedTouches[0].clientX - touchStartX.current
+                if (delta > 50) setCurrent((c) => (c - 1 + slides.length) % slides.length)
+                else if (delta < -50) setCurrent((c) => (c + 1) % slides.length)
+              }}
             >
               {/* Slides container */}
               <div
@@ -90,16 +96,28 @@ export function PlatformSection() {
                 ))}
               </div>
 
-              {/* Tooltip on hover */}
-              <div
-                className={`absolute bottom-0 left-0 right-0 bg-[#0f0f0f]/85 px-4 py-3 backdrop-blur-sm transition-all duration-300 ${
-                  showTooltip ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-                }`}
-              >
+              {/* Always-visible caption with gradient */}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0f0f0f]/90 to-transparent px-4 pb-4 pt-10">
                 <p className="text-center text-sm font-medium text-[#ffffff]">
                   {t(slides[current].tooltipKey)}
                 </p>
               </div>
+
+              {/* Side arrows */}
+              <button
+                onClick={() => setCurrent((current - 1 + slides.length) % slides.length)}
+                className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm opacity-40 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/80"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setCurrent((current + 1) % slides.length)}
+                className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm opacity-40 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/80"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
 
             </div>
 

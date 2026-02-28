@@ -46,9 +46,9 @@ const channels = [
 
 const ecosystemOrgs = [
   { name: "CBV", logo: "/logos/cbv.png" },
-  { name: "Gremio", logo: "/logos/gremio.png" },
-  { name: "Atletico MG", logo: "/logos/atletico-mg.png" },
-  { name: "Sao Paulo", logo: "/logos/sao-paulo.png" },
+  { name: "Grêmio", logo: "/logos/gremio.png" },
+  { name: "Atlético MG", logo: "/logos/atletico-mg.png" },
+  { name: "São Paulo", logo: "/logos/sao-paulo.png" },
   { name: "Vasco da Gama", logo: "/logos/vasco.png" },
   { name: "Imperial", logo: "/logos/imperial.png" },
 ]
@@ -570,7 +570,7 @@ export function NetworkSection() {
               size="lg"
               className="mt-8 w-auto max-w-full rounded-md bg-[#FF6600] px-6 text-sm font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/30 transition-all hover:shadow-xl hover:brightness-110 md:px-8 md:text-base"
             >
-              <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
                 {t("brands.audiences.persona.cta")}
               </a>
             </Button>

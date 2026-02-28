@@ -42,7 +42,6 @@ export function OrgFooter() {
   const { t } = useI18n()
 
   const solutionLinks = [
-    { label: t("org.footer.platform"), href: "#plataforma" },
     { label: t("org.footer.clubs"), href: "/organizacoes-esportivas" },
     { label: t("org.footer.brands"), href: "/marcas-anunciantes" },
   ]
@@ -92,7 +91,7 @@ export function OrgFooter() {
                 contato@retize.com.br
               </a>
               <a
-                href="https://wa.me/5511972281050"
+                href="https://wa.me/5511930601050"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#00CCFF]"

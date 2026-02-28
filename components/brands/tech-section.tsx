@@ -8,6 +8,7 @@ import { useI18n } from "@/lib/i18n/context"
 
 const slides = [
   { src: "/prints/plataforma.png", tooltipKey: "platform.slide.analytics" },
+  { src: "/prints/site-ads.png", tooltipKey: "platform.slide.ads" },
   { src: "/prints/site-cdp.png", tooltipKey: "platform.slide.cdp" },
   { src: "/prints/site-crm.png", tooltipKey: "platform.slide.crm" },
   { src: "/prints/site-exposicao.png", tooltipKey: "platform.slide.track" },
@@ -21,6 +22,7 @@ export function TechSection() {
   const [isHovered, setIsHovered] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
   const [isInView, setIsInView] = useState(false)
+  const touchStartX = useRef(0)
 
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % slides.length)
@@ -93,7 +95,7 @@ export function TechSection() {
               asChild
               className="mt-6 hidden rounded-full bg-[#FF6600] px-6 py-2 text-sm font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110 md:inline-flex"
             >
-              <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
                 {t("brands.tech.cta")}
               </a>
             </Button>
@@ -101,24 +103,18 @@ export function TechSection() {
 
           {/* Right: Platform carousel */}
           <div>
-            {/* Browser chrome */}
+            {/* Platform carousel */}
             <div
-              className="overflow-hidden rounded-2xl border border-[#ffffff]/10 bg-[#1a1a1a] shadow-2xl"
-              onMouseEnter={() => { setIsHovered(true) }}
-              onMouseLeave={() => { setIsHovered(false) }}
+              className="overflow-hidden rounded-2xl shadow-2xl"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+              onTouchEnd={(e) => {
+                const delta = e.changedTouches[0].clientX - touchStartX.current
+                if (delta > 50) setCurrent((c) => (c - 1 + slides.length) % slides.length)
+                else if (delta < -50) setCurrent((c) => (c + 1) % slides.length)
+              }}
             >
-              {/* Title bar */}
-              <div className="flex items-center gap-2 border-b border-[#ffffff]/5 bg-[#111111] px-4 py-2.5">
-                <div className="flex gap-1.5">
-                  <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-                </div>
-                <div className="ml-4 flex-1 rounded-md bg-[#ffffff]/5 px-3 py-1">
-                  <span className="text-[10px] text-[#ffffff]/30">app.retize.com.br</span>
-                </div>
-              </div>
-
               {/* Slide area */}
               <div className="relative">
                 <div
@@ -148,14 +144,14 @@ export function TechSection() {
                 {/* Side arrows */}
                 <button
                   onClick={() => setCurrent((current - 1 + slides.length) % slides.length)}
-                  className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm transition-colors hover:bg-[#0f0f0f]/80"
+                  className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm opacity-40 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/80"
                   aria-label="Anterior"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setCurrent((current + 1) % slides.length)}
-                  className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm transition-colors hover:bg-[#0f0f0f]/80"
+                  className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] backdrop-blur-sm opacity-40 transition-all hover:opacity-100 hover:bg-[#0f0f0f]/80"
                   aria-label="Proximo"
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -184,7 +180,7 @@ export function TechSection() {
                 size="lg"
                 className="w-full max-w-xs rounded-full bg-[#FF6600] px-8 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/20 transition-all hover:shadow-xl hover:brightness-110"
               >
-                <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer">
                   {t("brands.tech.cta")}
                 </a>
               </Button>

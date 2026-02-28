@@ -74,7 +74,7 @@ export function HeroVideo() {
           <Button
             asChild
             size="lg"
-            className="w-[300px] justify-center rounded-md border-0 bg-gradient-to-r from-[#00CCFF] to-[#00a3cc] px-7 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#00CCFF]/30 transition-all hover:shadow-xl hover:shadow-[#00CCFF]/40 hover:brightness-110"
+            className="w-[300px] justify-center rounded border-0 bg-gradient-to-r from-[#00CCFF] to-[#00a3cc] px-7 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#00CCFF]/30 transition-all hover:shadow-xl hover:shadow-[#00CCFF]/40 hover:brightness-110"
           >
             <a href="/organizacoes-esportivas">
               <Building2 className="mr-2 h-5 w-5" />
@@ -84,7 +84,7 @@ export function HeroVideo() {
           <Button
             asChild
             size="lg"
-            className="w-[300px] justify-center rounded-md border-0 bg-gradient-to-r from-[#FF6600] to-[#ff8533] px-7 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/30 transition-all hover:shadow-xl hover:shadow-[#FF6600]/40 hover:brightness-110"
+            className="w-[300px] justify-center rounded border-0 bg-gradient-to-r from-[#FF6600] to-[#ff8533] px-7 text-base font-semibold text-[#ffffff] shadow-lg shadow-[#FF6600]/30 transition-all hover:shadow-xl hover:shadow-[#FF6600]/40 hover:brightness-110"
           >
             <a href="/marcas-anunciantes">
               <BarChart3 className="mr-2 h-5 w-5" />

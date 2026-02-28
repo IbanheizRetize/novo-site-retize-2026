@@ -172,6 +172,8 @@ function LeadFormModal({
   )
 }
 
+const WA_URL = "https://wa.me/5511930601050?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Retize!"
+
 export function ActivationSection() {
   const { t } = useI18n()
   const [pacotesModalOpen, setPacotesModalOpen] = useState(false)
@@ -180,8 +182,10 @@ export function ActivationSection() {
   // Mobile auto-reveal
   const card1Ref = useRef<HTMLDivElement>(null)
   const card2Ref = useRef<HTMLDivElement>(null)
+  const card3Ref = useRef<HTMLDivElement>(null)
   const [card1Active, setCard1Active] = useState(false)
   const [card2Active, setCard2Active] = useState(false)
+  const [card3Active, setCard3Active] = useState(false)
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -191,12 +195,14 @@ export function ActivationSection() {
         entries.forEach((e) => {
           if (e.target === card1Ref.current) setCard1Active(e.isIntersecting || e.intersectionRatio > 0.15)
           if (e.target === card2Ref.current) setCard2Active(e.isIntersecting || e.intersectionRatio > 0.15)
+          if (e.target === card3Ref.current) setCard3Active(e.isIntersecting || e.intersectionRatio > 0.15)
         })
       },
       { threshold: [0, 0.15, 0.3] }
     )
     if (card1Ref.current) obs.observe(card1Ref.current)
     if (card2Ref.current) obs.observe(card2Ref.current)
+    if (card3Ref.current) obs.observe(card3Ref.current)
     return () => obs.disconnect()
   }, [])
 
@@ -205,9 +211,9 @@ export function ActivationSection() {
       ref: card1Ref,
       title: t("brands.activation.1.title"),
       desc: t("brands.activation.1.desc"),
-      cta: t("brands.activation.1.cta"),
+      cta: t("brands.activation.2.cta"),
       image: "/images/brands-media-projects.jpg",
-      onCta: () => setPacotesModalOpen(true),
+      onCta: () => setCopaModalOpen(true),
       active: card1Active,
       accent: "#FF6600",
     },
@@ -215,11 +221,21 @@ export function ActivationSection() {
       ref: card2Ref,
       title: t("brands.activation.2.title"),
       desc: t("brands.activation.2.desc"),
-      cta: t("brands.activation.2.cta"),
+      cta: t("brands.activation.1.cta"),
       image: "/images/brands-digital-sponsorship.jpg",
-      onCta: () => setCopaModalOpen(true),
+      onCta: () => setPacotesModalOpen(true),
       active: card2Active,
       accent: "#9900FF",
+    },
+    {
+      ref: card3Ref,
+      title: t("brands.activation.3.title"),
+      desc: t("brands.activation.3.desc"),
+      cta: t("brands.activation.3.cta"),
+      image: "/images/sponsorship-background.png",
+      onCta: () => window.open(WA_URL, "_blank"),
+      active: card3Active,
+      accent: "#0066FF",
     },
   ]
 
@@ -230,7 +246,7 @@ export function ActivationSection() {
           {t("brands.activation.title")}
         </h2>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {cards.map((card, i) => (
             <div key={i} ref={card.ref}>
               <div className="group relative flex h-96 flex-col overflow-hidden rounded-2xl md:h-[28rem]">

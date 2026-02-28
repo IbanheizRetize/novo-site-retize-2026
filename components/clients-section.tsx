@@ -5,16 +5,16 @@ import { useI18n } from "@/lib/i18n/context"
 
 const orgs = [
   { name: "CBV", logo: "/logos/cbv.png" },
-  { name: "Gremio", logo: "/logos/gremio.png" },
-  { name: "Atletico MG", logo: "/logos/atletico-mg.png" },
-  { name: "Sao Paulo", logo: "/logos/sao-paulo.png" },
+  { name: "Grêmio", logo: "/logos/gremio.png" },
+  { name: "Atlético MG", logo: "/logos/atletico-mg.png" },
+  { name: "São Paulo", logo: "/logos/sao-paulo.png" },
   { name: "Vasco da Gama", logo: "/logos/vasco.png" },
   { name: "Imperial", logo: "/logos/imperial.png" },
 ]
 
 const brands = [
   { name: "Banco Carrefour", logo: "/logos/banco-carrefour.png" },
-  { name: "Atacadao", logo: "/logos/atacadao.png" },
+  { name: "Atacadão", logo: "/logos/atacadao.png" },
   { name: "Cielo", logo: "/logos/cielo.png" },
   { name: "Samsung", logo: "/logos/samsung.png" },
   { name: "Zamp", logo: "/logos/zamp.png" },

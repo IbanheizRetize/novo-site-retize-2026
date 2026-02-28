@@ -29,6 +29,7 @@ const cases: CaseData[] = [
     resultKeys: ["org.cases.1.result.1", "org.cases.1.result.2", "org.cases.1.result.3"],
     orgName: "Confederacao Brasileira de Volei",
     orgLogo: "/logos/cbv.png",
+    caseImage: "/images/case-cbv.png",
   },
   {
     id: "cupons",
@@ -39,6 +40,7 @@ const cases: CaseData[] = [
     orgName: "Imperial",
     orgLogo: "/logos/imperial.png",
     partnerName: "O Burgues",
+    caseImage: "/images/case-imperial-burgues.png",
   },
   {
     id: "patrocinio",
@@ -49,6 +51,7 @@ const cases: CaseData[] = [
     orgName: "Atletico MG",
     orgLogo: "/logos/atletico-mg.png",
     partnerName: "H2bet",
+    caseImage: "/images/case-atletico.png",
   },
   {
     id: "exposicao",
@@ -58,6 +61,8 @@ const cases: CaseData[] = [
     resultKeys: ["org.cases.4.result.1", "org.cases.4.result.2", "org.cases.4.result.3"],
     badge: "org.cases.badge.ongoing",
     orgName: "Portuguesa de Desportos",
+    orgLogo: "/logos/portuguesa.png",
+    caseImage: "/images/case-portuguesa.png",
   },
 ]
 
@@ -136,13 +141,13 @@ function CaseCard({ c, t }: { c: CaseData; t: (key: string) => string }) {
 
       {/* Case image - always at bottom */}
       {c.caseImage ? (
-        <div className="mt-5 overflow-hidden rounded-xl">
+        <div className="mt-5 h-32 overflow-hidden rounded-xl">
           <Image
             src={c.caseImage}
             alt={t(c.titleKey)}
             width={600}
-            height={300}
-            className="h-auto w-full object-cover"
+            height={128}
+            className="h-full w-full object-cover"
           />
         </div>
       ) : (
@@ -159,6 +164,7 @@ export function CasesSection() {
   const [mobileIdx, setMobileIdx] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
   const [isInView, setIsInView] = useState(false)
+  const touchStartX = useRef(0)
 
   // Track whether the section is in the viewport for floating arrows
   useEffect(() => {
@@ -188,7 +194,15 @@ export function CasesSection() {
 
         {/* Mobile carousel */}
         <div className="relative mt-10 md:hidden">
-          <div className="overflow-hidden">
+          <div
+            className="overflow-hidden"
+            onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+            onTouchEnd={(e) => {
+              const delta = e.changedTouches[0].clientX - touchStartX.current
+              if (delta > 50) setMobileIdx((i) => Math.max(0, i - 1))
+              else if (delta < -50) setMobileIdx((i) => Math.min(cases.length - 1, i + 1))
+            }}
+          >
             <div
               className="flex transition-transform duration-300"
               style={{ transform: `translateX(-${mobileIdx * 100}%)` }}
@@ -223,7 +237,7 @@ export function CasesSection() {
           <button
             onClick={() => setMobileIdx(Math.max(0, mobileIdx - 1))}
             disabled={mobileIdx === 0}
-            className="fixed top-1/2 left-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0 md:hidden"
+            className="fixed top-1/2 left-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm opacity-40 hover:opacity-100 transition-all disabled:opacity-0 md:hidden"
             aria-label="Case anterior"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -231,7 +245,7 @@ export function CasesSection() {
           <button
             onClick={() => setMobileIdx(Math.min(cases.length - 1, mobileIdx + 1))}
             disabled={mobileIdx === cases.length - 1}
-            className="fixed top-1/2 right-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0 md:hidden"
+            className="fixed top-1/2 right-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm opacity-40 hover:opacity-100 transition-all disabled:opacity-0 md:hidden"
             aria-label="Proximo case"
           >
             <ChevronRight className="h-5 w-5" />

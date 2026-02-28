@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, forwardRef } from "react"
+import Image from "next/image"
 import { ChevronLeft, ChevronRight, Play, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
@@ -12,6 +13,9 @@ interface BrandCase {
   challengeKey: string
   approachKeys: string[]
   resultKeys: string[]
+  brandName?: string
+  brandLogo?: string
+  caseImage?: string
 }
 
 const cases: BrandCase[] = [
@@ -25,6 +29,9 @@ const cases: BrandCase[] = [
       "brands.cases.1.approach.3",
     ],
     resultKeys: ["brands.cases.1.result.1", "brands.cases.1.result.2"],
+    brandName: "Banco Carrefour",
+    brandLogo: "/logos/banco-carrefour.png",
+    caseImage: "/images/case-banco-carrefour.png",
   },
   {
     id: "samsung",
@@ -36,6 +43,9 @@ const cases: BrandCase[] = [
       "brands.cases.2.approach.3",
     ],
     resultKeys: ["brands.cases.2.result.1", "brands.cases.2.result.2"],
+    brandName: "Samsung",
+    brandLogo: "/images/samsung.png",
+    caseImage: "/images/case-samsung.png",
   },
 ]
 
@@ -45,7 +55,9 @@ const brandTestimonials = [
     nameKey: "brands.testimonials.1.name",
     roleKey: "brands.testimonials.1.role",
     quoteKey: "brands.testimonials.1.quote",
-    video: "/videos/testimonial-1.mp4",
+    video: null as string | null,
+    image: "/depoimentos/pedro-paiva.png",
+    thumbnail: null as string | null,
     initials: "PP",
     color: "#FF6600",
   },
@@ -54,7 +66,9 @@ const brandTestimonials = [
     nameKey: "brands.testimonials.2.name",
     roleKey: "brands.testimonials.2.role",
     quoteKey: "brands.testimonials.2.quote",
-    video: "/videos/testimonial-2.mp4",
+    video: "/depoimentos/ricardo.mp4" as string | null,
+    image: null as string | null,
+    thumbnail: "/depoimentos/ricardo.png" as string | null,
     initials: "RB",
     color: "#9900FF",
   },
@@ -63,6 +77,21 @@ const brandTestimonials = [
 function CaseCard({ c, t }: { c: BrandCase; t: (k: string) => string }) {
   return (
     <div className="flex h-full flex-col rounded-2xl border border-[#e5e5e5] bg-[#ffffff] p-6 shadow-sm transition-shadow hover:shadow-md">
+      {/* Brand logo + name */}
+      {c.brandLogo && (
+        <div className="flex items-center gap-3 mb-4">
+          <Image
+            src={c.brandLogo}
+            alt={c.brandName ?? ""}
+            width={36}
+            height={36}
+            className="h-9 w-9 object-contain"
+          />
+          {c.brandName && (
+            <span className="text-sm font-bold text-[#0f0f0f]">{c.brandName}</span>
+          )}
+        </div>
+      )}
       <h3 className="text-lg font-bold text-[#0f0f0f]">{t(c.titleKey)}</h3>
 
       <div className="mt-5">
@@ -101,9 +130,23 @@ function CaseCard({ c, t }: { c: BrandCase; t: (k: string) => string }) {
       </div>
 
       <div className="flex-grow" />
-      <div className="mt-5 flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-[#e5e5e5] bg-[#f7f7f8]">
-        <span className="text-xs text-[#6b6b6b]/60">Imagem do case</span>
-      </div>
+
+      {/* Case image - always at bottom */}
+      {c.caseImage ? (
+        <div className="mt-5 h-32 overflow-hidden rounded-xl">
+          <Image
+            src={c.caseImage}
+            alt={t(c.titleKey)}
+            width={600}
+            height={128}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      ) : (
+        <div className="mt-5 flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-[#e5e5e5] bg-[#f7f7f8]">
+          <span className="text-xs text-[#6b6b6b]/60">Imagem do case</span>
+        </div>
+      )}
     </div>
   )
 }
@@ -115,6 +158,7 @@ export function BrandsCasesSection() {
   const testimonialsRef = useRef<HTMLDivElement>(null)
   const [isInView, setIsInView] = useState(false)
   const [testimonialsInView, setTestimonialsInView] = useState(false)
+  const touchStartX = useRef(0)
 
   useEffect(() => {
     const el = sectionRef.current
@@ -154,7 +198,15 @@ export function BrandsCasesSection() {
 
         {/* Mobile carousel */}
         <div className="relative mt-10 md:hidden">
-          <div className="overflow-hidden">
+          <div
+            className="overflow-hidden"
+            onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+            onTouchEnd={(e) => {
+              const delta = e.changedTouches[0].clientX - touchStartX.current
+              if (delta > 50) setMobileIdx((i) => Math.max(0, i - 1))
+              else if (delta < -50) setMobileIdx((i) => Math.min(cases.length - 1, i + 1))
+            }}
+          >
             <div
               className="flex transition-transform duration-300"
               style={{ transform: `translateX(-${mobileIdx * 100}%)` }}
@@ -190,7 +242,7 @@ export function BrandsCasesSection() {
           <button
             onClick={() => setMobileIdx(Math.max(0, mobileIdx - 1))}
             disabled={mobileIdx === 0}
-            className="fixed top-1/2 left-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0 md:hidden"
+            className="fixed top-1/2 left-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm opacity-40 hover:opacity-100 transition-all disabled:opacity-0 md:hidden"
             aria-label="Case anterior"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -198,7 +250,7 @@ export function BrandsCasesSection() {
           <button
             onClick={() => setMobileIdx(Math.min(cases.length - 1, mobileIdx + 1))}
             disabled={mobileIdx === cases.length - 1}
-            className="fixed top-1/2 right-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0 md:hidden"
+            className="fixed top-1/2 right-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm opacity-40 hover:opacity-100 transition-all disabled:opacity-0 md:hidden"
             aria-label="Proximo case"
           >
             <ChevronRight className="h-5 w-5" />
@@ -214,6 +266,7 @@ export function BrandsCasesSection() {
 const TestimonialsBlock = forwardRef<HTMLDivElement, { t: (k: string) => string }>(function TestimonialsBlock({ t }, ref) {
   const [videoOpen, setVideoOpen] = useState<string | null>(null)
   const [mobileIdx, setMobileIdx] = useState(0)
+  const touchStartX = useRef(0)
 
   return (
     <div ref={ref} className="mt-16">
@@ -235,7 +288,15 @@ const TestimonialsBlock = forwardRef<HTMLDivElement, { t: (k: string) => string 
 
       {/* Mobile carousel */}
       <div className="relative mt-8 md:hidden">
-        <div className="overflow-hidden">
+        <div
+          className="overflow-hidden"
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+          onTouchEnd={(e) => {
+            const delta = e.changedTouches[0].clientX - touchStartX.current
+            if (delta > 50) setMobileIdx((i) => Math.max(0, i - 1))
+            else if (delta < -50) setMobileIdx((i) => Math.min(brandTestimonials.length - 1, i + 1))
+          }}
+        >
           <div
             className="flex transition-transform duration-300"
             style={{ transform: `translateX(-${mobileIdx * 100}%)` }}
@@ -255,7 +316,7 @@ const TestimonialsBlock = forwardRef<HTMLDivElement, { t: (k: string) => string 
           <button
             onClick={() => setMobileIdx(Math.max(0, mobileIdx - 1))}
             disabled={mobileIdx === 0}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] disabled:opacity-30"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] opacity-50 hover:opacity-100 transition-opacity disabled:opacity-30"
             aria-label="Anterior"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -275,7 +336,7 @@ const TestimonialsBlock = forwardRef<HTMLDivElement, { t: (k: string) => string 
           <button
             onClick={() => setMobileIdx(Math.min(brandTestimonials.length - 1, mobileIdx + 1))}
             disabled={mobileIdx === brandTestimonials.length - 1}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] disabled:opacity-30"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] opacity-50 hover:opacity-100 transition-opacity disabled:opacity-30"
             aria-label="Proximo"
           >
             <ChevronRight className="h-4 w-4" />
@@ -319,22 +380,41 @@ function TestimonialCard({
 }) {
   return (
     <div className="flex flex-col rounded-2xl border border-[#e5e5e5] bg-[#ffffff] p-6 transition-shadow hover:shadow-md">
-      {/* Video placeholder */}
-      <button
-        onClick={onPlay}
-        className="group/play relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-[#0f0f0f] to-[#2a2a2a]"
-        aria-label={`Assistir - ${t(item.nameKey)}`}
-      >
-        <div
-          className="flex h-14 w-14 items-center justify-center rounded-full transition-transform group-hover/play:scale-110"
-          style={{ backgroundColor: `${item.color}cc` }}
+      {/* Video / image placeholder */}
+      {item.video ? (
+        <button
+          onClick={onPlay}
+          className="group/play relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-[#0f0f0f] to-[#2a2a2a]"
+          aria-label={`Assistir - ${t(item.nameKey)}`}
         >
-          <Play className="ml-0.5 h-6 w-6 text-[#ffffff]" />
+          {item.thumbnail && (
+            <Image
+              src={item.thumbnail}
+              alt={t(item.nameKey)}
+              fill
+              className="object-cover object-top brightness-75 transition-all group-hover/play:brightness-60"
+            />
+          )}
+          <div
+            className="relative flex h-14 w-14 items-center justify-center rounded-full transition-transform group-hover/play:scale-110"
+            style={{ backgroundColor: `${item.color}cc` }}
+          >
+            <Play className="ml-0.5 h-6 w-6 text-[#ffffff]" />
+          </div>
+          <span className="absolute bottom-2 left-2 rounded-md bg-[#000000]/60 px-2 py-0.5 text-xs text-[#ffffff]">
+            {"Assistir depoimento"}
+          </span>
+        </button>
+      ) : item.image ? (
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl">
+          <Image
+            src={item.image}
+            alt={t(item.nameKey)}
+            fill
+            className="object-cover object-top"
+          />
         </div>
-        <span className="absolute bottom-2 left-2 rounded-md bg-[#000000]/60 px-2 py-0.5 text-xs text-[#ffffff]">
-          {"Assistir depoimento"}
-        </span>
-      </button>
+      ) : null}
 
       {/* Person */}
       <div className="mt-5 flex items-center gap-3">

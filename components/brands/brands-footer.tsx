@@ -42,7 +42,6 @@ export function BrandsFooter() {
   const { t } = useI18n()
 
   const solutionLinks = [
-    { label: t("org.footer.platform"), href: "#tecnologia" },
     { label: t("org.footer.clubs"), href: "/organizacoes-esportivas" },
     { label: t("org.footer.brands"), href: "/marcas-anunciantes" },
   ]
@@ -85,7 +84,7 @@ export function BrandsFooter() {
               <a href="mailto:contato@retize.com.br" className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#FF6600]">
                 contato@retize.com.br
               </a>
-              <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#FF6600]">
+              <a href="https://wa.me/5511930601050" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#FF6600]">
                 WhatsApp
               </a>
               <address className="mt-1 text-sm not-italic leading-snug text-[#ffffff]/50">
