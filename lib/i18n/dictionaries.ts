@@ -271,6 +271,9 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.hero.cta": "Saiba mais",
     "brands.hero.scroll": "Rolar para baixo",
 
+    // Brands Page - Network Section
+    "brands.network.orgs.more.label": "Organizações Esportivas",
+
     // Brands Page - Audiences Section
     "brands.audiences.title": "Audiências e canais exclusivos",
     "brands.audiences.subtitle": "Conecte sua marca às audiências 1st party das principais organizações esportivas do Brasil.",
@@ -361,7 +364,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.cases.cta": "Saiba mais",
 
     // Brands Page - Testimonials
-    "brands.testimonials.title": "O que dizem nossos parceiros",
+    "brands.testimonials.title": "O que dizem nossos clientes",
     "brands.testimonials.1.name": "Pedro Paiva",
     "brands.testimonials.1.role": "Head de Marketing Digital, Banco Carrefour",
     "brands.testimonials.1.quote": "A parceria com a Retize nos permitiu alcançar audiências altamente qualificadas dentro do universo esportivo. A segmentação de dados 1st party e a capacidade de ativação multicanal trouxeram resultados acima das nossas expectativas em leads e conversão.",
@@ -669,6 +672,9 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.hero.cta": "Learn more",
     "brands.hero.scroll": "Scroll down",
 
+    // Brands Page - Network Section
+    "brands.network.orgs.more.label": "Sports Organizations",
+
     // Brands Page - Audiences Section
     "brands.audiences.title": "Exclusive audiences and channels",
     "brands.audiences.subtitle": "Connect your brand to the 1st party audiences of Brazil's leading sports organizations.",
@@ -759,7 +765,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.cases.cta": "Learn more",
 
     // Brands Page - Testimonials
-    "brands.testimonials.title": "What our partners say",
+    "brands.testimonials.title": "What our clients say",
     "brands.testimonials.1.name": "Pedro Paiva",
     "brands.testimonials.1.role": "Head of Digital Marketing, Banco Carrefour",
     "brands.testimonials.1.quote": "The partnership with Retize allowed us to reach highly qualified audiences within the sports universe. The 1st party data segmentation and multichannel activation capability delivered results above our expectations in leads and conversion.",
@@ -1067,6 +1073,9 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.hero.cta": "Saber más",
     "brands.hero.scroll": "Desplazar hacia abajo",
 
+    // Brands Page - Network Section
+    "brands.network.orgs.more.label": "Organizaciones Deportivas",
+
     // Brands Page - Audiences Section
     "brands.audiences.title": "Audiencias y canales exclusivos",
     "brands.audiences.subtitle": "Conecte su marca a las audiencias 1st party de las principales organizaciones deportivas de Brasil.",
@@ -1157,7 +1166,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "brands.cases.cta": "Saber más",
 
     // Brands Page - Testimonials
-    "brands.testimonials.title": "Lo que dicen nuestros socios",
+    "brands.testimonials.title": "Lo que dicen nuestros clientes",
     "brands.testimonials.1.name": "Pedro Paiva",
     "brands.testimonials.1.role": "Head de Marketing Digital, Banco Carrefour",
     "brands.testimonials.1.quote": "La asociación con Retize nos permitió alcanzar audiencias altamente calificadas dentro del universo deportivo. La segmentación de datos 1st party y la capacidad de activación multicanal entregaron resultados por encima de nuestras expectativas en leads y conversión.",

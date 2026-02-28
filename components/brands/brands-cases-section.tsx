@@ -99,14 +99,14 @@ function CaseCard({ c, t }: { c: BrandCase; t: (k: string) => string }) {
 
       <div className="mt-5">
         <span className="inline-block rounded-md bg-[#0f0f0f] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
-          {"Desafio"}
+          {t("org.cases.label.challenge")}
         </span>
         <p className="mt-2 text-sm leading-relaxed text-[#6b6b6b]">{t(c.challengeKey)}</p>
       </div>
 
       <div className="mt-4">
         <span className="inline-block rounded-md bg-[#6b6b6b] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
-          {"Abordagem"}
+          {t("org.cases.label.approach")}
         </span>
         <ul className="mt-2 flex flex-col gap-1.5">
           {c.approachKeys.map((key) => (
@@ -120,7 +120,7 @@ function CaseCard({ c, t }: { c: BrandCase; t: (k: string) => string }) {
 
       <div className="mt-4">
         <span className="inline-block rounded-md bg-[#6b6b6b] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
-          {"Resultados"}
+          {t("org.cases.label.results")}
         </span>
         <ul className="mt-2 flex flex-col gap-1.5">
           {c.resultKeys.map((key) => (
