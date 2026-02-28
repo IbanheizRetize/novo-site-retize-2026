@@ -626,7 +626,7 @@ export function NetworkSection() {
                       {"+ 20"}
                     </span>
                     <span className="text-xs font-semibold text-[#ffffff]/50 md:text-center md:text-[8px]">
-                      {"Organizações Esportivas"}
+                      {t("brands.network.orgs.more.label")}
                     </span>
                   </div>
                 </div>
