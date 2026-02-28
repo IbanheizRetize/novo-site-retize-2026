@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description:
     'Estruturamos e ativamos dados de fas para transformar audiencia em receita sustentavel para clubes e marcas.',
   generator: 'v0.app',
+
 }
 
 export const viewport: Viewport = {

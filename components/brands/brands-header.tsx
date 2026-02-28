@@ -9,18 +9,22 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { LanguageSelector } from "@/components/language-selector"
 import { useI18n } from "@/lib/i18n/context"
 
-export function OrgHeader() {
+export function BrandsHeader() {
   const { t } = useI18n()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: t("org.header.brands"), href: "/marcas-anunciantes" },
-    { label: t("org.header.useCases"), href: "#alavancas" },
-    { label: t("org.header.platform"), href: "#plataforma" },
-    { label: t("org.header.cases"), href: "#cases" },
+    { label: t("brands.header.orgs"), href: "/organizacoes-esportivas" },
+    { label: t("brands.header.audiences"), href: "#audiencias" },
+    { label: t("brands.header.channels"), href: "#canais" },
+    { label: t("brands.header.packages"), href: "#ativacao" },
+    { label: t("brands.header.technology"), href: "#tecnologia" },
+    { label: t("brands.header.cases"), href: "#cases" },
   ]
+
+  const WA_URL = "https://wa.me/5511972281050?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Retize!"
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -95,10 +99,10 @@ export function OrgHeader() {
             )
           )}
           <Button
-            className="rounded-full bg-[#00CCFF] px-5 text-sm font-semibold text-[#0f0f0f] hover:bg-[#00b8e6]"
-            onClick={() => handleNavClick("#alavancas")}
+            className="rounded-full bg-[#FF6600] px-5 text-sm font-semibold text-[#ffffff] hover:bg-[#e65c00]"
+            onClick={() => window.open(WA_URL, "_blank")}
           >
-            {t("org.header.cta")}
+            {t("brands.header.cta")}
           </Button>
           <LanguageSelector variant={scrolled ? "dark" : "light"} />
         </nav>
@@ -130,7 +134,7 @@ export function OrgHeader() {
                     <button
                       key={item.label}
                       onClick={() => handleNavClick(item.href)}
-                      className="text-left text-base font-medium text-[#0f0f0f] transition-colors hover:text-[#00CCFF]"
+                      className="text-left text-base font-medium text-[#0f0f0f] transition-colors hover:text-[#FF6600]"
                     >
                       {item.label}
                     </button>
@@ -139,17 +143,17 @@ export function OrgHeader() {
                       key={item.label}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="text-base font-medium text-[#0f0f0f] transition-colors hover:text-[#00CCFF]"
+                      className="text-base font-medium text-[#0f0f0f] transition-colors hover:text-[#FF6600]"
                     >
                       {item.label}
                     </Link>
                   )
                 )}
                 <Button
-                  className="mt-2 w-full rounded-full bg-[#00CCFF] text-[#0f0f0f] hover:bg-[#00b8e6]"
-                  onClick={() => handleNavClick("#alavancas")}
+                  className="mt-2 w-full rounded-full bg-[#FF6600] text-[#ffffff] hover:bg-[#e65c00]"
+                  onClick={() => { setMobileOpen(false); window.open(WA_URL, "_blank") }}
                 >
-                  {t("org.header.cta")}
+                  {t("brands.header.cta")}
                 </Button>
               </nav>
             </SheetContent>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -157,9 +157,23 @@ function CaseCard({ c, t }: { c: CaseData; t: (key: string) => string }) {
 export function CasesSection() {
   const { t } = useI18n()
   const [mobileIdx, setMobileIdx] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  // Track whether the section is in the viewport for floating arrows
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.15 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section id="cases" className="bg-[#f7f7f8] py-20 lg:py-28">
+    <section id="cases" ref={sectionRef} className="relative bg-[#f7f7f8] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <h2 className="text-balance text-center text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
           {t("org.cases.title")}
@@ -187,39 +201,43 @@ export function CasesSection() {
             </div>
           </div>
 
-          {/* Mobile nav */}
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <button
-              onClick={() => setMobileIdx(Math.max(0, mobileIdx - 1))}
-              disabled={mobileIdx === 0}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] disabled:opacity-30"
-              aria-label="Case anterior"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <div className="flex gap-2">
-              {cases.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setMobileIdx(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    i === mobileIdx ? "w-6 bg-[#00CCFF]" : "w-2 bg-[#0f0f0f]/20"
-                  }`}
-                  aria-label={`Case ${i + 1}`}
-                />
-              ))}
-            </div>
-            <button
-              onClick={() => setMobileIdx(Math.min(cases.length - 1, mobileIdx + 1))}
-              disabled={mobileIdx === cases.length - 1}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f0f0f]/10 text-[#0f0f0f] disabled:opacity-30"
-              aria-label="Proximo case"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
+          {/* Mobile dots pagination */}
+          <div className="mt-6 flex items-center justify-center gap-2">
+            {cases.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setMobileIdx(i)}
+                className={`h-2 rounded-full transition-all ${
+                  i === mobileIdx ? "w-6 bg-[#00CCFF]" : "w-2 bg-[#0f0f0f]/20"
+                }`}
+                aria-label={`Case ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Floating side arrows -- mobile only, visible when section is in viewport */}
+      {isInView && (
+        <>
+          <button
+            onClick={() => setMobileIdx(Math.max(0, mobileIdx - 1))}
+            disabled={mobileIdx === 0}
+            className="fixed top-1/2 left-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0 md:hidden"
+            aria-label="Case anterior"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            onClick={() => setMobileIdx(Math.min(cases.length - 1, mobileIdx + 1))}
+            disabled={mobileIdx === cases.length - 1}
+            className="fixed top-1/2 right-2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#0f0f0f]/60 text-[#ffffff] shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0 md:hidden"
+            aria-label="Proximo case"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </>
+      )}
     </section>
   )
 }

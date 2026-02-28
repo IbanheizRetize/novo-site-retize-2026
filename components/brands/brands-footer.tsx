@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { useI18n } from "@/lib/i18n/context"
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -37,21 +38,19 @@ const socialLinks = [
   { label: "Linktree", href: "https://linktr.ee/retize", Icon: LinktreeIcon },
 ]
 
-export function SiteFooter() {
+export function BrandsFooter() {
   const { t } = useI18n()
 
-  const footerSolucoes = [
-    { label: t("footer.solutions.platform"), href: "#plataforma" },
-    { label: t("footer.solutions.clubs"), href: "#hero" },
-    { label: t("footer.solutions.brands"), href: "#hero" },
+  const solutionLinks = [
+    { label: t("org.footer.platform"), href: "#tecnologia" },
+    { label: t("org.footer.clubs"), href: "/organizacoes-esportivas" },
+    { label: t("org.footer.brands"), href: "/marcas-anunciantes" },
   ]
 
   return (
     <footer className="bg-[#1a1a1a] py-12 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        {/* Main footer grid — 3 columns now (removed Empresa) */}
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Column 1: Logo + tagline */}
           <div className="flex flex-col gap-2">
             <Image
               src="/brand/retize-logo.png"
@@ -60,51 +59,39 @@ export function SiteFooter() {
               height={20}
               style={{ filter: "brightness(0) invert(1)" }}
             />
-            <p className="text-sm font-medium uppercase tracking-wider text-[#4700d1]">
-              {t("footer.tagline")}
+            <p className="text-sm font-medium uppercase tracking-wider text-[#FF6600]">
+              Sports Media Network
             </p>
           </div>
 
-          {/* Column 2: Solutions */}
           <div>
-            <h4 className="text-sm font-bold text-[#ffffff]">{t("footer.solutions")}</h4>
-            <nav className="mt-4 flex flex-col gap-3" aria-label={t("footer.solutions")}>
-              {footerSolucoes.map((link) => (
-                <a
+            <h4 className="text-sm font-bold text-[#ffffff]">{t("org.footer.solutions")}</h4>
+            <nav className="mt-4 flex flex-col gap-3" aria-label={t("org.footer.solutions")}>
+              {solutionLinks.map((link) => (
+                <Link
                   key={link.label}
                   href={link.href}
-                  className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#ffffff]"
+                  className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#FF6600]"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
 
-          {/* Column 3: Contact */}
           <div>
-            <h4 className="text-sm font-bold text-[#ffffff]">{t("footer.contact")}</h4>
+            <h4 className="text-sm font-bold text-[#ffffff]">{t("org.footer.contact")}</h4>
             <div className="mt-4 flex flex-col gap-3">
-              <a
-                href="mailto:contato@retize.com.br"
-                className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#ffffff]"
-              >
+              <a href="mailto:contato@retize.com.br" className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#FF6600]">
                 contato@retize.com.br
               </a>
-              <a
-                href="https://wa.me/5511972281050"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#ffffff]"
-              >
+              <a href="https://wa.me/5511972281050" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#FF6600]">
                 WhatsApp
               </a>
               <address className="mt-1 text-sm not-italic leading-snug text-[#ffffff]/50">
-                {"Av. Francisco Matarazzo, 1705 - Água Branca, São Paulo - SP, 05001-200"}
+                {"Av. Francisco Matarazzo, 1705 - Agua Branca, Sao Paulo - SP, 05001-200"}
               </address>
             </div>
-
-            {/* Social icons */}
             <div className="mt-5 flex gap-3">
               {socialLinks.map((link) => (
                 <a
@@ -113,7 +100,7 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ffffff]/20 text-[#ffffff]/50 transition-colors hover:border-[#ffffff]/50 hover:text-[#ffffff]"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ffffff]/20 text-[#ffffff]/50 transition-colors hover:border-[#FF6600]/50 hover:text-[#FF6600]"
                 >
                   <link.Icon className="h-4 w-4" />
                 </a>
@@ -122,33 +109,24 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Divider + bottom row */}
         <div className="mt-12 border-t border-[#ffffff]/10 pt-6">
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-            <p className="text-xs text-[#ffffff]/40">
-              {t("footer.copyright")}
-            </p>
+            <p className="text-xs text-[#ffffff]/40">{t("org.footer.copyright")}</p>
             <nav className="flex gap-6 text-xs" aria-label="Links legais">
-              <a
-                href="/legal"
-                className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70"
-              >
-                {t("footer.privacy")}
-              </a>
+              <Link href="/legal" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
+                {t("org.footer.privacy")}
+              </Link>
               <a
                 href="https://www.privacidade.com.br/portal-de-privacidade?token=e9ef3022620a045a9d0220b162bdc3b5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70"
               >
-                {t("footer.privacyPortal")}
+                {t("org.footer.privacyPortal")}
               </a>
-              <a
-                href="/legal"
-                className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70"
-              >
-                {t("footer.terms")}
-              </a>
+              <Link href="/legal" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
+                {t("org.footer.terms")}
+              </Link>
             </nav>
           </div>
         </div>
