@@ -37,7 +37,7 @@ const cases: CaseData[] = [
     titleKey: "org.cases.2.title",
     challengeKey: "org.cases.2.challenge",
     approachKeys: ["org.cases.2.approach.1", "org.cases.2.approach.2", "org.cases.2.approach.3"],
-    resultKeys: ["org.cases.2.result.1", "org.cases.2.result.2"],
+    resultKeys: ["org.cases.2.result.1", "org.cases.2.result.2", "org.cases.2.result.3"],
     orgName: "Imperial",
     orgLogo: "/logos/imperial.png",
     partnerName: "O Burgues",
