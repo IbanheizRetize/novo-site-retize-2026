@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+export const dynamic = "force-dynamic"
 
 interface ContactPayload {
   name: string
@@ -16,6 +16,8 @@ function validateEmail(email: string): boolean {
 }
 
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
+
   try {
     const body = (await request.json()) as ContactPayload
 
