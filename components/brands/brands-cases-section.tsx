@@ -61,6 +61,7 @@ const brandTestimonials = [
     thumbnail: null as string | null,
     initials: "PP",
     color: "#FF6600",
+    orgLogo: "/logos/banco-carrefour.png",
   },
   {
     id: "ricardo",
@@ -72,6 +73,7 @@ const brandTestimonials = [
     thumbnail: "/depoimentos/ricardo.png" as string | null,
     initials: "RB",
     color: "#9900FF",
+    orgLogo: "/logos/imperial.png",
   },
 ]
 
@@ -461,12 +463,18 @@ function TestimonialCard({
 
       {/* Person */}
       <div className="mt-5 flex items-center gap-3">
-        <div
-          className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-[#ffffff]"
-          style={{ backgroundColor: item.color }}
-        >
-          {item.initials}
-        </div>
+        {"orgLogo" in item && item.orgLogo ? (
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#ffffff] border border-[#e5e5e5] p-1.5">
+            <Image src={item.orgLogo} alt={t(item.nameKey)} width={28} height={28} className="h-full w-full object-contain" />
+          </div>
+        ) : (
+          <div
+            className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-[#ffffff]"
+            style={{ backgroundColor: item.color }}
+          >
+            {item.initials}
+          </div>
+        )}
         <div>
           <p className="text-sm font-bold text-[#0f0f0f]">{t(item.nameKey)}</p>
           <p className="text-xs text-[#6b6b6b]">{t(item.roleKey)}</p>

@@ -195,7 +195,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.cases.4.approach.2": "Identificação dos melhores canais e momentos para exposição de cada patrocinador.",
     "org.cases.4.approach.3": "Correlação das reações dos fãs nas redes sociais com as exposições de patrocinadores.",
     "org.cases.4.result.1": "7 diferentes marcas utilizando a plataforma de anúncios da Retize na Lusa entre patrocinadores e novos anunciantes.",
-    "org.cases.4.result.2": "Aumento de X% da base de fãs cadastrados através do Retize Survey.",
+    "org.cases.4.result.2": "Aumento de 10% da base de fãs cadastrados através do Retize Survey.",
     "org.cases.4.result.3": "Valuation e exposição de mídia da Série D.",
 
     // Org Page - Testimonials
@@ -593,7 +593,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.cases.4.approach.2": "Identification of the best channels and moments for each sponsor's exposure.",
     "org.cases.4.approach.3": "Correlation of fan reactions on social media with sponsor exposures.",
     "org.cases.4.result.1": "7 different brands using Retize's ad platform at Lusa among sponsors and new advertisers.",
-    "org.cases.4.result.2": "Increase of X% in registered fan base through Retize Survey.",
+    "org.cases.4.result.2": "Increase of 10% in registered fan base through Retize Survey.",
     "org.cases.4.result.3": "Valuation and media exposure for Serie D.",
 
     // Org Page - Testimonials
@@ -833,7 +833,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
 
     // Journey
     "journey.title": "Jornada de monetización del fan",
-    "journey.subtitle": "Trabajamos de punta a punta en la jornada de monetizaci��n de los fans para potenciar el uso de las audiencias en sus canales digitales",
+    "journey.subtitle": "Trabajamos de punta a punta en la jornada de monetización de los fans para potenciar el uso de las audiencias en sus canales digitales",
     "journey.step": "Etapa",
     "journey.step1.title": "INTEGRACIÓN",
     "journey.step1.desc": "Integre datos de múltiples fuentes construyendo una visión única del hincha, esencial para apalancar los resultados del marketing deportivo.",
@@ -943,7 +943,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.platform.survey.2": "Cuestionarios rápidos y personalizados por objetivo de negocio",
     "org.platform.survey.3": "Las respuestas se convierten en audiencias automáticamente",
     "org.platform.analytics.1": "Dashboards y análisis con visión única del fan",
-    "org.platform.analytics.2": "Filtros avanzados y m��tricas por jornada",
+    "org.platform.analytics.2": "Filtros avanzados y métricas por jornada",
     "org.platform.analytics.3": "Paneles personalizados en el onboarding",
     "org.platform.cdp.1": "Cree clusters de audiencia directamente en la interfaz",
     "org.platform.cdp.2": "Use audiencias en CRM y media display",
@@ -991,7 +991,7 @@ export const dictionaries: Record<Locale, Record<string, string>> = {
     "org.cases.4.approach.2": "Identificación de los mejores canales y momentos para la exposición de cada patrocinador.",
     "org.cases.4.approach.3": "Correlación de las reacciones de los fans en redes sociales con las exposiciones de patrocinadores.",
     "org.cases.4.result.1": "7 diferentes marcas utilizando la plataforma de anuncios de Retize en la Lusa entre patrocinadores y nuevos anunciantes.",
-    "org.cases.4.result.2": "Aumento de X% de la base de fans registrados a través de Retize Survey.",
+    "org.cases.4.result.2": "Aumento de 10% de la base de fans registrados a través de Retize Survey.",
     "org.cases.4.result.3": "Valoración y exposición de medios de la Serie D.",
 
     // Org Page - Testimonials
