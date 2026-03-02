@@ -27,7 +27,7 @@ function paramToLocale(param: string | null): Locale | null {
   return map[param.toLowerCase()] ?? null
 }
 
-function localeToParam(locale: Locale): string | null {
+export function localeToParam(locale: Locale): string | null {
   if (locale === "pt-BR") return null // default, no param needed
   return locale // "en" | "es"
 }

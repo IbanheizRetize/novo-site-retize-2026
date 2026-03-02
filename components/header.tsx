@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { LanguageSelector } from "@/components/language-selector"
 import { useI18n } from "@/lib/i18n/context"
 import { trackCtaClick } from "@/lib/gtag"
+import { LocalizedLink } from "@/components/ui/localized-link"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -60,7 +61,7 @@ export function Header() {
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex" aria-label="Menu principal">
           {navItems.map((item) => (
-            <a
+            <LocalizedLink
               key={item.href + item.label}
               href={item.href}
               style={{
@@ -70,7 +71,7 @@ export function Header() {
               className="cursor-pointer text-sm font-medium hover:opacity-80"
             >
               {item.label}
-            </a>
+            </LocalizedLink>
           ))}
           <Button
             asChild
@@ -109,14 +110,14 @@ export function Header() {
               </div>
               <nav className="flex flex-col gap-5" aria-label="Menu mobile">
                 {navItems.map((item) => (
-                  <a
+                  <LocalizedLink
                     key={item.href + item.label}
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
                     className="text-base font-medium text-[#0f0f0f] transition-colors hover:text-[#4700d1]"
                   >
                     {item.label}
-                  </a>
+                  </LocalizedLink>
                 ))}
                 <Button
                   asChild

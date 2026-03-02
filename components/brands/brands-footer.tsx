@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
+import { LocalizedLink } from "@/components/ui/localized-link"
 import { useI18n } from "@/lib/i18n/context"
 import { trackExternalLinkClick } from "@/lib/gtag"
 
@@ -68,13 +68,13 @@ export function BrandsFooter() {
             <h4 className="text-sm font-bold text-[#ffffff]">{t("org.footer.solutions")}</h4>
             <nav className="mt-4 flex flex-col gap-3" aria-label={t("org.footer.solutions")}>
               {solutionLinks.map((link) => (
-                <Link
+                <LocalizedLink
                   key={link.label}
                   href={link.href}
                   className="text-sm text-[#ffffff]/50 transition-colors hover:text-[#FF6600]"
                 >
                   {link.label}
-                </Link>
+                </LocalizedLink>
               ))}
             </nav>
           </div>
@@ -114,9 +114,9 @@ export function BrandsFooter() {
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
             <p className="text-xs text-[#ffffff]/40">{t("org.footer.copyright")}</p>
             <nav className="flex gap-6 text-xs" aria-label="Links legais">
-              <Link href="/legal" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
+              <LocalizedLink href="/legal" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
                 {t("org.footer.privacy")}
-              </Link>
+              </LocalizedLink>
               <a
                 href="https://www.privacidade.com.br/portal-de-privacidade?token=e9ef3022620a045a9d0220b162bdc3b5"
                 target="_blank"
@@ -126,9 +126,9 @@ export function BrandsFooter() {
               >
                 {t("org.footer.privacyPortal")}
               </a>
-              <Link href="/legal" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
+              <LocalizedLink href="/legal" className="text-[#ffffff]/40 transition-colors hover:text-[#ffffff]/70">
                 {t("org.footer.terms")}
-              </Link>
+              </LocalizedLink>
             </nav>
           </div>
         </div>

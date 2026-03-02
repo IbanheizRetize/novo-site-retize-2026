@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
+import { LocalizedLink } from "@/components/ui/localized-link"
 import Image from "next/image"
 import { useI18n } from "@/lib/i18n/context"
 import { legalContent } from "@/lib/legal-content"
@@ -21,20 +21,20 @@ function LegalHeader({ t }: { t: (k: string) => string }) {
   return (
     <header className="sticky top-0 z-50 border-b border-[#e5e5e5] bg-[#ffffff]/95 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
-        <Link href="/" className="flex-shrink-0">
+        <LocalizedLink href="/" className="flex-shrink-0">
           <Image src="/brand/retize-logo.png" alt="Retize" width={80} height={18} />
-        </Link>
+        </LocalizedLink>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <Link
+            <LocalizedLink
               key={link.href}
               href={link.href}
               className="text-sm font-medium text-[#0f0f0f]/70 transition-colors hover:text-[#0f0f0f]"
             >
               {link.label}
-            </Link>
+            </LocalizedLink>
           ))}
           <LanguageSelector variant="dark" />
         </nav>
@@ -57,14 +57,14 @@ function LegalHeader({ t }: { t: (k: string) => string }) {
       {mobileOpen && (
         <div className="border-t border-[#e5e5e5] bg-[#ffffff] px-4 py-4 md:hidden">
           {navLinks.map((link) => (
-            <Link
+            <LocalizedLink
               key={link.href}
               href={link.href}
               className="block py-2.5 text-sm font-medium text-[#0f0f0f]/70"
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
-            </Link>
+            </LocalizedLink>
           ))}
         </div>
       )}
