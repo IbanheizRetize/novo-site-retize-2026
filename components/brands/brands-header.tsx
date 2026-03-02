@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import Link from "next/link"
+import { LocalizedLink } from "@/components/ui/localized-link"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
@@ -58,7 +58,7 @@ export function BrandsHeader() {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
-        <Link href="/" className="flex-shrink-0" aria-label="Retize Home">
+        <LocalizedLink href="/" className="flex-shrink-0" aria-label="Retize Home">
           <Image
             src="/brand/retize-logo.png"
             alt="Retize"
@@ -70,7 +70,7 @@ export function BrandsHeader() {
             }}
             priority
           />
-        </Link>
+        </LocalizedLink>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Menu principal">
           {navItems.map((item) =>
@@ -87,7 +87,7 @@ export function BrandsHeader() {
                 {item.label}
               </button>
             ) : (
-              <Link
+              <LocalizedLink
                 key={item.label}
                 href={item.href}
                 style={{
@@ -97,7 +97,7 @@ export function BrandsHeader() {
                 className="text-sm font-medium hover:opacity-80"
               >
                 {item.label}
-              </Link>
+              </LocalizedLink>
             )
           )}
           <Button asChild className="rounded-full bg-[#FF6600] px-5 text-sm font-semibold text-[#ffffff] hover:bg-[#e65c00]">
@@ -144,14 +144,14 @@ export function BrandsHeader() {
                       {item.label}
                     </button>
                   ) : (
-                    <Link
+                    <LocalizedLink
                       key={item.label}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
                       className="text-base font-medium text-[#0f0f0f] transition-colors hover:text-[#FF6600]"
                     >
                       {item.label}
-                    </Link>
+                    </LocalizedLink>
                   )
                 )}
                 <Button asChild className="mt-2 w-full rounded-full bg-[#FF6600] text-[#ffffff] hover:bg-[#e65c00]">

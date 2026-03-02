@@ -45,6 +45,7 @@ function LeadFormModal({
   const [errors, setErrors] = useState<FormErrors>({})
   const [sending, setSending] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const validate = (): boolean => {
     const e: FormErrors = {}
@@ -62,6 +63,7 @@ function LeadFormModal({
   const handleSubmit = async () => {
     if (!validate()) return
     setSending(true)
+    setSubmitError(null)
     try {
       const res = await fetch("/api/leads/copa-2026", {
         method: "POST",
@@ -74,7 +76,8 @@ function LeadFormModal({
           source,
         }),
       })
-      if (!res.ok) throw new Error()
+      const data = await res.json()
+      if (!res.ok || !data.ok) throw new Error()
       setSuccess(true)
       window.open(pdfUrl, "_blank")
       trackGenerateLead({ form_id: source })
@@ -85,7 +88,7 @@ function LeadFormModal({
         setForm({ name: "", company: "", email: "", phone: "" })
       }, 3000)
     } catch {
-      setErrors({ ...errors, name: t("brands.modal.error.generic") })
+      setSubmitError(t("brands.modal.error.generic"))
     } finally {
       setSending(false)
     }
@@ -160,6 +163,7 @@ function LeadFormModal({
                 />
                 {errors.phone && <p className="mt-1 text-xs text-[#ff3333]">{errors.phone}</p>}
               </div>
+              {submitError && <p className="text-sm text-[#ff3333]">{submitError}</p>}
               <Button
                 className="mt-2 w-full rounded-lg bg-[#FF6600] py-3 text-base font-semibold text-[#ffffff] hover:brightness-110"
                 onClick={handleSubmit}
@@ -239,6 +243,7 @@ export function ActivationSection() {
       onCta: () => window.open(WA_URL, "_blank"),
       active: card3Active,
       accent: "#0066FF",
+      titleClass: "text-2xl md:text-3xl",
     },
   ]
 
@@ -266,7 +271,7 @@ export function ActivationSection() {
                 <div className="relative z-10 flex h-full flex-col p-6 pt-10 md:p-8 md:pt-12">
                   {/* Title */}
                   <h3
-                    className={`text-3xl font-bold tracking-wide text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-2 md:text-4xl ${
+                    className={`${card.titleClass ?? "text-3xl md:text-4xl"} font-bold tracking-wide text-[#ffffff] transition-transform duration-300 group-hover:-translate-y-2 ${
                       card.active ? "-translate-y-2" : ""
                     }`}
                   >
