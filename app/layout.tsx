@@ -10,9 +10,9 @@ import './globals.css'
 const _inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Retize | Monetizamos a paixao pelo esporte',
+  title: 'Retize | Monetizamos a paixão pelo esporte',
   description:
-    'Estruturamos e ativamos dados de fas para transformar audiencia em receita sustentavel para clubes e marcas.',
+    'Estruturamos e ativamos dados de fãs para transformar audiência em receita sustentável para clubes e marcas.',
   generator: 'v0.app',
 
 }

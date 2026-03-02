@@ -11,7 +11,7 @@ import { BrandsFooter } from "@/components/brands/brands-footer"
 export const metadata: Metadata = {
   title: "Retize | Para Marcas Anunciantes",
   description:
-    "Fale com seus clientes atraves do esporte. Usamos o esporte como um acelerador de jornadas para ativar sua marca de forma personalizada.",
+    "Fale com seus clientes através do esporte. Usamos o esporte como um acelerador de jornadas para ativar sua marca de forma personalizada.",
 }
 
 export default function MarcasAnunciantesPage() {
