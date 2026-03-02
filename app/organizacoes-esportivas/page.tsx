@@ -9,9 +9,9 @@ import { PartnersSection } from "@/components/org/partners-section"
 import { OrgFooter } from "@/components/org/org-footer"
 
 export const metadata: Metadata = {
-  title: "Retize | Para Organizacoes Esportivas",
+  title: "Retize | Para Organizações Esportivas",
   description:
-    "Plataforma de monetizacao do fa de esporte. Ajudamos organizacoes esportivas a construir a jornada de monetizacao do fa aumentando o potencial de receita recorrente.",
+    "Plataforma de monetização do fã de esporte. Ajudamos organizações esportivas a construir a jornada de monetização do fã aumentando o potencial de receita recorrente.",
 }
 
 export default function OrganizacoesEsportivasPage() {
