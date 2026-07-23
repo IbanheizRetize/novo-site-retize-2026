@@ -48,9 +48,9 @@ const ecosystemOrgs = [
   { name: "CBV", logo: "/logos/cbv.png" },
   { name: "Grêmio", logo: "/logos/gremio.png" },
   { name: "Atlético MG", logo: "/logos/atletico-mg.png" },
-  { name: "São Paulo", logo: "/logos/sao-paulo.png" },
+  { name: "Cruzeiro", logo: "/logos/cruzeiro.png" },
   { name: "Vasco da Gama", logo: "/logos/vasco.png" },
-  { name: "Imperial", logo: "/logos/imperial.png" },
+  { name: "LOUD", logo: "/logos/loud.png" },
 ]
 
 /* ── Social icons ─────────────────────────────────────────── */
