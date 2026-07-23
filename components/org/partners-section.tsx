@@ -8,7 +8,7 @@ import { trackExternalLinkClick } from "@/lib/gtag"
 const entities: { name: string; logo?: string }[] = [
   { name: "CBV", logo: "/logos/cbv.png" },
   { name: "Grêmio", logo: "/logos/gremio.png" },
-  { name: "São Paulo", logo: "/logos/sao-paulo.png" },
+  { name: "Cruzeiro", logo: "/logos/cruzeiro.png" },
   { name: "Atlético MG", logo: "/logos/atletico-mg.png" },
   { name: "Vasco da Gama", logo: "/logos/vasco.png" },
   { name: "Imperial", logo: "/logos/imperial.png" },
