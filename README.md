@@ -53,7 +53,7 @@ novo-site-retize-2026/
 │   ├── header.tsx                    # Cabeçalho principal
 │   ├── hero-video.tsx                # Seção hero com vídeo
 │   ├── platform-section.tsx          # Seção da plataforma
-│   ├── journey-section.tsx           # Jornada em 4 etapas
+│   ├── journey-section.tsx           # Jornada de maturidade em 5 etapas
 │   ├── clients-section.tsx           # Logos de clientes
 │   ├── value-proof-section.tsx       # Métricas com animação
 │   ├── contact-section.tsx           # Formulário de contato
@@ -160,7 +160,7 @@ Combina `clsx` + `tailwind-merge` para evitar conflitos de classes Tailwind.
 ### ✅ Página Inicial (/)
 - Hero com vídeo background adaptativo
 - Seção da plataforma (carousel de features)
-- Jornada do cliente (4 etapas)
+- Jornada de maturidade de relacionamento (5 etapas + receitas B2C/B2B)
 - Logos de clientes/parceiros
 - Prova de valor (métricas animadas)
 - Formulário de contato
